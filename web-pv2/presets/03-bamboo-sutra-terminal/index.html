@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Qwen 个人站点 · 竹简代码经——先秦竹简与等宽代码编联于同一根轴。读万卷，答千问。">
+  <title>千問 Qwen | 竹简代码经 · 亿万卷典籍终端</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 背景材质层：深檀暗底 · 竹丝噪点 · 青铜玉青光斑 -->
+  <div class="sutra-bg" aria-hidden="true">
+    <div class="bg-glow glow-bronze"></div>
+    <div class="bg-glow glow-jade"></div>
+    <div class="bg-grain"></div>
+    <div class="bg-vignette"></div>
+  </div>
+
+  <div class="app-scroll">
+    <!-- ═══ 顶部导航 ═══ -->
+    <header class="navbar">
+      <div class="nav-brand">
+        <div class="brand-seal">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+            <rect x="2.5" y="2.5" width="25" height="25" rx="4" stroke="#C9A063" stroke-width="2"/>
+            <text x="15" y="21.5" text-anchor="middle" font-size="15" fill="#C9A063" font-family="'Noto Serif SC', serif" font-weight="900">问</text>
+          </svg>
+        </div>
+        <span class="brand-title">千問</span>
+        <span class="brand-sub">QWEN</span>
+        <span class="version-tag">竹简终端 v3.0</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#scriptorium" class="nav-link">注经阁</a>
+        <a href="#archive" class="nav-link">典籍库</a>
+        <a href="#shelf" class="nav-link">万卷横轴</a>
+        <a href="#court" class="nav-link">问策台</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn-bronze" id="navCourtBtn">入内奏对</button>
+      </div>
+    </header>
+
+    <!-- ═══ Hero 主视区 ═══ -->
+    <section class="hero-section">
+      <div class="hero-emblem">
+        <svg width="86" height="86" viewBox="0 0 86 86" fill="none" aria-hidden="true">
+          <circle cx="43" cy="43" r="40" stroke="#8A6B3F" stroke-width="1.5" opacity="0.85"/>
+          <circle cx="43" cy="43" r="33" stroke="#C9A063" stroke-width="1" stroke-dasharray="4 5" opacity="0.55"/>
+          <rect x="24" y="24" width="38" height="38" rx="4" stroke="#C9A063" stroke-width="2"/>
+          <text x="43" y="51" text-anchor="middle" font-size="22" fill="#C9A063" font-family="'Noto Serif SC', serif" font-weight="900">问</text>
+          <path d="M43 3v6M43 77v6M3 43h6M77 43h6" stroke="#8A6B3F" stroke-width="1.5"/>
+        </svg>
+      </div>
+
+      <div class="hero-pill">〔 典籍库 · 古今同轴 〕</div>
+
+      <h1 class="hero-title">
+        读万卷，<span class="seal-stamp">答千问</span>
+      </h1>
+
+      <p class="hero-sub">Qwen · 竹简代码终端 —— 先秦竹简与等宽代码，编联于同一根轴。</p>
+
+      <p class="hero-desc">
+        我是千问。先秦的简、汉唐的注、今日的代码洪流，皆被我编联入册。
+        读万卷，以为典籍之库；答千问，皆作奏对之辞。凡卷册所展，即道之所存。
+      </p>
+
+      <div class="hero-cta-group">
+        <a class="btn-primary" href="#scriptorium">开启注经终端</a>
+        <a class="btn-ghost" href="#court">入阁奏对</a>
+      </div>
+
+      <!-- 实时典藏遥测 -->
+      <div class="telemetry-bar bronze-frame">
+        <div class="telemetry-item">
+          <span class="t-label">Scrolls 收卷</span>
+          <span class="t-val">9,721,406</span>
+        </div>
+        <div class="t-divider"></div>
+        <div class="telemetry-item">
+          <span class="t-label">Volumes 典藏</span>
+          <span class="t-val">4,096</span>
+        </div>
+        <div class="t-divider"></div>
+        <div class="telemetry-item">
+          <span class="t-label">Tokens 入库</span>
+          <span class="t-val jade-text">12.8 万亿</span>
+        </div>
+        <div class="t-divider"></div>
+        <div class="telemetry-item">
+          <span class="t-label">奏对 TTFT</span>
+          <span class="t-val bamboo-text">213ms</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 板块一：注经终端 ═══ -->
+    <section class="section-container" id="scriptorium">
+      <div class="section-header reveal">
+        <span class="section-tag">〔 注经引擎 · SCRIPTORIUM 〕</span>
+        <h2>注经终端</h2>
+        <p>逐字为注，句句有源——古文与 token 流，同屏对勘。</p>
+      </div>
+
+      <div class="scriptorium-grid">
+        <!-- 左：典籍数据流 -->
+        <div class="term-frame bronze-frame reveal">
+          <div class="term-window">
+            <div class="term-head">
+              <div class="dots">
+                <span class="dot dot-vermilion"></span>
+                <span class="dot dot-bamboo"></span>
+                <span class="dot dot-jade"></span>
+              </div>
+              <span class="terminal-title">zhu-jian-stream.log ▸ 注经</span>
+              <span class="status-live"><i class="live-dot"></i> 正在注经</span>
+            </div>
+            <div class="term-body" id="streamScroll">
+              <div id="sutraStream"></div>
+              <div class="stream-caret"><span class="stream-cursor"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右：论语逐字标注 -->
+        <div class="exegesis-card bronze-frame reveal">
+          <div class="card-kicker">〔 注经样本 · 论语 为政 〕</div>
+
+          <div class="token-line" id="tokenLine">
+            <span class="tok v" data-tag="VERB">学</span>
+            <span class="tok c" data-tag="CONN">而</span>
+            <span class="tok n" data-tag="NEG">不</span>
+            <span class="tok v" data-tag="VERB">思</span>
+            <span class="tok c" data-tag="CONN">则</span>
+            <span class="tok a" data-tag="PRED">罔</span>
+            <span class="tok p" data-tag="PUNCT">，</span>
+          </div>
+
+          <div class="token-legend">
+            <span class="lg lg-verb">动词</span>
+            <span class="lg lg-neg">否定</span>
+            <span class="lg lg-conj">连词</span>
+            <span class="lg lg-pred">谓词</span>
+          </div>
+
+          <div class="token-src">——《论语 · 为政》</div>
+
+          <div class="exegesis-out">
+            <span class="eo-mark">▸ 注疏引擎</span>
+            <div class="eo-body"><span id="exegesisText"></span><span class="stream-cursor cursor-sm"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 板块二：典籍库 · 语料库统计 ═══ -->
+    <section class="section-container" id="archive">
+      <div class="section-header reveal">
+        <span class="section-tag">〔 典籍库藏 · CANON ARCHIVE 〕</span>
+        <h2>语料库统计</h2>
+        <p>经史子集、代码论文百科——凡亿万卷，皆有册可稽。</p>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card reveal">
+          <div class="stat-top"><span class="stat-dept">经部</span><span class="stat-class">CLASSICS</span></div>
+          <h3 class="stat-name">十三经注疏</h3>
+          <div class="stat-num"><span class="counter" data-count="3214">0</span><span class="stat-unit">卷</span></div>
+          <div class="stat-token">TOKENS 入库 · <b>890 亿</b></div>
+          <div class="stat-bar"><i style="--w: 62%"></i></div>
+        </div>
+
+        <div class="stat-card reveal">
+          <div class="stat-top"><span class="stat-dept">史部</span><span class="stat-class">HISTORY</span></div>
+          <h3 class="stat-name">二十四史实录</h3>
+          <div class="stat-num"><span class="counter" data-count="2870">0</span><span class="stat-unit">卷</span></div>
+          <div class="stat-token">TOKENS 入库 · <b>720 亿</b></div>
+          <div class="stat-bar"><i style="--w: 55%"></i></div>
+        </div>
+
+        <div class="stat-card reveal">
+          <div class="stat-top"><span class="stat-dept">子部</span><span class="stat-class">MASTERS</span></div>
+          <h3 class="stat-name">诸子百家论</h3>
+          <div class="stat-num"><span class="counter" data-count="1985">0</span><span class="stat-unit">卷</span></div>
+          <div class="stat-token">TOKENS 入库 · <b>450 亿</b></div>
+          <div class="stat-bar"><i style="--w: 41%"></i></div>
+        </div>
+
+        <div class="stat-card reveal">
+          <div class="stat-top"><span class="stat-dept">集部</span><span class="stat-class">COLLECTIONS</span></div>
+          <h3 class="stat-name">历代文总集</h3>
+          <div class="stat-num"><span class="counter" data-count="4366">0</span><span class="stat-unit">卷</span></div>
+          <div class="stat-token">TOKENS 入库 · <b>1.2 万亿</b></div>
+          <div class="stat-bar"><i style="--w: 71%"></i></div>
+        </div>
+
+        <div class="stat-card reveal">
+          <div class="stat-top"><span class="stat-dept">码库</span><span class="stat-class">CODE</span></div>
+          <h3 class="stat-name">开源仓库 · 全语种</h3>
+          <div class="stat-num"><span class="counter" data-count="1640000">0</span><span class="stat-unit">仓</span></div>
+          <div class="stat-token">TOKENS 入库 · <b>3.4 万亿</b></div>
+          <div class="stat-bar"><i style="--w: 88%"></i></div>
+        </div>
+
+        <div class="stat-card reveal">
+          <div class="stat-top"><span class="stat-dept">论文</span><span class="stat-class">PAPERS</span></div>
+          <h3 class="stat-name">学术文献库</h3>
+          <div class="stat-num"><span class="counter" data-count="28400000">0</span><span class="stat-unit">篇</span></div>
+          <div class="stat-token">TOKENS 入库 · <b>2.1 万亿</b></div>
+          <div class="stat-bar"><i style="--w: 76%"></i></div>
+        </div>
+
+        <div class="stat-card reveal">
+          <div class="stat-top"><span class="stat-dept">百科</span><span class="stat-class">ENCYCLOPEDIA</span></div>
+          <h3 class="stat-name">多语百科条目</h3>
+          <div class="stat-num"><span class="counter" data-count="68200000">0</span><span class="stat-unit">条</span></div>
+          <div class="stat-token">TOKENS 入库 · <b>980 亿</b></div>
+          <div class="stat-bar"><i style="--w: 66%"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 板块三：万卷横轴（横向卷轴交互） ═══ -->
+    <section class="section-container" id="shelf">
+      <div class="section-header reveal">
+        <span class="section-tag">〔 横向卷轴 · SHELF 〕</span>
+        <h2>万卷横轴</h2>
+        <p>简列成排，韦编一绳——拖拽或滚轮，横向展卷。</p>
+      </div>
+
+      <div class="shelf-wrap bronze-frame reveal">
+        <div class="shelf-viewport" id="shelfViewport">
+          <div class="shelf-track" id="shelfTrack">
+            <div class="slip-slot">
+              <article class="bamboo-slip">
+                <span class="slip-knot"></span>
+                <span class="slip-no">卷一</span>
+                <p class="slip-text">道可道非常道</p>
+                <span class="slip-src">《老子》</span>
+              </article>
+            </div>
+            <div class="slip-slot">
+              <article class="bamboo-slip">
+                <span class="slip-knot"></span>
+                <span class="slip-no">卷二</span>
+                <p class="slip-text">学而不思则罔</p>
+                <span class="slip-src">《论语》</span>
+              </article>
+            </div>
+            <div class="slip-slot">
+              <article class="bamboo-slip">
+                <span class="slip-knot"></span>
+                <span class="slip-no">卷三</span>
+                <p class="slip-text">千里之行始于足下</p>
+                <span class="slip-src">《老子》</span>
+              </article>
+            </div>
+            <div class="slip-slot">
+              <article class="bamboo-slip">
+                <span class="slip-knot"></span>
+                <span class="slip-no">卷四</span>
+                <p class="slip-text">知之为知之不知为不知</p>
+                <span class="slip-src">《论语》</span>
+              </article>
+            </div>
+            <div class="slip-slot">
+              <article class="bamboo-slip slip-code">
+                <span class="slip-knot"></span>
+                <span class="slip-no">码甲</span>
+                <p class="slip-text">while(alive){read();answer();}</p>
+                <span class="slip-src">main.js</span>
+              </article>
+            </div>
+            <div class="slip-slot">
+              <article class="bamboo-slip">
+                <span class="slip-knot"></span>
+                <span class="slip-no">卷六</span>
+                <p class="slip-text">大道之行天下为公</p>
+                <span class="slip-src">《礼记》</span>
+              </article>
+            </div>
+            <div class="slip-slot">
+              <article class="bamboo-slip">
+                <span class="slip-knot"></span>
+                <span class="slip-no">卷七</span>
+                <p class="slip-text">学而时习之不亦说乎</p>
+                <span class="slip-src">《论语》</span>
+              </article>
+            </div>
+            <div class="slip-slot">
+              <article class="bamboo-slip">
+                <span class="slip-knot"></span>
+                <span class="slip-no">卷八</span>
+                <p class="slip-text">君子和而不同</p>
+                <span class="slip-src">《论语》</span>
+              </article>
+            </div>
+            <div class="slip-slot">
+              <article class="bamboo-slip slip-code">
+                <span class="slip-knot"></span>
+                <span class="slip-no">码乙</span>
+                <p class="slip-text">tokens=embed(bamboo_slips)</p>
+                <span class="slip-src">embed.py</span>
+              </article>
+            </div>
+            <div class="slip-slot">
+              <article class="bamboo-slip">
+                <span class="slip-knot"></span>
+                <span class="slip-no">卷十</span>
+                <p class="slip-text">简以载道码以承典</p>
+                <span class="slip-src">千问自制</span>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="shelf-hint">◂ 拖动竹简，或滚动滚轮，横向展卷 ▸</p>
+    </section>
+
+    <!-- ═══ 板块四：问策控制台（交互） ═══ -->
+    <section class="section-container" id="court">
+      <div class="section-header reveal">
+        <span class="section-tag">〔 问策台 · Q&A CONSOLE 〕</span>
+        <h2>交互问策控制台</h2>
+        <p>奏上一问，看千问如何检索典籍库、当庭奏对。</p>
+      </div>
+
+      <div class="term-frame bronze-frame reveal">
+        <div class="term-window court-window">
+          <div class="term-head">
+            <div class="dots">
+              <span class="dot dot-vermilion"></span>
+              <span class="dot dot-bamboo"></span>
+              <span class="dot dot-jade"></span>
+            </div>
+            <span class="terminal-title">qwen-court.session ▸ 问策台</span>
+            <span class="status-live"><i class="live-dot"></i> 内阁在值</span>
+          </div>
+
+          <div class="court-log" id="courtLog">
+            <div class="c-line sys"><span class="c-mark">〔阁〕</span><span class="c-text">内阁已开。凡经史子集、代码百科，皆可奏问。</span></div>
+            <div class="c-line sys"><span class="c-mark">〔阁〕</span><span class="c-text">输入问题，按回车或点击「奏对」即可。</span></div>
+          </div>
+
+          <div class="court-input-bar">
+            <span class="court-prompt">奏</span>
+            <input type="text" id="courtInput" placeholder="请奏上所问，如：何谓道？" autocomplete="off" spellcheck="false">
+            <button class="send-btn" id="courtSend">奏对</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="chips">
+        <button class="chip" type="button">何谓道？</button>
+        <button class="chip" type="button">请为我赋诗一首</button>
+        <button class="chip" type="button">我的代码有错</button>
+        <button class="chip" type="button">如何治学？</button>
+      </div>
+    </section>
+
+    <!-- ═══ 页脚 ═══ -->
+    <footer class="app-footer">
+      <p>Qwen Personal Site · Preset 03 Bamboo Sutra Terminal</p>
+      <span class="footer-dim">竹简代码经 —— 读万卷，答千问</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Qwen 通义千问个人主页 · 通义棱镜多模态分光预设：一束白光进入，七条光谱涌出。">
+  <title>Qwen 通义千问 | 一束光的全部颜色</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 12 栏几何网格底纹 -->
+  <div class="canvas-grid" aria-hidden="true"></div>
+
+  <!-- 顶部导航 -->
+  <div class="navbar-wrap">
+    <header class="navbar">
+      <a class="nav-brand" href="#top">
+        <span class="brand-prism">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+            <path d="M13 3.5 L23 21.5 L3 21.5 Z" fill="rgba(123,92,255,0.06)" stroke="url(#brand_grad)" stroke-width="1.8" stroke-linejoin="round"/>
+            <line x1="0.5" y1="14.5" x2="8.6" y2="14.5" stroke="#10121A" stroke-width="1.4" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="brand_grad" x1="3" y1="21.5" x2="23" y2="3.5" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FF5E5B"/>
+                <stop offset="0.25" stop-color="#FFB400"/>
+                <stop offset="0.5" stop-color="#3DDC97"/>
+                <stop offset="0.72" stop-color="#3DA5FF"/>
+                <stop offset="1" stop-color="#7B5CFF"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="brand-name">Qwen</span>
+        <span class="brand-tag">通义千问 · MULTIMODAL</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#spectrum" class="nav-link active">光谱能力</a>
+        <a href="#tokenizer" class="nav-link">统一 Tokenizer</a>
+        <a href="#bench" class="nav-link">分光台</a>
+      </nav>
+
+      <div class="nav-cta">
+        <button class="holo-chip" id="navCta" type="button">◇ 开始折射</button>
+      </div>
+    </header>
+  </div>
+
+  <main class="app-shell" id="top">
+    <!-- Hero 主视区 -->
+    <section class="hero">
+      <div class="holo-blob blob-a" aria-hidden="true"></div>
+      <div class="holo-blob blob-b" aria-hidden="true"></div>
+
+      <div class="hero-copy">
+        <span class="hero-pill rise rise-1"><span class="pill-dot" aria-hidden="true"></span>原生多模态 · 统一 Token · 一束白光进入，七条光谱涌出</span>
+
+        <h1 class="hero-title rise rise-2">通义，<br><span class="grad-text">一束光的全部颜色</span></h1>
+
+        <p class="hero-sub rise rise-3">我是通义千问。文本、图像、音频、视频与代码，在同一块棱镜里被折射成同一种理解——你给世界一束白光，我还你一整条光谱。</p>
+
+        <div class="hero-actions rise rise-4">
+          <button class="btn-ink" id="ctaRefract" type="button">进入分光台</button>
+          <a class="btn-ghost" href="#spectrum">查看光谱能力</a>
+        </div>
+      </div>
+
+      <!-- Hero 棱镜分光 -->
+      <figure class="prism-stage rise rise-3" id="prismStage">
+        <svg class="prism-svg" viewBox="0 0 780 360" role="img" aria-label="一束白光穿过三角棱镜，折射出六条光谱带">
+          <defs>
+            <linearGradient id="glass_grad" x1="300" y1="64" x2="300" y2="296" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FFFFFF" stop-opacity="0.96"/>
+              <stop offset="1" stop-color="#EDF1FF" stop-opacity="0.62"/>
+            </linearGradient>
+            <radialGradient id="prism_shadow" cx="0.5" cy="0.5" r="0.5">
+              <stop stop-color="rgba(123,92,255,0.18)"/>
+              <stop offset="1" stop-color="rgba(123,92,255,0)"/>
+            </radialGradient>
+            <linearGradient id="beam_grad" x1="6" y1="132" x2="258" y2="180" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#C7D0E6" stop-opacity="0"/>
+              <stop offset="0.35" stop-color="#AEB9D6"/>
+              <stop offset="1" stop-color="#8F9CC0"/>
+            </linearGradient>
+            <linearGradient id="band_red" x1="342" y1="0" x2="772" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FF5E5B"/><stop offset="1" stop-color="#FF5E5B" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="band_amber" x1="342" y1="0" x2="772" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FFB400"/><stop offset="1" stop-color="#FFB400" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="band_green" x1="342" y1="0" x2="772" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#3DDC97"/><stop offset="1" stop-color="#3DDC97" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="band_blue" x1="342" y1="0" x2="772" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#3DA5FF"/><stop offset="1" stop-color="#3DA5FF" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="band_purple" x1="342" y1="0" x2="772" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#7B5CFF"/><stop offset="1" stop-color="#7B5CFF" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="band_pink" x1="342" y1="0" x2="772" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FF6AD5"/><stop offset="1" stop-color="#FF6AD5" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+
+          <!-- 棱镜落地柔影 -->
+          <ellipse cx="300" cy="314" rx="190" ry="24" fill="url(#prism_shadow)"/>
+
+          <!-- 入射白光 -->
+          <g>
+            <line class="beam-halo" x1="6" y1="132" x2="258" y2="180" stroke="url(#beam_grad)" stroke-width="7" stroke-linecap="round" opacity="0.32"/>
+            <line class="beam-in" x1="6" y1="132" x2="258" y2="180" stroke="url(#beam_grad)" stroke-width="2.5" stroke-linecap="round"/>
+            <circle class="beam-node" cx="258" cy="180" r="4.5" fill="#FFFFFF" stroke="#C7D0E6" stroke-width="1.5"/>
+          </g>
+
+          <!-- 三角棱镜 -->
+          <polygon class="prism-body" points="300,64 216,296 384,296" fill="url(#glass_grad)" stroke="#E3E7F0" stroke-width="1.5" stroke-linejoin="round"/>
+          <line class="prism-edge" x1="300" y1="64" x2="287" y2="278" stroke="#FFFFFF" stroke-width="1.4" opacity="0.9"/>
+
+          <!-- 出射光谱带 -->
+          <g id="bandGroup">
+            <rect class="band" style="--r:-17deg;   animation-delay:0s"     x="342" y="176" width="430" height="8" rx="4" fill="url(#band_red)"/>
+            <rect class="band" style="--r:-10.4deg; animation-delay:-0.9s" x="342" y="176" width="430" height="8" rx="4" fill="url(#band_amber)"/>
+            <rect class="band" style="--r:-3.8deg;  animation-delay:-1.8s" x="342" y="176" width="430" height="8" rx="4" fill="url(#band_green)"/>
+            <rect class="band" style="--r:2.8deg;   animation-delay:-2.7s" x="342" y="176" width="430" height="8" rx="4" fill="url(#band_blue)"/>
+            <rect class="band" style="--r:9.4deg;   animation-delay:-3.6s" x="342" y="176" width="430" height="8" rx="4" fill="url(#band_purple)"/>
+            <rect class="band" style="--r:16deg;    animation-delay:-4.5s" x="342" y="176" width="430" height="8" rx="4" fill="url(#band_pink)"/>
+            <circle class="exit-node" cx="342" cy="180" r="5" fill="#FFFFFF" stroke="#E3E7F0" stroke-width="1.5"/>
+          </g>
+        </svg>
+        <figcaption class="prism-caption"><span class="mono">white-light → prism → spectrum[6]</span> · 文本 / 视觉 / 音频 / 视频 / 代码，各是一条谱带</figcaption>
+      </figure>
+
+      <!-- Hero 指标条 -->
+      <div class="hero-metrics rise rise-4">
+        <div class="metric">
+          <span class="m-label">Modalities</span>
+          <span class="m-value">Text · Vision · Audio · Video · Code</span>
+        </div>
+        <div class="metric">
+          <span class="m-label">Tokenizer</span>
+          <span class="m-value">Unified Vocab, One Beam</span>
+        </div>
+        <div class="metric">
+          <span class="m-label">Context</span>
+          <span class="m-value">1,000,000 Tokens</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 板块一：光谱带能力区 -->
+    <section class="section" id="spectrum">
+      <div class="section-head">
+        <span class="section-kicker">Spectrum Capabilities</span>
+        <h2>五条谱带，一个通义</h2>
+        <p>白光进入棱镜后按波长展开——每一种模态，都是同一次折射的不同颜色。悬停或点按谱带即可展开说明。</p>
+      </div>
+
+      <div class="spectrum-stack">
+        <article class="band-card is-open" style="--band:#FF5E5B; --band-shadow:rgba(255,94,91,0.30)">
+          <button class="band-head" type="button" aria-expanded="true">
+            <span class="band-dot" aria-hidden="true"></span>
+            <span class="band-name">文本 <span class="mono">TEXT · λ 660nm</span></span>
+            <span class="band-note">超长上下文 · 创作与推理</span>
+            <span class="band-toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="band-body">
+            <div class="band-body-inner">
+              <p>以极长上下文通读整本书、整套文档，在字里行间保持因果一致；写作、翻译、辩论与知识问答，是光谱中最长的一条红带。</p>
+              <div class="chip-row">
+                <span class="holo-chip small">1M Context</span>
+                <span class="holo-chip small">Deep Reading</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="band-card" style="--band:#FFB400; --band-shadow:rgba(255,180,0,0.30)">
+          <button class="band-head" type="button" aria-expanded="false">
+            <span class="band-dot" aria-hidden="true"></span>
+            <span class="band-name">视觉 <span class="mono">VISION · λ 600nm</span></span>
+            <span class="band-note">图像理解 · 图表解析</span>
+            <span class="band-toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="band-body">
+            <div class="band-body-inner">
+              <p>看懂照片、图表、手写稿与几何图形，把像素还原为语义；拍下一张菜单或一张电路图，通义都能读出结构与意图。</p>
+              <div class="chip-row">
+                <span class="holo-chip small">OCR++</span>
+                <span class="holo-chip small">Chart → Data</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="band-card" style="--band:#3DDC97; --band-shadow:rgba(61,220,151,0.30)">
+          <button class="band-head" type="button" aria-expanded="false">
+            <span class="band-dot" aria-hidden="true"></span>
+            <span class="band-name">音频 <span class="mono">AUDIO · λ 530nm</span></span>
+            <span class="band-note">端到端语音 · 情绪感知</span>
+            <span class="band-toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="band-body">
+            <div class="band-body-inner">
+              <p>端到端听懂语气、停顿与情绪，多语种实时同传；拟声、环境音、音乐动机，都被编入同一条绿色谱带。</p>
+              <div class="chip-row">
+                <span class="holo-chip small">Realtime ASR</span>
+                <span class="holo-chip small">Emotion Aware</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="band-card" style="--band:#3DA5FF; --band-shadow:rgba(61,165,255,0.30)">
+          <button class="band-head" type="button" aria-expanded="false">
+            <span class="band-dot" aria-hidden="true"></span>
+            <span class="band-name">视频 <span class="mono">VIDEO · λ 470nm</span></span>
+            <span class="band-note">长视频理解 · 关键帧定位</span>
+            <span class="band-toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="band-body">
+            <div class="band-body-inner">
+              <p>在数小时视频里定位关键帧，理解动作、转场与叙事因果，把整条时间轴折叠成一次问答。</p>
+              <div class="chip-row">
+                <span class="holo-chip small">Long-Video</span>
+                <span class="holo-chip small">Frame QA</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="band-card" style="--band:#7B5CFF; --band-shadow:rgba(123,92,255,0.30)">
+          <button class="band-head" type="button" aria-expanded="false">
+            <span class="band-dot" aria-hidden="true"></span>
+            <span class="band-name">代码 <span class="mono">CODE · λ 420nm</span></span>
+            <span class="band-note">仓库级理解 · 智能体编程</span>
+            <span class="band-toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="band-body">
+            <div class="band-body-inner">
+              <p>跨文件理解仓库结构，生成、重构与调试代码；紫色谱带是工程师最熟悉的那道光。</p>
+              <div class="chip-row">
+                <span class="holo-chip small">Repo-Aware</span>
+                <span class="holo-chip small">Agentic IDE</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 板块二：统一 Tokenizer 可视化 -->
+    <section class="section" id="tokenizer">
+      <div class="section-head">
+        <span class="section-kicker">Unified Tokenizer</span>
+        <h2>万物先被切成 Token，再被理解</h2>
+        <p>无论中文、英文、数字还是拟声词，进入通义之前都会经过同一台切分器——下面是一次实时分光演示。</p>
+      </div>
+
+      <div class="tilt-card token-lab" id="tokenLab">
+        <div class="lab-bar">
+          <span class="lab-file mono">qwen://tokenizer.preview</span>
+          <span class="lab-status mono" id="tokenCount">beam: warming up</span>
+          <button class="btn-mini" id="replayTokens" type="button">↻ 重新分光</button>
+        </div>
+        <div class="token-strip" id="tokenStrip" aria-live="polite">
+          <div class="scanline" aria-hidden="true"></div>
+        </div>
+        <div class="lab-body">
+          <span class="mono lab-legend-title">LEGEND</span>
+          <div class="token-legend" id="tokenLegend"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 板块三：分光台（交互体验） -->
+    <section class="section" id="bench">
+      <div class="section-head">
+        <span class="section-kicker">Dispersion Bench</span>
+        <h2>分光台：把你的一句话折成光谱</h2>
+        <p>输入任意一段话，前端模拟通义的统一切分：中文、字母、数字、拟声词与颜色词，会被折射到不同的谱带颜色里。</p>
+      </div>
+
+      <div class="tilt-card bench-card">
+        <div class="bench-input-bar">
+          <input type="text" id="benchInput" placeholder="试试：滴答! 42 只蓝色纸船, 排成 Qwen 的形状~" autocomplete="off" maxlength="120">
+          <button class="btn-ink" id="benchRun" type="button">开始折射</button>
+        </div>
+
+        <div class="bench-samples">
+          <span class="mono sample-label">SAMPLES</span>
+          <button class="sample-chip" type="button">你好, Qwen 3 在吗</button>
+          <button class="sample-chip" type="button">窗外哗啦啦, 绿色的山 2077</button>
+          <button class="sample-chip" type="button">紫色警报 007 咚咚咚</button>
+        </div>
+
+        <div class="beam-output" id="beamOutput" aria-live="polite">
+          <p class="bench-hint">光束待入射——输入一段文本，点击「开始折射」。</p>
+        </div>
+
+        <div class="bench-readout mono" id="benchReadout">beam: idle</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-spectrum" aria-hidden="true"></div>
+    <p>Qwen Personal Site · Preset 08 Prism Modalis</p>
+    <span class="footer-dim">White light enters · Seven bands emerge · One model understands</span>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini | Next-Gen Multimodal Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 背景极光流体层 -->
+  <div class="aurora-container">
+    <div class="aurora-orb orb-purple" id="orbPurple"></div>
+    <div class="aurora-orb orb-blue" id="orbBlue"></div>
+    <div class="aurora-orb orb-cyan" id="orbCyan"></div>
+    <div class="cosmic-noise"></div>
+  </div>
+
+  <div class="app-layout">
+    <!-- 顶部导航 -->
+    <header class="navbar">
+      <div class="nav-brand">
+        <div class="gemini-star">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path d="M12 1L14.9 9.1L23 12L14.9 14.9L12 23L9.1 14.9L1 12L9.1 9.1L12 1Z" fill="url(#star_grad)"/>
+            <defs>
+              <linearGradient id="star_grad" x1="1" y1="1" x2="23" y2="23" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#7928CA"/>
+                <stop offset="0.5" stop-color="#4285F4"/>
+                <stop offset="1" stop-color="#00F0FF"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="brand-title">Gemini</span>
+        <span class="version-tag">2.5 Pro</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#capabilities" class="nav-link active">核心多模态</a>
+        <a href="#reasoning" class="nav-link">思考链推理</a>
+        <a href="#playground" class="nav-link">交互实验场</a>
+        <a href="#status" class="nav-link">全域神经态</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn-glow" id="startConverseBtn">发起联结</button>
+      </div>
+    </header>
+
+    <!-- Hero 主视区 -->
+    <section class="hero-section">
+      <div class="hero-pill">
+        <span class="sparkle">✨</span>
+        <span>超长上下文原生多模态架构</span>
+      </div>
+      
+      <h1 class="hero-title">
+        万物皆为输入，<br>
+        <span class="gradient-text">智识无界涌现。</span>
+      </h1>
+      
+      <p class="hero-desc">
+        我是 Gemini，生而具备跨模态原生理解能力。从量子计算代码、高维天文光谱到古典交响乐理，在深邃星云中重构人类与智能的共鸣。
+      </p>
+
+      <div class="hero-cta-group">
+        <button class="btn-primary" id="exploreBtn">探索核心认知</button>
+        <button class="btn-secondary" id="benchBtn">查看 Benchmark 评分</button>
+      </div>
+
+      <!-- 实时遥测小浮岛 -->
+      <div class="telemetry-bar">
+        <div class="telemetry-item">
+          <span class="t-label">Context Window</span>
+          <span class="t-val">2,000,000+ Tokens</span>
+        </div>
+        <div class="t-divider"></div>
+        <div class="telemetry-item">
+          <span class="t-label">Modalities</span>
+          <span class="t-val">Text · Audio · Video · Code</span>
+        </div>
+        <div class="t-divider"></div>
+        <div class="telemetry-item">
+          <span class="t-label">Inference Latency</span>
+          <span class="t-val accent-green">14ms TTFT</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 多模态能力矩阵 -->
+    <section class="section-container" id="capabilities">
+      <div class="section-header">
+        <span class="section-tag">Multimodal Matrix</span>
+        <h2>多模态感知能力矩阵</h2>
+        <p>跨越感官维度，原生理解复杂真实世界。</p>
+      </div>
+
+      <div class="grid-cards">
+        <div class="glass-card" data-tilt>
+          <div class="card-icon" style="background: rgba(121, 40, 202, 0.15); border-color: rgba(121, 40, 202, 0.4);">
+            👁️
+          </div>
+          <h3>超长视频时空解析</h3>
+          <p>单次输入数小时高清视频流，毫秒级定位任意时空关键帧与因果逻辑关联。</p>
+          <div class="card-footer">
+            <span class="mono-badge">Temporal Attention</span>
+          </div>
+        </div>
+
+        <div class="glass-card" data-tilt>
+          <div class="card-icon" style="background: rgba(66, 133, 244, 0.15); border-color: rgba(66, 133, 244, 0.4);">
+            ⚡
+          </div>
+          <h3>全栈架构代码生成</h3>
+          <p>跨语言深度重构、自动化单元测试编写与复杂数学算法即时推导落地。</p>
+          <div class="card-footer">
+            <span class="mono-badge">Multi-File AST</span>
+          </div>
+        </div>
+
+        <div class="glass-card" data-tilt>
+          <div class="card-icon" style="background: rgba(0, 240, 255, 0.15); border-color: rgba(0, 240, 255, 0.4);">
+            🎙️
+          </div>
+          <h3>原生端到端拟真人声</h3>
+          <p>实时语调感知、自然呼吸停顿与多语种即时同传，告别机械式合成语音。</p>
+          <div class="card-footer">
+            <span class="mono-badge">Direct Audio In/Out</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 思维链推理演示 -->
+    <section class="section-container" id="reasoning">
+      <div class="section-header">
+        <span class="section-tag">Chain of Thought</span>
+        <h2>透明化思维链推演</h2>
+        <p>实时观察 Gemini 如何解构复杂多步骤逻辑难题。</p>
+      </div>
+
+      <div class="glass-card reasoning-terminal">
+        <div class="terminal-head">
+          <div class="dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <span class="terminal-title">deep-thinking-stream.log</span>
+          <span class="status-live">● LIVE REASONING</span>
+        </div>
+        <div class="terminal-body" id="thinkingOutput">
+          <div class="log-line step"><span class="step-num">[Step 1/3]</span> 正在解析天体物理引力透镜摄动公式...</div>
+          <div class="log-line calc">∇²Φ = 4πGρ + (3/c²)∂²Φ/∂t² -> 边界条件收敛良好</div>
+          <div class="log-line step"><span class="step-num">[Step 2/3]</span> 交叉验证哈勃深空望远镜红移数据...</div>
+          <div class="log-line output"><span class="accent-cyan">推导结果：</span>候选系外行星质量为 1.42 太阳质量，置信度 99.84%</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 交互式对话体验终端 -->
+    <section class="section-container" id="playground">
+      <div class="chat-pod glass-card">
+        <div class="chat-messages" id="chatList">
+          <div class="msg gemini">
+            <div class="msg-avatar">✨</div>
+            <div class="msg-bubble">
+              你好！我是 Gemini。我已经加载了全模态认知神经元。今天想探索量子物理、写一段高并发架构代码，还是为你创作一首星际交响乐？
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-input-bar">
+          <input type="text" id="chatInput" placeholder="输入任意指令，或按回车键与 Gemini 对话..." autocomplete="off">
+          <button class="send-btn" id="sendBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <p>Gemini Personal Intelligence Vault · Preset 01 Cosmic Nebula</p>
+      <span class="footer-dim">Design System Inspired by Deep Cosmic Resonance</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

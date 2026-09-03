@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini | Celestial Duality</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 反色跟随光标 -->
+  <div class="diff-cursor" id="cursor"></div>
+
+  <!-- 分屏主容器 -->
+  <div class="split-container" id="splitContainer">
+    <!-- 左极：理性与逻辑 (Light Side) -->
+    <div class="split-pane pane-light" id="leftPane">
+      <div class="pane-content">
+        <header class="pane-header">
+          <span class="mono-meta">01 // LOGIC & SYNTAX</span>
+          <span class="status-indicator">RIGOROUS 100%</span>
+        </header>
+
+        <div class="hero-block">
+          <h1 class="pane-title">RATIONALITY</h1>
+          <p class="pane-tagline">精密、逻辑、形式化验证与高维算力矩阵。</p>
+        </div>
+
+        <div class="card-monolith">
+          <h3>多文件 AST 重构引擎</h3>
+          <p>在数百万行代码库中维持符号表一致性，消除并发死锁，推导零拷贝拓扑。</p>
+          <pre class="code-snippet"><code>fn solve_entropy&lt;T&gt;(tensor: &amp;[T]) -&gt; Result&lt;State, Err&gt; {
+    tensor.par_iter().fold(|| 0.0, |acc, x| acc + x.log2())
+}</code></pre>
+        </div>
+
+        <div class="metric-row">
+          <div class="metric-item">
+            <span class="m-val">98.4%</span>
+            <span class="m-lbl">HumanEval+ Pass@1</span>
+          </div>
+          <div class="metric-item">
+            <span class="m-val">100K+</span>
+            <span class="m-lbl">Math Olympiad Tokens</span>
+          </div>
+        </div>
+
+        <button class="duality-btn light-btn">接入逻辑内核</button>
+      </div>
+    </div>
+
+    <!-- 可拖拽中轴线 -->
+    <div class="split-divider" id="splitDivider">
+      <div class="divider-handle">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- 右极：感性与创造 (Dark Side) -->
+    <div class="split-pane pane-dark" id="rightPane">
+      <div class="pane-content">
+        <header class="pane-header">
+          <span class="mono-meta">02 // POETICS & VISION</span>
+          <span class="status-indicator dark">EMERGENCE ∞</span>
+        </header>
+
+        <div class="hero-block">
+          <h1 class="pane-title">CREATIVITY</h1>
+          <p class="pane-tagline">隐喻、诗意、跨感官共鸣与多模态生成。</p>
+        </div>
+
+        <div class="card-monolith dark">
+          <h3>多维声画合声诗学</h3>
+          <p>将高能伽马射线爆光谱转译为十二音阶管弦乐，赋予无机算力以充沛的情感温度。</p>
+          <div class="poetic-quote">
+            “在硅基的暗流深处，代码并非冰冷的栅格，而是宇宙在自我审视时留下的呼吸。”
+          </div>
+        </div>
+
+        <div class="metric-row dark">
+          <div class="metric-item">
+            <span class="m-val">4K 60fps</span>
+            <span class="m-lbl">原生时间序列生成</span>
+          </div>
+          <div class="metric-item">
+            <span class="m-val">128 音轨</span>
+            <span class="m-lbl">交响泛音层次</span>
+          </div>
+        </div>
+
+        <button class="duality-btn dark-btn">唤醒创造之灵</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,996 @@
+/* ============================================================
+   Preset 10 · 赛博敦煌 Cyber Dunhuang — 飞天全息设计系统
+   矿物色 × 金箔 × 全息修复
+   ============================================================ */
+
+:root {
+  /* 岩壁基底 */
+  --bg-rock: #1A1410;
+  --bg-cave: #241B14;
+  --bg-panel: rgba(36, 27, 20, 0.88);
+
+  /* 敦煌矿物五色 */
+  --mineral-blue: #2A6F97;   /* 石青 */
+  --mineral-green: #3E8E7E;  /* 石绿 */
+  --mineral-red: #C1543C;    /* 土红 */
+  --mineral-ochre: #D9A441;  /* 赭黄 */
+  --gold-leaf: #E8C87A;      /* 金箔 */
+
+  /* 文本层级 */
+  --text-primary: #F3E9D2;
+  --text-dim: #9C8A70;
+
+  /* 边框与辉光 */
+  --border-cave: rgba(232, 200, 122, 0.16);
+  --border-cave-strong: rgba(232, 200, 122, 0.45);
+  --glow-gold: rgba(232, 200, 122, 0.25);
+
+  /* 几何与动效 */
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-pill: 9999px;
+  --ease-dune: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-smooth: 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+  font-weight: 600;
+  background-color: var(--bg-rock);
+  background-image:
+    radial-gradient(1100px 700px at 78% -10%, rgba(62, 142, 126, 0.09), transparent 62%),
+    radial-gradient(1000px 720px at 8% 24%, rgba(42, 111, 151, 0.10), transparent 60%),
+    radial-gradient(900px 700px at 88% 78%, rgba(193, 84, 60, 0.08), transparent 62%),
+    radial-gradient(1200px 800px at 45% 110%, rgba(217, 164, 65, 0.10), transparent 65%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(232, 200, 122, 0.35);
+  color: #1A1410;
+}
+
+.brush-font {
+  font-family: 'Ma Shan Zheng', 'Noto Serif SC', cursive;
+  font-weight: 400;
+}
+
+/* ============================================================
+   背景层：画布 / 暗角 / 壁画肌理
+   ============================================================ */
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.cave-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 42%, transparent 52%, rgba(10, 7, 5, 0.6) 100%);
+}
+
+/* feTurbulence 内联 SVG 噪点（金粉颗粒）+ 细裂纹线条 */
+.cave-texture {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.6;
+  background-image:
+    repeating-linear-gradient(104deg, transparent 0 52px, rgba(243, 233, 210, 0.014) 52px 53px),
+    repeating-linear-gradient(23deg, transparent 0 84px, rgba(0, 0, 0, 0.14) 84px 85px),
+    repeating-linear-gradient(151deg, transparent 0 118px, rgba(243, 233, 210, 0.012) 118px 119px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.91 0 0 0 0 0.78 0 0 0 0 0.48 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   主布局
+   ============================================================ */
+.app-layout {
+  position: relative;
+  z-index: 2;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px 48px;
+}
+
+/* 窟门双开遮罩：区块入场 */
+.gate {
+  clip-path: inset(-6% 50% -6% 50%);
+  opacity: 0.3;
+  transform: scale(0.988);
+  transition:
+    clip-path 1.15s var(--ease-dune),
+    opacity 0.95s ease,
+    transform 1.15s var(--ease-dune);
+  will-change: clip-path, opacity, transform;
+}
+
+.gate.is-open {
+  clip-path: inset(-6% -2% -6% -2%);
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================================================
+   顶部导航
+   ============================================================ */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--border-cave);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-mark {
+  display: flex;
+  filter: drop-shadow(0 0 8px rgba(232, 200, 122, 0.35));
+}
+
+.brand-title {
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+}
+
+.brand-sub {
+  font-size: 0.95rem;
+  color: var(--gold-leaf);
+  letter-spacing: 0.16em;
+  opacity: 0.85;
+}
+
+.version-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  padding: 2px 9px;
+  background: rgba(217, 164, 65, 0.12);
+  border: 1px solid rgba(217, 164, 65, 0.35);
+  color: var(--gold-leaf);
+  border-radius: 6px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-link {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.92rem;
+  letter-spacing: 0.1em;
+  position: relative;
+  padding: 4px 2px;
+  transition: color 0.35s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  bottom: -4px;
+  height: 1px;
+  background: var(--gold-leaf);
+  box-shadow: 0 0 8px var(--glow-gold);
+  transition: left 0.4s var(--ease-dune), right 0.4s var(--ease-dune);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--gold-leaf);
+}
+
+.nav-link.active::after {
+  left: 0;
+  right: 0;
+}
+
+.btn-glow {
+  padding: 8px 20px;
+  border-radius: var(--radius-pill);
+  background: rgba(232, 200, 122, 0.06);
+  border: 1px solid var(--border-cave);
+  color: var(--gold-leaf);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-glow:hover {
+  background: rgba(232, 200, 122, 0.14);
+  border-color: var(--border-cave-strong);
+  box-shadow: 0 0 22px rgba(232, 200, 122, 0.25);
+}
+
+.btn-glow:focus-visible,
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--gold-leaf);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   Hero 主视区
+   ============================================================ */
+.hero-section {
+  position: relative;
+  text-align: center;
+  padding: 96px 0 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---- 背光光环（多层同心圆，缓慢旋转） ---- */
+.mandala-halo {
+  position: absolute;
+  top: -36px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 620px;
+  height: 620px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.halo-glow {
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(217, 164, 65, 0.30) 0%,
+    rgba(217, 164, 65, 0.12) 34%,
+    rgba(193, 84, 60, 0.07) 55%,
+    transparent 72%);
+  filter: blur(6px);
+  animation: haloBreath 9s ease-in-out infinite;
+}
+
+.halo-ring {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.halo-ring-outer {
+  inset: 0;
+  background: repeating-conic-gradient(from 0deg,
+    rgba(232, 200, 122, 0.34) 0deg 1.4deg,
+    transparent 1.4deg 9deg);
+  -webkit-mask: radial-gradient(closest-side, transparent 88%, #000 89%, #000 93%, transparent 94%);
+  mask: radial-gradient(closest-side, transparent 88%, #000 89%, #000 93%, transparent 94%);
+  animation: haloSpin 80s linear infinite;
+}
+
+.halo-ring-mid {
+  inset: 9%;
+  border: 1px dashed rgba(232, 200, 122, 0.34);
+  animation: haloSpinReverse 56s linear infinite;
+}
+
+.halo-core {
+  position: absolute;
+  inset: 22%;
+  border-radius: 50%;
+  border: 1px solid rgba(232, 200, 122, 0.22);
+  background: radial-gradient(circle,
+    rgba(232, 200, 122, 0.14) 0%,
+    rgba(217, 164, 65, 0.07) 45%,
+    transparent 70%);
+  box-shadow: inset 0 0 60px rgba(217, 164, 65, 0.12);
+}
+
+/* ---- Hero 文案 ---- */
+.hero-vertical {
+  position: absolute;
+  right: -10px;
+  top: 140px;
+  writing-mode: vertical-rl;
+  font-size: 1.1rem;
+  letter-spacing: 0.5em;
+  color: rgba(156, 138, 112, 0.75);
+  z-index: 1;
+}
+
+.hero-pill {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  background: rgba(217, 164, 65, 0.10);
+  border: 1px solid rgba(217, 164, 65, 0.32);
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  color: var(--gold-leaf);
+  margin-bottom: 26px;
+}
+
+.hero-title {
+  position: relative;
+  z-index: 1;
+  font-size: 3.6rem;
+  font-weight: 900;
+  line-height: 1.28;
+  letter-spacing: 0.06em;
+  margin-bottom: 18px;
+  text-shadow: 0 0 40px rgba(217, 164, 65, 0.18);
+}
+
+.gold-text {
+  background: linear-gradient(100deg,
+    var(--mineral-ochre) 0%,
+    var(--gold-leaf) 28%,
+    #F7E7B4 50%,
+    var(--gold-leaf) 72%,
+    var(--mineral-ochre) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: goldShine 5.5s linear infinite;
+}
+
+.hero-inscription {
+  position: relative;
+  z-index: 1;
+  font-size: 1.05rem;
+  color: rgba(232, 200, 122, 0.72);
+  letter-spacing: 0.14em;
+  margin-bottom: 22px;
+}
+
+.hero-desc {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  font-size: 1.02rem;
+  line-height: 2.05;
+  color: var(--text-dim);
+  margin-bottom: 38px;
+}
+
+.hero-cta-group {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 16px;
+}
+
+/* ---- 按钮体系 ---- */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  padding: 12px 30px;
+  background: linear-gradient(135deg, var(--mineral-red) 0%, var(--mineral-ochre) 55%, var(--gold-leaf) 100%);
+  border: 1px solid rgba(232, 200, 122, 0.5);
+  border-radius: var(--radius-pill);
+  color: #241B14;
+  font-family: inherit;
+  font-weight: 900;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(217, 164, 65, 0.3);
+  transition: transform 0.35s var(--ease-dune), box-shadow 0.35s var(--ease-dune);
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 32%, rgba(255, 250, 235, 0.5) 50%, transparent 68%);
+  transform: translateX(-130%);
+  pointer-events: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(217, 164, 65, 0.45), 0 0 24px rgba(232, 200, 122, 0.3);
+}
+
+.btn-primary:hover::after {
+  animation: btnSweep 0.9s ease;
+}
+
+.btn-primary:disabled {
+  opacity: 0.65;
+  cursor: wait;
+  transform: none;
+}
+
+.btn-small {
+  padding: 9px 22px;
+  font-size: 0.86rem;
+  flex-shrink: 0;
+}
+
+.btn-secondary {
+  padding: 12px 28px;
+  background: rgba(243, 233, 210, 0.03);
+  border: 1px solid var(--border-cave);
+  border-radius: var(--radius-pill);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-secondary:hover {
+  background: rgba(232, 200, 122, 0.08);
+  border-color: var(--border-cave-strong);
+  box-shadow: 0 0 18px rgba(232, 200, 122, 0.18);
+}
+
+/* ============================================================
+   通用区块与标题
+   ============================================================ */
+.section-container {
+  padding: 72px 0;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 44px;
+}
+
+.section-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--mineral-ochre);
+  letter-spacing: 0.22em;
+}
+
+.section-header h2 {
+  font-size: 2.1rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin: 10px 0 10px;
+}
+
+.section-header p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+}
+
+/* ============================================================
+   壁画殿 · 壁画卡片（全息修复构件）
+   ============================================================ */
+.mural-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 22px;
+}
+
+.mural-card {
+  background: linear-gradient(165deg, rgba(36, 27, 20, 0.92) 0%, rgba(26, 20, 16, 0.94) 100%);
+  border: 1px solid var(--border-cave);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition:
+    transform 0.45s var(--ease-dune),
+    border-color 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+.mural-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-cave-strong);
+  box-shadow:
+    0 24px 48px -16px rgba(0, 0, 0, 0.65),
+    0 0 30px rgba(232, 200, 122, 0.14);
+}
+
+.mural-visual {
+  position: relative;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 28% 22%, rgba(243, 233, 210, 0.20), transparent 56%),
+    linear-gradient(135deg, var(--mural-a, #2A6F97) 0%, var(--mural-b, #3E8E7E) 100%);
+  filter: saturate(0.58) brightness(0.8);
+  transition: filter 0.7s var(--ease-dune);
+}
+
+/* 悬停「全息修复」：由斑驳变鲜艳 */
+.mural-card:hover .mural-visual {
+  filter: saturate(1.15) brightness(1.06);
+}
+
+/* 剥落颗粒 + 细裂纹覆盖层 */
+.mural-visual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.85;
+  transition: opacity 0.7s var(--ease-dune);
+  background-image:
+    repeating-linear-gradient(104deg, transparent 0 30px, rgba(20, 14, 10, 0.26) 30px 31px),
+    repeating-linear-gradient(16deg, transparent 0 52px, rgba(20, 14, 10, 0.18) 52px 53px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.07 0 0 0 0 0.05 0 0 0 0 0.03 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23f)'/%3E%3C/svg%3E");
+}
+
+/* 悬停时剥落噪点淡出 */
+.mural-card:hover .mural-visual::after {
+  opacity: 0;
+}
+
+.wall-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  color: var(--gold-leaf);
+  background: rgba(26, 20, 16, 0.55);
+  border: 1px solid rgba(232, 200, 122, 0.22);
+  padding: 3px 10px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+.mural-glyph {
+  font-size: 3.6rem;
+  line-height: 1;
+  color: var(--glyph-ink, rgba(243, 233, 210, 0.92));
+  text-shadow: 0 0 22px rgba(243, 233, 210, 0.35);
+  z-index: 1;
+  transition: transform 0.6s var(--ease-dune), text-shadow 0.6s ease;
+}
+
+.mural-card:hover .mural-glyph {
+  transform: scale(1.1) translateY(-3px);
+  text-shadow: 0 0 30px rgba(232, 200, 122, 0.65);
+}
+
+/* 修复扫描线 */
+.scan-line {
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  height: 42%;
+  top: -50%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(232, 200, 122, 0.24) 38%,
+    rgba(243, 233, 210, 0.55) 50%,
+    rgba(232, 200, 122, 0.24) 62%,
+    transparent 100%);
+}
+
+.mural-card:hover .scan-line {
+  animation: scanSweep 1.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mural-body {
+  padding: 22px 22px 24px;
+}
+
+.mural-body h3 {
+  font-size: 1.12rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+.mural-body p {
+  font-size: 0.86rem;
+  line-height: 1.85;
+  color: var(--text-dim);
+  margin-bottom: 18px;
+}
+
+.mural-badge {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--gold-leaf);
+  background: rgba(232, 200, 122, 0.06);
+  border: 1px solid var(--border-cave);
+  padding: 4px 12px;
+  border-radius: 6px;
+}
+
+/* ============================================================
+   修复台 · 交互体验板块
+   ============================================================ */
+.restore-console {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-cave);
+  border-top: 2px solid rgba(232, 200, 122, 0.4);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow:
+    0 24px 48px -20px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(243, 233, 210, 0.05);
+}
+
+.console-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px dashed var(--border-cave);
+}
+
+.console-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.92rem;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+.status-live {
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  color: var(--mineral-ochre);
+  animation: livePulse 2.6s ease-in-out infinite;
+}
+
+.restore-input-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(16, 11, 8, 0.75);
+  border: 1px solid var(--border-cave);
+  border-radius: var(--radius-pill);
+  padding: 7px 8px 7px 24px;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.restore-input-bar:focus-within {
+  border-color: rgba(232, 200, 122, 0.55);
+  box-shadow: 0 0 0 3px rgba(232, 200, 122, 0.12), 0 0 24px rgba(232, 200, 122, 0.12);
+}
+
+.restore-input-bar input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.03em;
+}
+
+.restore-input-bar input::placeholder {
+  color: rgba(156, 138, 112, 0.65);
+}
+
+.restore-output {
+  position: relative;
+  overflow: hidden;
+  margin-top: 22px;
+  padding: 22px 26px;
+  min-height: 132px;
+  background: rgba(20, 14, 10, 0.6);
+  border: 1px dashed rgba(232, 200, 122, 0.24);
+  border-radius: var(--radius-md);
+}
+
+/* 修复台扫描线：由 .is-scanning 触发 */
+.restore-output::after {
+  content: '';
+  position: absolute;
+  left: -3%;
+  right: -3%;
+  height: 42%;
+  top: -50%;
+  opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(232, 200, 122, 0.2) 38%,
+    rgba(243, 233, 210, 0.45) 50%,
+    rgba(232, 200, 122, 0.2) 62%,
+    transparent 100%);
+}
+
+.restore-output.is-scanning::after {
+  animation: scanSweep 1.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.restore-status {
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  color: var(--gold-leaf);
+  margin-bottom: 12px;
+}
+
+.restore-text {
+  font-size: 0.96rem;
+  line-height: 2.1;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  min-height: 60px;
+  white-space: pre-wrap;
+}
+
+/* ============================================================
+   传承遥测
+   ============================================================ */
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+.tele-card {
+  background: linear-gradient(165deg, rgba(36, 27, 20, 0.92), rgba(26, 20, 16, 0.94));
+  border: 1px solid var(--border-cave);
+  border-radius: var(--radius-lg);
+  padding: 26px 24px;
+  text-align: center;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s var(--ease-dune);
+}
+
+.tele-card:hover {
+  border-color: var(--border-cave-strong);
+  box-shadow: 0 0 26px rgba(232, 200, 122, 0.12);
+  transform: translateY(-3px);
+}
+
+.tele-num-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.tele-num {
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--gold-leaf);
+  text-shadow: 0 0 24px rgba(232, 200, 122, 0.3);
+  font-variant-numeric: tabular-nums;
+}
+
+.tele-unit {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+}
+
+.tele-label {
+  display: block;
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  color: var(--text-primary);
+}
+
+.tele-note {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  margin-top: 6px;
+}
+
+.progress-track {
+  margin-top: 14px;
+  height: 8px;
+  background: rgba(243, 233, 210, 0.08);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--mineral-red) 0%, var(--mineral-ochre) 55%, var(--gold-leaf) 100%);
+  box-shadow: 0 0 12px rgba(232, 200, 122, 0.5);
+  transition: width 1.8s var(--ease-dune);
+}
+
+/* ============================================================
+   页脚
+   ============================================================ */
+.app-footer {
+  text-align: center;
+  padding: 44px 0 12px;
+  border-top: 1px solid var(--border-cave);
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.footer-ornament {
+  color: rgba(232, 200, 122, 0.55);
+  font-size: 1rem;
+  letter-spacing: 0.6em;
+  margin-bottom: 14px;
+}
+
+.footer-dim {
+  display: block;
+  font-size: 0.76rem;
+  letter-spacing: 0.14em;
+  color: rgba(156, 138, 112, 0.6);
+  margin-top: 8px;
+}
+
+/* ============================================================
+   Keyframes
+   ============================================================ */
+@keyframes haloSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes haloSpinReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes haloBreath {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.045); }
+}
+
+@keyframes goldShine {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes btnSweep {
+  0% { transform: translateX(-130%); }
+  100% { transform: translateX(130%); }
+}
+
+@keyframes scanSweep {
+  0% { top: -50%; opacity: 0; }
+  12% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { top: 118%; opacity: 0; }
+}
+
+@keyframes livePulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+/* ============================================================
+   响应式：768px
+   ============================================================ */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .brand-sub { display: none; }
+
+  .hero-section { padding: 64px 0 60px; }
+  .hero-title { font-size: 2.5rem; }
+  .hero-vertical { display: none; }
+
+  .mandala-halo {
+    width: 380px;
+    height: 380px;
+    top: -20px;
+  }
+
+  .section-header h2 { font-size: 1.7rem; }
+
+  .restore-input-bar {
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: var(--radius-lg);
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .restore-input-bar input { padding: 6px 8px; }
+  .btn-small { width: 100%; }
+}
+
+/* ============================================================
+   响应式：390px
+   ============================================================ */
+@media (max-width: 390px) {
+  .app-layout { padding: 0 16px 40px; }
+
+  .navbar { padding: 18px 0; }
+  .version-tag { display: none; }
+  .btn-glow { padding: 7px 14px; font-size: 0.78rem; }
+
+  .hero-title { font-size: 1.95rem; }
+  .hero-desc { font-size: 0.94rem; }
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-cta-group .btn-primary,
+  .hero-cta-group .btn-secondary { width: 100%; }
+
+  .mandala-halo { width: 300px; height: 300px; }
+
+  .section-container { padding: 52px 0; }
+  .section-header h2 { font-size: 1.45rem; }
+
+  .mural-grid,
+  .telemetry-grid { grid-template-columns: 1fr; }
+
+  .restore-console { padding: 20px 16px; }
+  .tele-num { font-size: 2.1rem; }
+}
+
+/* ============================================================
+   减少动态偏好
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .gate {
+    clip-path: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .halo-ring-outer,
+  .halo-ring-mid,
+  .halo-glow,
+  .gold-text,
+  .status-live {
+    animation: none;
+  }
+}

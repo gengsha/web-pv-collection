@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini | Acid Dimensional Origami</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="acid-wrapper">
+    <!-- 顶部贴纸导航 -->
+    <header class="acid-header">
+      <div class="sticker-brand">GEMINI // ACID LAB</div>
+      <div class="sticker-badge pink-badge">★ NO RULES ★</div>
+    </header>
+
+    <!-- Hero 潮流爆破区 -->
+    <section class="acid-hero">
+      <div class="hero-sticker-row">
+        <span class="sticker-chip">DIMENSIONAL FOLD</span>
+        <span class="sticker-chip cyan-chip">UNLEASH CREATIVITY</span>
+      </div>
+
+      <h1 class="acid-title">
+        FOLD REALITY.<br>
+        <span class="acid-highlight">折叠多维想象。</span>
+      </h1>
+
+      <p class="acid-sub">
+        打破平庸的对称，用高能酸性撞色与 3D 折纸空间重新定义智能创作者的边界。
+      </p>
+
+      <div class="hero-btn-row">
+        <button class="acid-btn primary-lime" id="foldTriggerBtn">展开全维折纸</button>
+        <button class="acid-btn outline-pink">获取灵感贴纸</button>
+      </div>
+    </section>
+
+    <!-- 3D 折纸交互卡片 -->
+    <section class="origami-section">
+      <div class="origami-card folded" id="origamiCard">
+        <div class="origami-face face-front">
+          <span class="origami-label">FOLD 01 // FRONT</span>
+          <h2>多模态重组爆炸</h2>
+          <p>点击此处，解锁展开折纸背后的多维生成神经元 ➔</p>
+          <div class="card-tag-row">
+            <span class="mini-tag">3D TRANSFORMS</span>
+            <span class="mini-tag">SPRING PHYSICS</span>
+          </div>
+        </div>
+
+        <div class="origami-face face-inside">
+          <span class="origami-label green-lbl">FOLD 02 // INSIDE MATRIX</span>
+          <h3>全维创作者引擎已解锁！</h3>
+          <p>即时将一段涂鸦草图、一段失真电吉他 Riff 与一段 Rust 核心代码揉合成全新的跨界互动 App。</p>
+          <button class="acid-btn-sm" id="collapseBtn">收起折叠</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 潮流灵感生成贴纸栏 -->
+    <section class="sticker-generator">
+      <div class="gen-box">
+        <span class="gen-title">★ 随机酸性灵感生成器 ★</span>
+        <div class="idea-display" id="ideaDisplay">“在赛博朋克东京街头，让 AI 演奏一首融合 8-bit 与爵士乐的即兴交响曲。”</div>
+        <button class="acid-btn-generate" id="genIdeaBtn">BOMB ANOTHER IDEA 💥</button>
+      </div>
+    </section>
+
+    <footer class="acid-footer">
+      <span>GEMINI // ACID ORIGAMI PRESET 07</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

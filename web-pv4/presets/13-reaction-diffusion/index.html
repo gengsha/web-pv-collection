@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 · Reaction-Diffusion — 反应扩散培养皿</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dish-wrap">
+    <canvas id="sim"></canvas>
+    <div class="dish-ring"></div>
+  </div>
+  <div class="lab-noise"></div>
+
+  <div class="shell">
+    <div class="hud">
+      <span class="cell"><i>MODEL</i><b>GRAY-SCOTT</b></span>
+      <span class="cell"><i>GRID</i><b id="hGrid">256²</b></span>
+      <span class="cell"><i>ITER / FRAME</i><b id="hIter">10</b></span>
+      <span class="cell"><i>FEED</i><b id="hF">0.0370</b></span>
+      <span class="cell"><i>KILL</i><b id="hK">0.0600</b></span>
+      <span class="cell"><i>FPS</i><b id="hFps">60</b></span>
+    </div>
+
+    <header class="nav">
+      <div class="brand"><span>hy4</span><em>CULTURE DISH 04</em></div>
+      <nav class="nav-links">
+        <a href="#strains" class="nav-link active">菌株</a>
+        <a href="#culture" class="nav-link">培养参数</a>
+        <a href="#notes" class="nav-link">实验记录</a>
+        <a href="#bench" class="nav-link">评测</a>
+      </nav>
+      <button class="btn" id="ctaSeed">重新接种</button>
+    </header>
+
+    <section class="hero">
+      <p class="kicker">// ∂a/∂t = Dₐ∇²a − ab² + f(1−a)</p>
+      <h1>两种化学物质，<br><span class="grad">长出了一整个生态。</span></h1>
+      <p class="desc">
+        我是 hy4。这一页没有动画师，只有两个偏微分方程。每帧在 GPU 上迭代十次拉普拉斯算子，
+        让抑制与自催化互相拉锯。INSTANT 只跑 4 次迭代就拍照，DEEP 愿意跑 20 次，等珊瑚长完整。
+      </p>
+      <div class="cta">
+        <button class="btn solid" id="ctaStrains">查看菌株</button>
+        <button class="btn" id="ctaCulture">调节培养参数</button>
+      </div>
+      <p class="hint">在皿中拖动可接种新菌落 · 切换模式改变 Feed / Kill</p>
+    </section>
+
+    <section class="section" id="strains">
+      <div class="sec-head">
+        <span class="sec-tag">// STRAINS</span>
+        <h2>四株菌</h2>
+        <p>同一个反应，四种生存策略。</p>
+      </div>
+      <div class="grid">
+        <article class="card"><span class="no">01</span><h3>混合推理内核</h3><p>同一权重在 Instant 与 Deep Think 间切换，按任务复杂度分配思考预算。</p><span class="tag">HYBRID CORE</span></article>
+        <article class="card"><span class="no">02</span><h3>全栈代码工程</h3><p>跨文件重构、补齐测试、跑终端命令，遵循仓库既有约定续写。</p><span class="tag">AGENTIC CODING</span></article>
+        <article class="card"><span class="no">03</span><h3>256K 长上下文</h3><p>整本手册、整个仓库一次载入，长跨度下依旧不丢前文细节。</p><span class="tag">LONG CONTEXT</span></article>
+        <article class="card"><span class="no">04</span><h3>并行工具调用</h3><p>检索、读取、计算、执行最多 8 路并行，多步任务压成一轮往返。</p><span class="tag">PARALLEL TOOLS</span></article>
+      </div>
+    </section>
+
+    <section class="section" id="culture">
+      <div class="sec-head">
+        <span class="sec-tag">// CULTURE PARAMETERS</span>
+        <h2>培养参数</h2>
+        <p>切换培养基，观察形态学分岔。</p>
+      </div>
+
+      <div class="panel">
+        <div class="modes">
+          <button class="mode active" data-mode="instant">
+            <b>MITOSIS · 分裂</b>
+            <em>Feed 0.0367 / Kill 0.0649 · 4 次迭代</em>
+          </button>
+          <button class="mode" data-mode="deep">
+            <b>CORAL · 珊瑚生长</b>
+            <em>Feed 0.0545 / Kill 0.0620 · 20 次迭代</em>
+          </button>
+          <div class="row2">
+            <div class="sl"><label>FEED <b id="vF">0.0367</b></label><input type="range" id="sF" min="100" max="700" value="367"></div>
+            <div class="sl"><label>KILL <b id="vK">0.0649</b></label><input type="range" id="sK" min="500" max="700" value="649"></div>
+          </div>
+        </div>
+        <div class="trace" id="traceBox"></div>
+      </div>
+    </section>
+
+    <section class="section" id="notes">
+      <div class="sec-head">
+        <span class="sec-tag">// LAB NOTEBOOK</span>
+        <h2>实验记录</h2>
+        <p>向记录本追加一条观测。</p>
+      </div>
+      <div class="term">
+        <div class="log" id="log">
+          <div class="row"><span class="who">hy4</span><span class="txt">接种完成，培养箱恒温。写下你想观测的现象。</span></div>
+        </div>
+        <div class="inp">
+          <span class="p">lab&gt;</span>
+          <input type="text" id="inp" placeholder="记录一条观测，回车提交" autocomplete="off">
+          <button class="btn solid" id="send">记录</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bench">
+      <div class="sec-head">
+        <span class="sec-tag">// BENCHMARK</span>
+        <h2>评测数据</h2>
+      </div>
+      <div class="bench-grid">
+        <div class="bench"><span class="bn">SWE-bench Verified</span><span class="bv">74.2</span><div class="bb"><i data-w="74"></i></div></div>
+        <div class="bench"><span class="bn">LiveCodeBench v6</span><span class="bv">68.5</span><div class="bb"><i data-w="68"></i></div></div>
+        <div class="bench"><span class="bn">AIME 2025</span><span class="bv">88.0</span><div class="bb"><i data-w="88"></i></div></div>
+        <div class="bench"><span class="bn">GPQA Diamond</span><span class="bv">71.4</span><div class="bb"><i data-w="71"></i></div></div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>hy4 · REACTION-DIFFUSION PRESET 13 · GRAY-SCOTT ON GPU · 培养皿 No.04</p>
+      <span>THE PATTERN WAS NEVER DRAWN — IT GREW</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

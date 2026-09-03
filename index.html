@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web-PV Collection | 网页美术风格预设全景总库</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --card-bg: rgba(16, 21, 34, 0.7);
+      --card-hover: rgba(26, 35, 58, 0.9);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f8fafc;
+      --text-dim: #94a3b8;
+      --gemini-cyan: #00f0ff;
+      --gemini-purple: #7928ca;
+      --qwen-purple: #8b5cf6;
+      --glm-amber: #f59e0b;
+      --hy4-lime: #ccff00;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 40px 24px 80px;
+    }
+    .ambient-bg {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 20% 20%, rgba(121, 40, 202, 0.15) 0%, transparent 40%),
+                  radial-gradient(circle at 80% 80%, rgba(0, 240, 255, 0.1) 0%, transparent 40%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      padding: 4px 14px;
+      border-radius: 999px;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: var(--gemini-cyan);
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .sub {
+      font-size: 1.15rem;
+      color: var(--text-dim);
+      max-width: 700px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+    }
+    .stats-bar {
+      display: inline-flex;
+      gap: 30px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      padding: 12px 30px;
+      border-radius: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+    }
+    .stat-val { color: var(--gemini-cyan); font-weight: 700; }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+    .vault-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .vault-card:hover {
+      background: var(--card-hover);
+      transform: translateY(-6px);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+    }
+    .card-top { margin-bottom: 24px; }
+    .card-vol {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .vol-badge { padding: 3px 8px; border-radius: 6px; }
+    .vol-1 .vol-badge { background: rgba(121, 40, 202, 0.2); color: #c084fc; }
+    .vol-2 .vol-badge { background: rgba(139, 92, 246, 0.2); color: #a78bfa; }
+    .vol-3 .vol-badge { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+    .vol-4 .vol-badge { background: rgba(204, 255, 0, 0.2); color: #ccff00; }
+
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 20px 0;
+    }
+    .tag {
+      font-size: 0.7rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 3px 8px;
+      border-radius: 4px;
+      color: #cbd5e1;
+    }
+    .btn-enter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      color: #ffffff;
+    }
+    .vol-1:hover .btn-enter { color: var(--gemini-cyan); }
+    .vol-2:hover .btn-enter { color: var(--qwen-purple); }
+    .vol-3:hover .btn-enter { color: var(--glm-amber); }
+    .vol-4:hover .btn-enter { color: var(--hy4-lime); }
+
+    footer {
+      text-align: center;
+      margin-top: 80px;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-bg"></div>
+  <div class="container">
+    <header>
+      <span class="badge">WEB-PV VAULT COLLECTION</span>
+      <h1>网页美术风格预设全景总库</h1>
+      <p class="sub">精选 4 大系列、50 套现代 AI 网页美术风格规范与交互原型。内置可交互示例工程与大模型系统级 Prompt 资产。</p>
+      
+      <div class="stats-bar">
+        <div><span>收录分卷：</span><span class="stat-val">4 大专题</span></div>
+        <div><span>风格预设：</span><span class="stat-val">50 套原型</span></div>
+        <div><span>提示词规范：</span><span class="stat-val">50 份 style-spec</span></div>
+        <div><span>架构：</span><span class="stat-val">Vanilla Zero-Build</span></div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- Vol. 1 -->
+      <a href="web-pv/index.html" class="vault-card vol-1">
+        <div class="card-top">
+          <div class="card-vol">
+            <span class="vol-badge">VOL. 01</span>
+            <span>10 PRESETS</span>
+          </div>
+          <h2 class="card-title">Gemini 专题</h2>
+          <p class="card-desc">围绕 Google Gemini 旗舰多模态打造的高维流体、黑白对偶、深空天文台与次时代空间计算风格。</p>
+          <div class="card-tags">
+            <span class="tag">极光流体</span>
+            <span class="tag">50/50对偶</span>
+            <span class="tag">全息色散</span>
+            <span class="tag">VisionOS拟物</span>
+            <span class="tag">洛伦兹吸引子</span>
+          </div>
+        </div>
+        <div class="btn-enter">
+          <span>进入画廊工作台</span>
+          <span>➔</span>
+        </div>
+      </a>
+
+      <!-- Vol. 2 -->
+      <a href="web-pv2/index.html" class="vault-card vol-2">
+        <div class="card-top">
+          <div class="card-vol">
+            <span class="vol-badge">VOL. 02</span>
+            <span>10 PRESETS</span>
+          </div>
+          <h2 class="card-title">Qwen 通义千问专题</h2>
+          <p class="card-desc">以阿里通义千问为灵感，交织东方当代水墨、霁青旗舰、经折竹简、开源熔炉与赛博敦煌美学。</p>
+          <div class="card-tags">
+            <span class="tag">当代水墨</span>
+            <span class="tag">霁岚曜枢</span>
+            <span class="tag">竹简经卷</span>
+            <span class="tag">开源锻造</span>
+            <span class="tag">赛博敦煌</span>
+          </div>
+        </div>
+        <div class="btn-enter">
+          <span>进入画廊工作台</span>
+          <span>➔</span>
+        </div>
+      </a>
+
+      <!-- Vol. 3 -->
+      <a href="web-pv3/index.html" class="vault-card vol-3">
+        <div class="card-top">
+          <div class="card-vol">
+            <span class="vol-badge">VOL. 03</span>
+            <span>10 PRESETS</span>
+          </div>
+          <h2 class="card-title">GLM 5.3 智谱专题</h2>
+          <p class="card-desc">智谱清言与 GLM 5.3 全能旗舰基座。晨曦旗舰、活字造物、青花素韵、月夜园林与聚变强基跃迁。</p>
+          <div class="card-tags">
+            <span class="tag">晨曦之光</span>
+            <span class="tag">活字墨版</span>
+            <span class="tag">青花开片</span>
+            <span class="tag">苏博光影</span>
+            <span class="tag">聚变反应堆</span>
+          </div>
+        </div>
+        <div class="btn-enter">
+          <span>进入画廊工作台</span>
+          <span>➔</span>
+        </div>
+      </a>
+
+      <!-- Vol. 4 -->
+      <a href="web-pv4/index.html" class="vault-card vol-4">
+        <div class="card-top">
+          <div class="card-vol">
+            <span class="vol-badge">VOL. 04</span>
+            <span>20 PRESETS</span>
+          </div>
+          <h2 class="card-title">hy4 视觉与硬核 WebGL</h2>
+          <p class="card-desc">包含 10 种前沿视觉艺术流派（液态金属、蒸汽波、太阳朋克等）与 10 种硬核 Shader/GPGPU 实时数学渲染。</p>
+          <div class="card-tags">
+            <span class="tag">Liquid Chrome</span>
+            <span class="tag">Raymarch SDF</span>
+            <span class="tag">10万粒子流场</span>
+            <span class="tag">反应扩散</span>
+            <span class="tag">曼德博分形</span>
+          </div>
+        </div>
+        <div class="btn-enter">
+          <span>进入画廊工作台</span>
+          <span>➔</span>
+        </div>
+      </a>
+    </main>
+
+    <footer>
+      <p>Web-PV Collection · Curated by gengsha © 2026</p>
+    </footer>
+  </div>
+</body>
+</html>

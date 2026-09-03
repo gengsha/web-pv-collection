@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 · Concrete Edge — Hybrid Reasoning Model</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;700&family=Work+Sans:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 顶部跑马灯 -->
+  <div class="marquee">
+    <div class="marquee-track" id="marqueeTrack">
+      <span>HYBRID REASONING ✦ INSTANT OR DEEP ✦ 256K CONTEXT ✦ PARALLEL TOOLS ✦ SHIPS CODE ✦</span>
+      <span>HYBRID REASONING ✦ INSTANT OR DEEP ✦ 256K CONTEXT ✦ PARALLEL TOOLS ✦ SHIPS CODE ✦</span>
+    </div>
+  </div>
+
+  <!-- 网格底纹 -->
+  <div class="grid-bg"></div>
+
+  <div class="shell">
+    <header class="nav">
+      <div class="brand">
+        <div class="brand-box">hy4</div>
+        <span class="tape">v4 · HYBRID</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#capabilities" class="nav-link active">CAPABILITIES</a>
+        <a href="#reasoning" class="nav-link">REASONING</a>
+        <a href="#console" class="nav-link">CONSOLE</a>
+        <a href="#bench" class="nav-link">BENCH</a>
+      </nav>
+      <button class="btn-brutal yellow" data-press>START ↗</button>
+    </header>
+
+    <section class="hero">
+      <div class="hero-badge">NO ROUNDED CORNERS. NO EXCUSES.</div>
+
+      <h1 class="hero-title">
+        <span class="hl">THINK FAST.</span><br>
+        <span class="hl red">THINK DEEP.</span><br>
+        SHIP IT.
+      </h1>
+
+      <p class="hero-desc">
+        我是 hy4 —— 一套混合推理模型。快模式在毫秒间回话，深模式在长链推演里保持严谨。
+        没有玄学，只有可验证的推理路径与可交付的结果。
+      </p>
+
+      <div class="hero-cta">
+        <button class="btn-brutal blue big" data-press id="ctaCap">查看能力矩阵</button>
+        <button class="btn-brutal white big" data-press id="ctaCon">打开终端</button>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-box"><span class="s-num">256K</span><span class="s-lab">CONTEXT</span></div>
+        <div class="stat-box yellow"><span class="s-num">0.18s</span><span class="s-lab">TTFT</span></div>
+        <div class="stat-box red"><span class="s-num">×8</span><span class="s-lab">PARALLEL</span></div>
+        <div class="stat-box"><span class="s-num">2</span><span class="s-lab">MODES</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="capabilities">
+      <div class="sec-head">
+        <h2 class="sec-title">CAPABILITY MATRIX</h2>
+        <p>四块硬边构件，撑起一整套真实工作流。</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="b-card" data-tilt-card>
+          <div class="c-no">01</div>
+          <div class="c-ico">◈</div>
+          <h3>混合推理内核</h3>
+          <p>同一权重在 Instant 与 Deep Think 间切换，按任务复杂度分配思考预算。</p>
+          <span class="tag">HYBRID CORE</span>
+        </article>
+        <article class="b-card" data-tilt-card>
+          <div class="c-no">02</div>
+          <div class="c-ico">⌘</div>
+          <h3>全栈代码工程</h3>
+          <p>跨文件重构、补齐测试、跑终端命令，遵循仓库既有约定续写。</p>
+          <span class="tag">AGENTIC CODING</span>
+        </article>
+        <article class="b-card" data-tilt-card>
+          <div class="c-no">03</div>
+          <div class="c-ico">≡</div>
+          <h3>256K 长上下文</h3>
+          <p>整本手册、整个仓库一次载入，长跨度下依旧不丢前文细节。</p>
+          <span class="tag">LONG CONTEXT</span>
+        </article>
+        <article class="b-card" data-tilt-card>
+          <div class="c-no">04</div>
+          <div class="c-ico">⇄</div>
+          <h3>并行工具调用</h3>
+          <p>检索、读取、计算、执行最多 8 路并行，把多步任务压成一轮往返。</p>
+          <span class="tag">PARALLEL TOOLS</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="reasoning">
+      <div class="sec-head">
+        <h2 class="sec-title">HYBRID REASONING</h2>
+        <p>两个巨大开关，两种思考预算。点一下就换脑。</p>
+      </div>
+
+      <div class="switch-row">
+        <button class="mode-slab active" data-mode="instant">
+          <span class="slab-key">A</span>
+          <span class="slab-title">INSTANT</span>
+          <span class="slab-sub">≈0.2s · 短答案 · 低 token</span>
+        </button>
+        <button class="mode-slab" data-mode="deep">
+          <span class="slab-key">B</span>
+          <span class="slab-title">DEEP THINK</span>
+          <span class="slab-sub">≈6s · 长链推演 · 自校验</span>
+        </button>
+      </div>
+
+      <div class="trace-frame">
+        <div class="frame-bar">
+          <span class="frame-title">REASONING TRACE</span>
+          <span class="frame-meta" id="traceMeta">STEPS 03 · 96 TOK · 0.18s</span>
+        </div>
+        <div class="trace-body" id="traceBody"></div>
+      </div>
+    </section>
+
+    <section class="section" id="console">
+      <div class="sec-head">
+        <h2 class="sec-title">CONSOLE</h2>
+        <p>打字，回车，看它怎么想。</p>
+      </div>
+      <div class="console-frame">
+        <div class="frame-bar">
+          <span class="frame-title">hy4@shell</span>
+          <span class="frame-meta">SESSION 001</span>
+        </div>
+        <div class="console-log" id="consoleLog">
+          <div class="line"><span class="who bot">hy4</span><span class="txt">待命中。给我一个仓库、一份文档，或者一个还没想清楚的问题。</span></div>
+        </div>
+        <div class="console-input">
+          <span class="prompt-sign">$</span>
+          <input type="text" id="consoleInput" placeholder="type a task and hit enter…" autocomplete="off">
+          <button class="btn-brutal yellow" data-press id="consoleSend">RUN</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bench">
+      <div class="sec-head">
+        <h2 class="sec-title">BENCHMARK</h2>
+        <p>公开基准，数字随版本迭代更新。</p>
+      </div>
+      <div class="bench-grid">
+        <div class="bench-box"><span class="b-name">SWE-bench Verified</span><span class="b-val">74.2</span><div class="b-bar"><i data-w="74"></i></div></div>
+        <div class="bench-box"><span class="b-name">LiveCodeBench v6</span><span class="b-val">68.5</span><div class="b-bar"><i data-w="68"></i></div></div>
+        <div class="bench-box"><span class="b-name">AIME 2025</span><span class="b-val">88.0</span><div class="b-bar"><i data-w="88"></i></div></div>
+        <div class="bench-box"><span class="b-name">GPQA Diamond</span><span class="b-val">71.4</span><div class="b-bar"><i data-w="71"></i></div></div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div class="foot-logo">hy4</div>
+      <p>CONCRETE EDGE PRESET · HYBRID REASONING PERSONAL SITE · BUILD 2026.09</p>
+      <span class="tape foot-tape">NO BLUR · NO GRADIENT · NO MERCY</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

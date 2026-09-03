@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLM 5.3 | 思维长河</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 令牌流河 -->
+  <canvas id="riverCanvas" aria-hidden="true"></canvas>
+
+  <!-- 上河岸 -->
+  <div class="bank bank-top" aria-hidden="true"></div>
+
+  <div class="river-page">
+    <header class="river-header">
+      <div class="river-brand">
+        <span class="brand-flow"></span>
+        <strong>思维长河</strong>
+      </div>
+      <span class="river-status mono">上游：您的提问 · 下游：更好的答案</span>
+    </header>
+
+    <!-- Hero -->
+    <section class="river-hero">
+      <h1 class="hero-title">思如长河<span class="title-dot">，</span><br>昼夜不废</h1>
+      <div class="hero-reflection" aria-hidden="true">思如长河<br>昼夜不废</div>
+      <p class="hero-sub">一道问题入河，便是一条奔涌的推理。<br>GLM 5.3 以 200K 上下文为河床，令牌为水，直至涌出答案的入海口。</p>
+      <div class="river-metrics mono">
+        <div class="metric"><span class="metric-val">200K</span><span class="metric-key">河长 · 上下文</span></div>
+        <div class="metric-sep"></div>
+        <div class="metric"><span class="metric-val">128</span><span class="metric-key">tok/s 流速</span></div>
+        <div class="metric-sep"></div>
+        <div class="metric"><span class="metric-val">6</span><span class="metric-key">步成答 · 思维链</span></div>
+      </div>
+    </section>
+
+    <!-- 思维链步石 -->
+    <section class="stone-section">
+      <h2 class="stone-head">踏石过河 · 一道思维链的诞生</h2>
+      <div class="stone-crossing" id="stoneCrossing">
+        <div class="stone-lane">
+          <div class="current-line" aria-hidden="true"></div>
+          <div class="stone-node" data-step="1"><span class="stone-ellipse">理解</span></div>
+          <div class="stone-node" data-step="2"><span class="stone-ellipse">拆解</span></div>
+          <div class="stone-node" data-step="3"><span class="stone-ellipse">检索</span></div>
+          <div class="stone-node" data-step="4"><span class="stone-ellipse">推演</span></div>
+          <div class="stone-node" data-step="5"><span class="stone-ellipse">校验</span></div>
+          <div class="stone-node" data-step="6"><span class="stone-ellipse">作答</span></div>
+        </div>
+        <div class="stone-notes">
+          <div class="stone-note" data-for="1"><span class="mono">STEP 01</span><p>读入全部语境，识别真问题所在。</p></div>
+          <div class="stone-note" data-for="2"><span class="mono">STEP 02</span><p>将难题剖成可解的小径。</p></div>
+          <div class="stone-note" data-for="3"><span class="mono">STEP 03</span><p>调取知识与记忆，向源头取水。</p></div>
+          <div class="stone-note" data-for="4"><span class="mono">STEP 04</span><p>多路并行推演，择最稳的一支流。</p></div>
+          <div class="stone-note" data-for="5"><span class="mono">STEP 05</span><p>回头核验，不许一滴浑水入海。</p></div>
+          <div class="stone-note" data-for="6"><span class="mono">STEP 06</span><p>涌出答案，如河入海，清亮见底。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 河岸对话台 -->
+    <section class="riverside-section">
+      <div class="riverside-frame reveal">
+        <div class="riverside-head">
+          <span>投石问河</span>
+          <span class="mono">STONE → STREAM</span>
+        </div>
+        <input type="text" id="riverInput" placeholder="向河中投一个值得深想的问题…" autocomplete="off">
+        <div class="river-reply" id="riverReply">「河水已醒。掷下您的问题，看它顺流成章。」</div>
+      </div>
+    </section>
+
+    <!-- 下河岸 -->
+    <div class="bank bank-bottom" aria-hidden="true"></div>
+
+    <footer class="river-footer">
+      <p>GLM 5.3 · 思维长河 · Preset 10 / Web-PV3 · 不废江河万古流</p>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

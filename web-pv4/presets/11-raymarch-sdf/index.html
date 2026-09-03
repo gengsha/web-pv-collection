@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 · SDF Raymarching — 光线步进雕塑</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- WebGL 光线步进画布 -->
+  <canvas id="glCanvas"></canvas>
+  <div class="scan"></div>
+  <div class="grain"></div>
+
+  <div class="shell">
+    <!-- HUD 状态条 -->
+    <div class="hud-bar">
+      <span class="hud-item"><i>RENDER</i><b id="hudRenderer">SDF RAYMARCH</b></span>
+      <span class="hud-item"><i>STEPS</i><b id="hudSteps">96</b></span>
+      <span class="hud-item"><i>FPS</i><b id="hudFps">60</b></span>
+      <span class="hud-item"><i>SDF CALLS</i><b id="hudCalls">0</b></span>
+      <span class="hud-item"><i>GPU</i><b id="hudGpu">—</b></span>
+    </div>
+
+    <header class="nav">
+      <div class="brand">
+        <span class="brand-mark">hy4</span>
+        <span class="brand-tag">GEOMETRY WITHOUT POLYGONS</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#kernels" class="nav-link active">能力内核</a>
+        <a href="#console" class="nav-link">步进控制台</a>
+        <a href="#terminal" class="nav-link">终端</a>
+        <a href="#bench" class="nav-link">评测</a>
+      </nav>
+      <button class="btn-hud" id="ctaDepth">进入深步进</button>
+    </header>
+
+    <section class="hero">
+      <p class="hero-kicker">// SIGNED DISTANCE FIELD · ANALYTIC GEOMETRY</p>
+      <h1 class="hero-title">没有一根三角形<br>的<span class="irid">实体</span></h1>
+      <p class="hero-desc">
+        我是 hy4。这一页的雕塑不是模型，而是一个数学函数：每颗像素沿着视线一次次试探，
+        直到撞上距离的零点。INSTANT 只走 64 步就交卷，DEEP 愿意走上 192 步，看清每一个倒角。
+      </p>
+      <div class="hero-cta">
+        <button class="btn-hud solid" id="ctaKernels">查看能力内核</button>
+        <button class="btn-hud" id="ctaConsole">打开控制台</button>
+      </div>
+      <p class="hero-hint">拖拽画面旋转 · 滚轮推拉镜头 · 右侧切换步进精度</p>
+    </section>
+
+    <section class="section" id="kernels">
+      <div class="sec-head">
+        <span class="sec-tag">// CAPABILITY KERNELS</span>
+        <h2>能力内核</h2>
+        <p>四个算子，构成这套推理内核。</p>
+      </div>
+      <div class="card-grid">
+        <article class="hud-card">
+          <span class="kc-no">01</span>
+          <h3>混合推理内核</h3>
+          <p>同一权重在 Instant 与 Deep Think 间切换，按任务复杂度分配思考预算 —— 就像这里的步进次数。</p>
+          <span class="kc-tag">HYBRID CORE</span>
+        </article>
+        <article class="hud-card">
+          <span class="kc-no">02</span>
+          <h3>全栈代码工程</h3>
+          <p>跨文件重构、补齐测试、跑终端命令，遵循仓库既有约定续写。</p>
+          <span class="kc-tag">AGENTIC CODING</span>
+        </article>
+        <article class="hud-card">
+          <span class="kc-no">03</span>
+          <h3>256K 长上下文</h3>
+          <p>整本手册、整个仓库一次载入，长跨度下依旧不丢前文细节。</p>
+          <span class="kc-tag">LONG CONTEXT</span>
+        </article>
+        <article class="hud-card">
+          <span class="kc-no">04</span>
+          <h3>并行工具调用</h3>
+          <p>检索、读取、计算、执行最多 8 路并行，多步任务压成一轮往返。</p>
+          <span class="kc-tag">PARALLEL TOOLS</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="console">
+      <div class="sec-head">
+        <span class="sec-tag">// STEP BUDGET CONSOLE</span>
+        <h2>步进预算控制台</h2>
+        <p>同一份 SDF，两种求解精度。切换后观察轮廓与高光的变化。</p>
+      </div>
+
+      <div class="console-grid">
+        <div class="switch-col">
+          <button class="step-btn active" data-mode="instant">
+            <span class="sb-ico">◐</span>
+            <span class="sb-txt">INSTANT<em>64 步 · 快速收敛</em></span>
+          </button>
+          <button class="step-btn" data-mode="deep">
+            <span class="sb-ico">◑</span>
+            <span class="sb-txt">DEEP THINK<em>192 步 · 全精度</em></span>
+          </button>
+
+          <div class="slider-row">
+            <label>ROTATION SPEED <b id="valRot">0.25</b></label>
+            <input type="range" id="rotRange" min="0" max="120" value="25">
+          </div>
+          <div class="slider-row">
+            <label>BLEND / MORPH <b id="valMorph">0.00</b></label>
+            <input type="range" id="morphRange" min="0" max="100" value="0">
+          </div>
+        </div>
+
+        <div class="trace-col">
+          <div class="trace" id="traceBox"></div>
+          <div class="hud-bar mini">
+            <span class="hud-item"><i>TOKENS</i><b id="mTok">96</b></span>
+            <span class="hud-item"><i>LATENCY</i><b id="mLat">0.18s</b></span>
+            <span class="hud-item"><i>STEPS</i><b id="mStep">3</b></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="terminal">
+      <div class="sec-head">
+        <span class="sec-tag">// SHELL</span>
+        <h2>着色器终端</h2>
+        <p>向内核提交一条指令。</p>
+      </div>
+      <div class="term">
+        <div class="term-log" id="termLog">
+          <div class="tline"><span class="tw">hy4</span><span class="tt">着色器编译完成。可以让我推一个公式、重构一段 GLSL，或者解释这个 SDF。</span></div>
+        </div>
+        <div class="term-input">
+          <span class="tp">glsl&gt;</span>
+          <input type="text" id="termInput" placeholder="输入指令，回车执行" autocomplete="off">
+          <button class="btn-hud solid" id="termSend">RUN</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bench">
+      <div class="sec-head">
+        <span class="sec-tag">// BENCHMARK</span>
+        <h2>评测数据</h2>
+        <p>公开基准，数字随版本更新。</p>
+      </div>
+      <div class="bench-grid">
+        <div class="bench"><span class="b-name">SWE-bench Verified</span><span class="b-val">74.2</span><div class="b-bar"><i data-w="74"></i></div></div>
+        <div class="bench"><span class="b-name">LiveCodeBench v6</span><span class="b-val">68.5</span><div class="b-bar"><i data-w="68"></i></div></div>
+        <div class="bench"><span class="b-name">AIME 2025</span><span class="b-val">88.0</span><div class="b-bar"><i data-w="88"></i></div></div>
+        <div class="bench"><span class="b-name">GPQA Diamond</span><span class="b-val">71.4</span><div class="b-bar"><i data-w="71"></i></div></div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>hy4 · SDF RAYMARCHING PRESET 11 · 零三角形 · 全解析几何</p>
+      <span class="foot-dim">NO MESHES WERE HARMED IN THE MAKING OF THIS PAGE</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

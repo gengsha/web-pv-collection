@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 · Solarpunk Greenhouse — Hybrid Reasoning Model</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 温室环境层 -->
+  <div class="greenhouse">
+    <div class="sunspot s1"></div>
+    <div class="sunspot s2"></div>
+    <div class="sunspot s3"></div>
+    <svg class="leaf-deco d1" viewBox="0 0 160 220" aria-hidden="true">
+      <path d="M80 220 C 76 160 70 110 60 60" stroke="#2f6b3f" stroke-width="6" fill="none" opacity=".5"/>
+      <path d="M62 70 C 30 58 12 34 8 6 C 44 22 66 44 74 66 Z" fill="#6fbf4a" opacity=".55"/>
+      <path d="M66 106 C 36 100 14 82 2 56 C 38 70 62 88 76 102 Z" fill="#6fbf4a" opacity=".45"/>
+      <path d="M70 44 C 100 30 126 12 146 0 C 116 18 92 34 76 52 Z" fill="#6fbf4a" opacity=".5"/>
+    </svg>
+    <svg class="leaf-deco d2" viewBox="0 0 160 220" aria-hidden="true">
+      <path d="M80 220 C 84 160 90 110 100 60" stroke="#2f6b3f" stroke-width="6" fill="none" opacity=".5"/>
+      <path d="M98 70 C 130 58 148 34 152 6 C 116 22 94 44 86 66 Z" fill="#6fbf4a" opacity=".55"/>
+      <path d="M94 106 C 124 100 146 82 158 56 C 122 70 98 88 84 102 Z" fill="#6fbf4a" opacity=".45"/>
+      <path d="M90 44 C 60 30 34 12 14 0 C 44 18 68 34 84 52 Z" fill="#6fbf4a" opacity=".5"/>
+    </svg>
+  </div>
+
+  <div class="vine-top"></div>
+
+  <div class="shell">
+    <header class="nav">
+      <div class="brand">
+        <span class="leaf-mark">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <path d="M20 4C10 4 4 10 4 20c10 0 16-6 16-16Z" fill="#6fbf4a"/>
+            <path d="M20 4C12 9 8 14 4 20" stroke="#2f6b3f" stroke-width="1.8" fill="none"/>
+          </svg>
+        </span>
+        <div class="brand-txt">
+          <span class="brand-name">hy4</span>
+          <span class="brand-sub">GREENHOUSE No.04</span>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#specimens" class="nav-link active">标本架</a>
+        <a href="#metabolism" class="nav-link">代谢模式</a>
+        <a href="#notes" class="nav-link">园艺笔记</a>
+        <a href="#yield" class="nav-link">产出</a>
+      </nav>
+      <button class="btn-leaf" id="ctaPlant">种下问题</button>
+    </header>
+
+    <section class="hero">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span> SOLARPUNK · 可持续智能生态 · 光照充足
+      </div>
+
+      <h1 class="hero-title">
+        让智能，<br>
+        <span class="ital">像植物一样生长。</span>
+      </h1>
+
+      <p class="hero-desc">
+        我是 hy4。快模式是光合作用 —— 捕捉光照，立刻转化成糖分；深模式是呼吸作用 ——
+        在夜里慢慢分解、慢慢想清楚。两种代谢，共用同一株根系。
+      </p>
+
+      <div class="hero-cta">
+        <button class="btn-leaf solid" id="ctaSpec">参观标本架</button>
+        <button class="btn-leaf" id="ctaMeta">切换代谢模式</button>
+      </div>
+
+      <div class="specimen-row">
+        <div class="specimen">
+          <span class="sp-lab">SPECIMEN · 上下文</span>
+          <span class="sp-val">256,000</span>
+          <span class="sp-unit">tokens / 株</span>
+        </div>
+        <div class="specimen">
+          <span class="sp-lab">SPECIMEN · 代谢</span>
+          <span class="sp-val">光合 / 呼吸</span>
+          <span class="sp-unit">dual mode</span>
+        </div>
+        <div class="specimen">
+          <span class="sp-lab">SPECIMEN · 首字延迟</span>
+          <span class="sp-val">0.18</span>
+          <span class="sp-unit">seconds</span>
+        </div>
+        <div class="specimen">
+          <span class="sp-lab">SPECIMEN · 并行工具</span>
+          <span class="sp-val">×8</span>
+          <span class="sp-unit">parallel</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="specimens">
+      <div class="sec-head">
+        <span class="sec-kicker">✿ SPECIMEN SHELF</span>
+        <h2>标本架</h2>
+        <p>四种器官，各自负责一种生长方式。</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="leaf-card" data-sway>
+          <div class="leaf-ico">
+            <svg viewBox="0 0 24 24" width="30" height="30"><path d="M12 22V9" stroke="#2f6b3f" stroke-width="2"/><path d="M12 12C7 12 4 9 3 3c6 0 9 3 9 9Z" fill="#6fbf4a"/><path d="M12 15c5 0 8-3 9-9-6 0-9 3-9 9Z" fill="#a0e7c8"/></svg>
+          </div>
+          <span class="sp-no">SPECIMEN No.01</span>
+          <h3>混合推理内核</h3>
+          <p>同一权重在 Instant 与 Deep Think 间切换，按任务复杂度分配思考预算。</p>
+        </article>
+        <article class="leaf-card" data-sway>
+          <div class="leaf-ico">
+            <svg viewBox="0 0 24 24" width="30" height="30"><path d="M4 20c0-8 5-14 16-16 1 11-5 16-16 16Z" fill="#6fbf4a"/><path d="M4 20C9 15 13 11 20 4" stroke="#2f6b3f" stroke-width="2" fill="none"/></svg>
+          </div>
+          <span class="sp-no">SPECIMEN No.02</span>
+          <h3>全栈代码工程</h3>
+          <p>跨文件重构、补齐测试、跑终端命令，遵循仓库既有约定续写。</p>
+        </article>
+        <article class="leaf-card" data-sway>
+          <div class="leaf-ico">
+            <svg viewBox="0 0 24 24" width="30" height="30"><path d="M12 21c0-6 0-11 0-15" stroke="#2f6b3f" stroke-width="2"/><circle cx="12" cy="5" r="3.4" fill="#ffb627"/><path d="M12 9c-4 0-6-2-7-5 4 0 6 2 7 5Z" fill="#a0e7c8"/></svg>
+          </div>
+          <span class="sp-no">SPECIMEN No.03</span>
+          <h3>256K 长上下文</h3>
+          <p>整本手册、整个仓库一次载入，长跨度下依旧不丢前文细节。</p>
+        </article>
+        <article class="leaf-card" data-sway>
+          <div class="leaf-ico">
+            <svg viewBox="0 0 24 24" width="30" height="30"><path d="M5 19c0-5 3-9 7-9s7 4 7 9" stroke="#2f6b3f" stroke-width="2" fill="none"/><circle cx="7" cy="14" r="2.2" fill="#d9705a"/><circle cx="12" cy="10" r="2.2" fill="#ffb627"/><circle cx="17" cy="14" r="2.2" fill="#6fbf4a"/></svg>
+          </div>
+          <span class="sp-no">SPECIMEN No.04</span>
+          <h3>并行工具调用</h3>
+          <p>检索、读取、计算、执行最多 8 路并行，多步任务压成一轮往返。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="metabolism">
+      <div class="sec-head">
+        <span class="sec-kicker">✿ METABOLISM</span>
+        <h2>代谢模式</h2>
+        <p>白天光合，夜里呼吸。切换查看两种代谢路径。</p>
+      </div>
+
+      <div class="meta-panel">
+        <div class="meta-switch">
+          <button class="meta-btn active" data-mode="photo">
+            <span class="mb-icon">☀</span>
+            <span class="mb-txt">光合作用<em>INSTANT</em></span>
+          </button>
+          <button class="meta-btn" data-mode="respi">
+            <span class="mb-icon">☾</span>
+            <span class="mb-txt">呼吸作用<em>DEEP THINK</em></span>
+          </button>
+          <span class="meta-thumb" id="metaThumb"></span>
+        </div>
+
+        <div class="meta-body">
+          <div class="meta-visual">
+            <svg viewBox="0 0 200 200" class="meta-svg" aria-hidden="true">
+              <circle cx="100" cy="100" r="86" class="ring"/>
+              <circle cx="100" cy="100" r="86" class="ring dash" id="metaRing"/>
+              <g class="meta-plant" id="metaPlant">
+                <path d="M100 168 C 98 130 96 108 94 84" class="stem"/>
+                <path d="M96 96 C 66 88 46 66 38 36 C 72 52 92 74 100 94 Z" class="leaf a"/>
+                <path d="M98 118 C 128 110 148 88 156 58 C 122 74 104 96 96 116 Z" class="leaf b"/>
+                <circle cx="94" cy="80" r="9" class="bud"/>
+              </g>
+            </svg>
+          </div>
+          <div class="meta-text">
+            <span class="meta-tag" id="metaTag">PHOTOSYNTHESIS</span>
+            <h3 id="metaTitle">光合：捕光即答</h3>
+            <p id="metaDesc">捕捉到光照就直接转化为糖分。短路径、低消耗，适合事实查询、格式转换与明确指令。</p>
+            <ul class="meta-list" id="metaList"></ul>
+            <div class="meta-stats">
+              <span>TOKENS <b id="metaTok">96</b></span>
+              <span>LATENCY <b id="metaLat">0.18s</b></span>
+              <span>YIELD <b id="metaYield">高</b></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="notes">
+      <div class="sec-head">
+        <span class="sec-kicker">✿ GARDENING NOTES</span>
+        <h2>园艺笔记</h2>
+        <p>把你手上的问题种进来，看它长出什么。</p>
+      </div>
+
+      <div class="notes">
+        <div class="notes-log" id="notesLog">
+          <div class="note bot">
+            <span class="n-from">hy4 · 温室日志</span>
+            <p>今天光照不错。给我一粒种子 —— 一段代码、一份文档，或者一个还没成形的问题。</p>
+          </div>
+        </div>
+        <div class="notes-input">
+          <input type="text" id="notesInput" placeholder="写下你的问题，回车种下…" autocomplete="off">
+          <button class="btn-leaf solid" id="notesSend">种 下</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="yield">
+      <div class="sec-head">
+        <span class="sec-kicker">✿ HARVEST</span>
+        <h2>产出记录</h2>
+        <p>公开基准上的收成，随季节更新。</p>
+      </div>
+      <div class="yield-grid">
+        <div class="yield-card"><span class="y-name">SWE-bench Verified</span><span class="y-val">74.2</span><div class="y-bar"><i data-w="74"></i></div></div>
+        <div class="yield-card"><span class="y-name">LiveCodeBench v6</span><span class="y-val">68.5</span><div class="y-bar"><i data-w="68"></i></div></div>
+        <div class="yield-card"><span class="y-name">AIME 2025</span><span class="y-val">88.0</span><div class="y-bar"><i data-w="88"></i></div></div>
+        <div class="yield-card"><span class="y-name">GPQA Diamond</span><span class="y-val">71.4</span><div class="y-bar"><i data-w="71"></i></div></div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div class="foot-logo">
+        <svg width="34" height="34" viewBox="0 0 24 24"><path d="M20 4C10 4 4 10 4 20c10 0 16-6 16-16Z" fill="#6fbf4a"/><path d="M20 4C12 9 8 14 4 20" stroke="#2f6b3f" stroke-width="1.8" fill="none"/></svg>
+        <span>hy4</span>
+      </div>
+      <p>SOLARPUNK BOTANICAL GREENHOUSE · PRESET 05 · 光照 14h / 日 · BUILD 2026.09</p>
+      <span class="foot-dim">GROWN, NOT BUILT.</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

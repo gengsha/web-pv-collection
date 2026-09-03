@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 · 手稿档案馆 — Dark Academia Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="candle"></div>
+  <div class="vignette"></div>
+  <div class="paper-noise"></div>
+
+  <div class="archive">
+    <header class="masthead">
+      <div class="crest">
+        <svg width="46" height="46" viewBox="0 0 48 48" aria-hidden="true">
+          <circle cx="24" cy="24" r="22" fill="none" stroke="#c9a227" stroke-width="1.4"/>
+          <circle cx="24" cy="24" r="17" fill="none" stroke="#c9a227" stroke-width=".8" opacity=".6"/>
+          <path d="M24 12 L30 24 L24 36 L18 24 Z" fill="#c9a227" opacity=".85"/>
+          <path d="M12 24 L24 18 L36 24 L24 30 Z" fill="none" stroke="#c9a227" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="mast-title">
+        <h1>hy4</h1>
+        <span class="mast-sub">手稿档案馆 · ARCHIVUM HYBRIDUM</span>
+      </div>
+      <nav class="mast-nav">
+        <a href="#catalog" class="mn active">馆藏目录</a>
+        <a href="#marginalia" class="mn">正文与批注</a>
+        <a href="#ledger" class="mn">借阅登记</a>
+        <a href="#colophon" class="mn">版本记录</a>
+      </nav>
+    </header>
+
+    <!-- 馆藏 Hero -->
+    <section class="hero">
+      <div class="folio">
+        <div class="folio-head">
+          <span class="call-no">索书号 · HY4-MS-04</span>
+          <span class="folio-date">ANNO 2026 · 秋</span>
+        </div>
+
+        <p class="folio-kicker">第 四 号 馆 藏 · 混 合 推 理 手 稿</p>
+
+        <h2 class="folio-title">论快与深：<br><em>一份混合推理手稿</em></h2>
+
+        <p class="folio-body">
+          <span class="dropcap">我</span>是 hy4，一套混合推理模型。同一套权重，既能如短笺般在毫秒间作答，
+          亦能如长卷般在推演中反复自校。此稿所录，是两种思考方式共存于同一心智的证明：
+          快者不浮，深者不滞，二者共用一条根系。
+        </p>
+
+        <div class="folio-cta">
+          <button class="wax-btn" id="ctaRead">阅读正文</button>
+          <button class="wax-btn ghost" id="ctaCatalog">查阅目录</button>
+        </div>
+
+        <div class="folio-meta">
+          <div class="fm"><span>装帧</span><b>四折手稿 · 羊皮纸</b></div>
+          <div class="fm"><span>字数</span><b>256,000 词位</b></div>
+          <div class="fm"><span>批注</span><b>页边 · 双色</b></div>
+          <div class="fm"><span>状态</span><b class="ok">在馆 · 可借阅</b></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 馆藏目录 -->
+    <section class="section" id="catalog">
+      <div class="sec-head">
+        <span class="sec-no">CAPUT I</span>
+        <h2>馆藏目录</h2>
+        <p>四张索引卡片，记录四种官能。</p>
+      </div>
+
+      <div class="card-catalog">
+        <article class="cat-card">
+          <div class="cc-strip"><span>01</span><span>HYBRID CORE</span></div>
+          <div class="cc-hole"></div>
+          <h3>混合推理内核</h3>
+          <p>同一权重在 Instant 与 Deep Think 间切换，按任务复杂度分配思考预算。</p>
+          <div class="cc-foot"><span>架位 A·01</span><span>在馆</span></div>
+        </article>
+        <article class="cat-card">
+          <div class="cc-strip"><span>02</span><span>AGENTIC CODING</span></div>
+          <div class="cc-hole"></div>
+          <h3>全栈代码工程</h3>
+          <p>跨文件重构、补齐测试、跑终端命令，遵循仓库既有约定续写。</p>
+          <div class="cc-foot"><span>架位 A·02</span><span>在馆</span></div>
+        </article>
+        <article class="cat-card">
+          <div class="cc-strip"><span>03</span><span>LONG CONTEXT</span></div>
+          <div class="cc-hole"></div>
+          <h3>256K 长上下文</h3>
+          <p>整本手册、整个仓库一次载入，长跨度下依旧不丢前文细节。</p>
+          <div class="cc-foot"><span>架位 B·01</span><span>在馆</span></div>
+        </article>
+        <article class="cat-card">
+          <div class="cc-strip"><span>04</span><span>PARALLEL TOOLS</span></div>
+          <div class="cc-hole"></div>
+          <h3>并行工具调用</h3>
+          <p>检索、读取、计算、执行最多 8 路并行，多步任务压成一轮往返。</p>
+          <div class="cc-foot"><span>架位 B·02</span><span>在馆</span></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 正文与页边批注 -->
+    <section class="section" id="marginalia">
+      <div class="sec-head">
+        <span class="sec-no">CAPUT II</span>
+        <h2>正文与批注</h2>
+        <p>同一命题，左侧为 Instant 抄本，右侧页边为 Deep Think 批注。</p>
+      </div>
+
+      <div class="manuscript">
+        <div class="ms-body">
+          <h3 class="ms-title">命题 · 一个 12 层 Transformer 的 KV Cache 显存</h3>
+          <p>每层 K/V 各 4096×768，共 24 组矩阵，合计 75,497,472 元素。</p>
+          <p>FP16 单元素 2 字节，单条约 144 MB；批量 8 时约 1.13 GB。</p>
+          <p class="ms-concl">是以：在 MHA 假设下，显存随批量线性增长，先于权重成为瓶颈。</p>
+        </div>
+        <aside class="ms-notes">
+          <div class="note-item">
+            <span class="ni-mark">i.</span>
+            <p>建模：KV = 层数 × 2 × 序列长 × 隐藏维 × 精度字节。</p>
+          </div>
+          <div class="note-item">
+            <span class="ni-mark">ii.</span>
+            <p>换算：150,994,944 B ≈ 0.1406 GB，取整为 144 MB。</p>
+          </div>
+          <div class="note-item">
+            <span class="ni-mark">iii.</span>
+            <p>扩展：batch=8 → 约 1.125 GB。</p>
+          </div>
+          <div class="note-item">
+            <span class="ni-mark">iv.</span>
+            <p>自校：若改用 GQA(8 heads)，单条可降至 ≈18 MB。</p>
+          </div>
+          <div class="note-item">
+            <span class="ni-mark">v.</span>
+            <p>结论：先上 GQA，再谈批处理规模。</p>
+          </div>
+        </aside>
+      </div>
+
+      <div class="ms-switch">
+        <button class="ms-btn active" data-mode="instant">抄本 · INSTANT</button>
+        <button class="ms-btn" data-mode="deep">批注 · DEEP THINK</button>
+        <span class="ms-stat" id="msStat">INSTANT · 96 词 · 0.18 秒</span>
+      </div>
+    </section>
+
+    <!-- 借阅登记 -->
+    <section class="section" id="ledger">
+      <div class="sec-head">
+        <span class="sec-no">CAPUT III</span>
+        <h2>借阅登记</h2>
+        <p>在登记卡上写下你的问题，馆员会回签。</p>
+      </div>
+
+      <div class="ledger-card">
+        <div class="lc-head">
+          <span>借 阅 登 记 卡 · LOAN LEDGER</span>
+          <span class="lc-no">No. 004</span>
+        </div>
+        <div class="lc-log" id="lcLog">
+          <div class="lc-row"><span class="lc-date">09·02</span><span class="lc-who">馆员 hy4</span><span class="lc-txt">登记已开。请写下欲查之问题，或一段待解之文本。</span></div>
+        </div>
+        <div class="lc-input">
+          <input type="text" id="lcInput" placeholder="写下你的问题，回车登记…" autocomplete="off">
+          <button class="wax-btn" id="lcSend">登 记</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 版本记录 -->
+    <section class="section" id="colophon">
+      <div class="sec-head">
+        <span class="sec-no">CAPUT IV</span>
+        <h2>版本记录</h2>
+        <p>公开基准上的誊抄成绩。</p>
+      </div>
+
+      <div class="scores">
+        <div class="score-row"><span class="sr-name">SWE-bench Verified</span><span class="sr-rule"></span><span class="sr-val">74.2</span><div class="sr-bar"><i data-w="74"></i></div></div>
+        <div class="score-row"><span class="sr-name">LiveCodeBench v6</span><span class="sr-rule"></span><span class="sr-val">68.5</span><div class="sr-bar"><i data-w="68"></i></div></div>
+        <div class="score-row"><span class="sr-name">AIME 2025</span><span class="sr-rule"></span><span class="sr-val">88.0</span><div class="sr-bar"><i data-w="88"></i></div></div>
+        <div class="score-row"><span class="sr-name">GPQA Diamond</span><span class="sr-rule"></span><span class="sr-val">71.4</span><div class="sr-bar"><i data-w="71"></i></div></div>
+      </div>
+
+      <div class="colophon-box">
+        <div class="seal"><span>ARCHIV<br>2026</span></div>
+        <p><strong>誊抄</strong>：hy4 · 混合推理抄本 · 编号 HY4-MS-04 · 二〇二六年秋</p>
+        <p><strong>用纸</strong>：羊皮纸 #E8DCC4 · 褪色金 #C9A227 描边 · 深夜墨蓝 #10131A 底 · 蜡封暗红 #7A2E2E</p>
+        <p><strong>字体</strong>：Cormorant Garamond 标题 · Spectral 正文 · JetBrains Mono 索书号</p>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>ARCHIVUM HYBRIDUM · 手稿档案馆 · 灯光请在离馆前熄灭</p>
+      <span class="foot-mark">— FINIS —</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 · Metaball Lava — 实时标量场渲染</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="heat"></div>
+
+  <div class="shell">
+    <div class="hud">
+      <span class="cell"><i>FIELD</i><b>Σ r²/d² · METABALLS</b></span>
+      <span class="cell"><i>BALLS</i><b id="hBalls">8</b></span>
+      <span class="cell"><i>GRID</i><b id="hGrid">180×100</b></span>
+      <span class="cell"><i>ISO</i><b>1.00</b></span>
+      <span class="cell"><i>LUT</i><b>256 × RGB</b></span>
+      <span class="cell"><i>FPS</i><b id="hFps">60</b></span>
+    </div>
+
+    <header class="nav">
+      <div class="brand"><span>hy4</span><em>THERMAL CORE 04</em></div>
+      <nav class="nav-links">
+        <a href="#cores" class="nav-link active">热核</a>
+        <a href="#thermal" class="nav-link">热力学参数</a>
+        <a href="#telemetry" class="nav-link">遥测</a>
+        <a href="#bench" class="nav-link">评测</a>
+      </nav>
+      <button class="btn" id="ctaShuffle">搅动岩浆</button>
+    </header>
+
+    <section class="viewport">
+      <canvas id="lava"></canvas>
+      <div class="vp-overlay">
+        <span>// CROSS-SECTION 04 · ISO-SURFACE AT v = 1.00</span>
+        <span id="vpMeta">DUAL CONTOUR OFF</span>
+      </div>
+      <div class="vp-scale">
+        <span>2.4</span>
+        <div class="sc-bar"></div>
+        <span>0.0</span>
+      </div>
+    </section>
+
+    <section class="hero">
+      <p class="kicker">// v(p) = Σᵢ rᵢ² / ‖p − cᵢ‖² ，等值面 v = 1.0</p>
+      <h1>没有模型，没有贴图，<br><span class="mark">只有一场函数的高温。</span></h1>
+      <p class="desc">
+        我是 hy4。这一页的岩浆既不是视频也不是粒子：每个像素都对所有热核求一个平方反比场，
+        把标量值塞进 256 项色查找表，超过等值面的部分自然融合成液滴。
+        INSTANT 只算 8 个热核，DEEP 把网格加密到 300×168，并打开第二道等值线。
+      </p>
+      <div class="cta">
+        <button class="btn solid" id="ctaCores">看看热核</button>
+        <button class="btn" id="ctaThermal">调热力学参数</button>
+      </div>
+      <p class="hint">按住鼠标把岩浆吸向光标 · 「搅动岩浆」给所有热核随机冲量</p>
+    </section>
+
+    <section class="section" id="cores">
+      <div class="sec-head">
+        <span class="sec-tag">// THERMAL CORES</span>
+        <h2>四个热核舱室</h2>
+        <p>同一条场方程，四种输出形态。</p>
+      </div>
+      <div class="grid">
+        <article class="card"><span class="no">01</span><h3>混合推理内核</h3><p>同一权重在 Instant 与 Deep Think 间切换，按任务复杂度分配思考预算 —— 就像这里的网格密度。</p><span class="tag">HYBRID CORE</span></article>
+        <article class="card"><span class="no">02</span><h3>全栈代码工程</h3><p>跨文件重构、补齐测试、跑终端命令，遵循仓库既有约定续写。</p><span class="tag">AGENTIC CODING</span></article>
+        <article class="card"><span class="no">03</span><h3>256K 长上下文</h3><p>整本手册、整个仓库一次载入，长跨度下依旧不丢前文细节。</p><span class="tag">LONG CONTEXT</span></article>
+        <article class="card"><span class="no">04</span><h3>并行工具调用</h3><p>检索、读取、计算、执行最多 8 路并行，多步任务压成一轮往返。</p><span class="tag">PARALLEL TOOLS</span></article>
+      </div>
+    </section>
+
+    <section class="section" id="thermal">
+      <div class="sec-head">
+        <span class="sec-tag">// THERMODYNAMICS</span>
+        <h2>热力学参数</h2>
+        <p>调热核数量、网格分辨率与等值线。</p>
+      </div>
+
+      <div class="panel">
+        <div class="modes">
+          <button class="mode active" data-mode="instant"><b>INSTANT · 常温</b><em>8 热核 · 180×100 · 单等值线</em></button>
+          <button class="mode" data-mode="deep"><b>DEEP THINK · 熔融</b><em>14 热核 · 300×168 · 双等值线</em></button>
+          <div class="sl"><label>VISCOSITY <b id="vVisc">0.995</b></label><input type="range" id="sVisc" min="960" max="999" value="995"></div>
+          <div class="sl"><label>HEAT INPUT <b id="vHeat">1.0</b></label><input type="range" id="sHeat" min="0" max="200" value="100"></div>
+        </div>
+        <div class="trace" id="traceBox"></div>
+      </div>
+    </section>
+
+    <section class="section" id="telemetry">
+      <div class="sec-head">
+        <span class="sec-tag">// TELEMETRY</span>
+        <h2>遥测</h2>
+        <p>向热核舱发送一条指令。</p>
+      </div>
+      <div class="term">
+        <div class="log" id="logBox">
+          <div class="row"><span class="who">hy4</span><span class="txt">舱压正常，岩浆温度稳定。给我一个热源、一条等值线，或者一个还没融合的液滴。</span></div>
+        </div>
+        <div class="inp">
+          <span class="p">core&gt;</span>
+          <input type="text" id="inp" placeholder="输入指令，回车发送" autocomplete="off">
+          <button class="btn solid" id="send">发送</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bench">
+      <div class="sec-head">
+        <span class="sec-tag">// BENCHMARK</span>
+        <h2>评测数据</h2>
+      </div>
+      <div class="bench-grid">
+        <div class="bench"><span class="bn">SWE-bench Verified</span><span class="bv">74.2</span><div class="bb"><i data-w="74"></i></div></div>
+        <div class="bench"><span class="bn">LiveCodeBench v6</span><span class="bv">68.5</span><div class="bb"><i data-w="68"></i></div></div>
+        <div class="bench"><span class="bn">AIME 2025</span><span class="bv">88.0</span><div class="bb"><i data-w="88"></i></div></div>
+        <div class="bench"><span class="bn">GPQA Diamond</span><span class="bv">71.4</span><div class="bb"><i data-w="71"></i></div></div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>hy4 · METABALL SCALAR FIELD · PRESET 20 · 逐像素平方反比场 + 256 项色表</p>
+      <span>LIQUID IS JUST A FUNCTION THAT LIKES ITSELF</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

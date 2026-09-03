@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLM 5.3 | 活字格物</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 宣纸帘纹肌理层 -->
+  <div class="paper-grain"></div>
+
+  <div class="press-page">
+    <header class="press-header">
+      <div class="press-brand">
+        <div class="brand-seal">智</div>
+        <div class="brand-text">
+          <strong>活字格物</strong>
+          <span class="mono">GLM-5.3 · TYPE FOUNDRY</span>
+        </div>
+      </div>
+      <span class="press-status mono">墨已研好 · 字库齐备 · 静候组版</span>
+    </header>
+
+    <!-- 巨字 Hero -->
+    <section class="hero-press">
+      <div class="vertical-poem reveal">
+        <span>字字如铸</span>
+        <span>落笔生根</span>
+        <span>格物而后知至</span>
+      </div>
+      <div class="hero-glyph reveal">
+        <div class="glyph-tile">
+          <span class="glyph-char">智</span>
+        </div>
+        <div class="glyph-caption mono">甲字第一号 · 九百九十九次淬火</div>
+      </div>
+      <div class="hero-copy reveal">
+        <h1>把语言，<br>重新铸成<span class="cinnabar-text">字</span></h1>
+        <p>
+          GLM 5.3 以亿计汉字养一炉铅字。每一次生成，都是从这座字库里拣字、排版、付印——严谨如古法，迅捷如电光。
+        </p>
+        <div class="hero-ink-rule"></div>
+        <p class="mono small-ink">上下文字盘容量 200,000 字 · 拣字速度 128K/s</p>
+      </div>
+    </section>
+
+    <!-- 字库矩阵 -->
+    <section class="typecase-section">
+      <div class="section-title-row">
+        <h2>字库矩阵</h2>
+        <span class="mono section-note">悬停按压 · 点击翻面</span>
+      </div>
+      <div class="typecase-grid" id="typecaseGrid">
+        <!-- 活字由 main.js 渲染 -->
+      </div>
+    </section>
+
+    <!-- 组版工坊 -->
+    <section class="typeset-section">
+      <div class="section-title-row">
+        <h2>组版工坊</h2>
+        <span class="mono section-note">输入一句，看它如何落版</span>
+      </div>
+      <div class="typeset-console reveal">
+        <div class="typeset-input-row">
+          <input type="text" id="typesetInput" placeholder="例如：为天地立心，为生民立命" maxlength="16" autocomplete="off">
+          <button id="typesetBtn">组 版</button>
+        </div>
+        <div class="composed-plate" id="composedPlate">
+          <div class="plate-empty mono">—— 待落版 ——</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 朱砂落款对话 -->
+    <section class="seal-dialogue reveal">
+      <div class="dialogue-frame">
+        <div class="dialogue-head">
+          <span>排印手谈</span>
+          <span class="mono">落款处</span>
+        </div>
+        <div class="dialogue-body">
+          <input type="text" id="inkInput" placeholder="与字匠说一句…" autocomplete="off">
+          <div class="ink-reply" id="inkReply">「字在纸上，意在字外。客官想排一版什么？」</div>
+        </div>
+        <button class="seal-btn" id="sealBtn">盖 印</button>
+      </div>
+    </section>
+
+    <footer class="press-footer">
+      <p>GLM 5.3 · 活字格物 · Preset 02 / Web-PV3</p>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

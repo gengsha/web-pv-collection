@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini | Deep Space Observatory Terminal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="crt-monitor">
+    <div class="crt-scanlines"></div>
+    <div class="crt-flicker"></div>
+
+    <div class="terminal-container">
+      <!-- 遥测抬头 -->
+      <header class="term-header">
+        <div class="hdr-left">
+          <span>[SYSTEM: GEMINI-L2-OBSERVATORY]</span>
+          <span>ORBIT: LAGRANGE_POINT_2</span>
+        </div>
+        <div class="hdr-right">
+          <span>SIGNAL: 1420.405 MHz</span>
+          <span class="pulse-indicator">● ONLINE</span>
+        </div>
+      </header>
+
+      <!-- ASCII 大标 -->
+      <pre class="ascii-banner">
+  ____ _____ __  __ ___ _   _ ___ 
+ / ___| ____|  \/  |_ _| \ | |_ _|
+| |  _|  _| | |\/| || ||  \| || | 
+| |_| | |___| |  | || || |\  || | 
+ \____|_____|_|  |_|___|_| \_|___|
+[ DEEP MULTIMODAL OBSERVATORY TERMINAL v9.2 ]
+      </pre>
+
+      <section class="mission-brief">
+        <p class="typewriter-line">> MISSION OBJECTIVE: 观测宇宙微波背景辐射，重构高维物理常数与多模态星际智识。</p>
+        <p class="typewriter-line">> SENSORS LOADED: 伽马射线谱仪 [OK], 光学星图分类器 [OK], 张量逻辑推演舱 [OK].</p>
+      </section>
+
+      <!-- 遥测仪表盘 -->
+      <div class="telemetry-grid">
+        <div class="term-card">
+          <div class="card-title">// SPECTRAL ATTENTION</div>
+          <div class="data-row"><span>赤经 (RA)</span><span>18h 36m 56s</span></div>
+          <div class="data-row"><span>赤纬 (DEC)</span><span>+38° 47′ 01″</span></div>
+          <div class="data-row"><span>红移参数 (z)</span><span class="amber-highlight">6.429 ± 0.001</span></div>
+          <div class="bar-gauge"><div class="fill" style="width: 82%;"></div></div>
+        </div>
+
+        <div class="term-card">
+          <div class="card-title">// COGNITIVE BANDWIDTH</div>
+          <div class="data-row"><span>Token 流速</span><span>1,240,000 /sec</span></div>
+          <div class="data-row"><span>内存堆栈</span><span>12.4 TB / 16.0 TB</span></div>
+          <div class="data-row"><span>量子纠缠态</span><span class="amber-highlight">COHERENT 99.9%</span></div>
+          <div class="bar-gauge"><div class="fill" style="width: 91%;"></div></div>
+        </div>
+      </div>
+
+      <!-- 可交互 CLI 终端 -->
+      <section class="cli-section">
+        <div class="cli-log" id="cliLog">
+          <div class="cli-entry">[INFO] 输入 'help' 查看支持的命令，输入 'scan' 启动深空全谱扫描。</div>
+        </div>
+        <div class="cli-input-row">
+          <span class="cli-prompt">gemini@l2-observatory:~$</span>
+          <input type="text" id="cliInput" autofocus autocomplete="off" spellcheck="false">
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

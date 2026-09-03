@@ -1,0 +1,864 @@
+/* ============================================================
+   Preset 05 · Open Weight Forge 开源熔炉设计系统
+   ============================================================ */
+
+:root {
+  /* 基础底色 */
+  --iron-black: #0C0C0E;
+  --steel-surface: #16181C;
+  --steel-raised: #1C1F25;
+  --steel-blue-grey: #3E4450;
+
+  /* 熔炉主色 */
+  --molten-orange: #FF6B1A;
+  --lava-deep: #FF3D00;
+  --lava-light: #FFB347;
+  --lava-gradient: linear-gradient(90deg, #FF3D00 0%, #FFB347 100%);
+
+  /* 工业警戒黄 */
+  --caution-yellow: #FFC53D;
+
+  /* 文本层级 */
+  --text-forge: #F2EFEA;
+  --text-dim: #8B8E98;
+  --text-faint: #5C5F66;
+
+  /* 边框与辉光 */
+  --border-steel: rgba(255, 255, 255, 0.09);
+  --border-steel-strong: rgba(255, 255, 255, 0.16);
+  --border-ember: rgba(255, 107, 26, 0.45);
+  --glow-ember: rgba(255, 107, 26, 0.35);
+
+  /* 形态 */
+  --radius-crate: 10px;
+  --radius-tag: 4px;
+
+  /* 过渡：锻锤般短促有力 */
+  --transition-forge: 0.25s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--iron-black);
+  color: var(--text-forge);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- 蓝图网格底纹（含熔炉余晖） ---------- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255, 107, 26, 0.13), transparent 70%),
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 44px 44px, 44px 44px;
+}
+
+/* ---------- 火花粒子画布 ---------- */
+#sparkCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- 主结构布局 ---------- */
+.forge-layout {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 48px;
+}
+
+/* ---------- 顶部导航 ---------- */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 0;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-steel);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.forge-mark {
+  display: flex;
+  align-items: center;
+  filter: drop-shadow(0 0 8px rgba(255, 107, 26, 0.45));
+}
+
+.brand-title {
+  font-family: 'Chakra Petch', 'Noto Sans SC', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-forge);
+}
+
+.version-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 3px 8px;
+  background: rgba(255, 107, 26, 0.12);
+  border: 1px solid var(--border-ember);
+  color: var(--molten-orange);
+  border-radius: var(--radius-tag);
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-link {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  position: relative;
+  transition: var(--transition-forge);
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background: var(--lava-gradient);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-forge);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-forge);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+/* ---------- 按钮体系 ---------- */
+.btn-hazard {
+  padding: 9px 22px;
+  border-radius: var(--radius-tag);
+  background: repeating-linear-gradient(45deg, var(--caution-yellow) 0 12px, #101012 12px 24px);
+  background-size: 34px 34px;
+  border: 1px solid rgba(255, 197, 61, 0.55);
+  color: #101012;
+  font-family: 'Chakra Petch', 'Noto Sans SC', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  text-shadow: 0 0 6px rgba(255, 240, 200, 0.8);
+  transition: var(--transition-forge);
+}
+
+.btn-hazard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 197, 61, 0.35);
+}
+
+.btn-molten {
+  padding: 13px 32px;
+  background: var(--lava-gradient);
+  border: none;
+  border-radius: var(--radius-tag);
+  color: #1A0D00;
+  font-family: 'Chakra Petch', 'Noto Sans SC', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(255, 61, 0, 0.35);
+  transition: var(--transition-forge);
+}
+
+.btn-molten:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(255, 61, 0, 0.5);
+}
+
+.btn-steel {
+  padding: 13px 30px;
+  background: var(--steel-surface);
+  border: 1px solid var(--border-steel-strong);
+  border-radius: var(--radius-tag);
+  color: var(--text-forge);
+  font-family: 'Chakra Petch', 'Noto Sans SC', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: var(--transition-forge);
+}
+
+.btn-steel:hover {
+  border-color: var(--molten-orange);
+  color: var(--lava-light);
+  box-shadow: 0 0 18px rgba(255, 107, 26, 0.25);
+}
+
+/* ---------- Hero 主视区 ---------- */
+.hero-section {
+  text-align: center;
+  padding: 72px 0 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-stencil {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.stencil-line {
+  width: 60px;
+  height: 1px;
+  background: var(--steel-blue-grey);
+}
+
+.stencil-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: var(--text-dim);
+}
+
+.hero-title {
+  font-family: 'Chakra Petch', 'Noto Sans SC', sans-serif;
+  font-size: 3.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  margin-bottom: 22px;
+}
+
+.molten-text {
+  background: var(--lava-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 0 22px rgba(255, 107, 26, 0.35));
+}
+
+.hero-desc {
+  max-width: 660px;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-dim);
+  margin-bottom: 36px;
+}
+
+.hero-cta-group {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+/* ---------- 熔炉遥测条 ---------- */
+.furnace-telemetry {
+  display: flex;
+  align-items: center;
+  background: rgba(22, 24, 28, 0.85);
+  border: 1px solid var(--border-steel);
+  border-radius: var(--radius-crate);
+  padding: 14px 30px;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.telemetry-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 0 18px;
+}
+
+.t-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.64rem;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.t-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-forge);
+  font-variant-numeric: tabular-nums;
+}
+
+.t-hot {
+  color: var(--molten-orange);
+  text-shadow: 0 0 12px rgba(255, 107, 26, 0.5);
+  animation: emberPulse 2.2s ease-in-out infinite;
+}
+
+.t-divider {
+  width: 1px;
+  height: 30px;
+  background: var(--border-steel-strong);
+}
+
+@keyframes emberPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.62; }
+}
+
+/* ---------- 工业警示斜纹条 ---------- */
+.hazard-strip {
+  height: 10px;
+  margin: 8px 0;
+  background: repeating-linear-gradient(45deg, var(--caution-yellow) 0 14px, #101012 14px 28px);
+  opacity: 0.8;
+  border-top: 1px solid rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+.hazard-strip-footer {
+  width: 220px;
+  margin: 0 auto 20px;
+  height: 8px;
+}
+
+/* ---------- 区块通用 ---------- */
+.section-container {
+  padding: 64px 0 40px;
+}
+
+.section-header {
+  margin-bottom: 34px;
+}
+
+.section-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--molten-orange);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.section-header h2 {
+  font-family: 'Chakra Petch', 'Noto Sans SC', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 8px 0 10px;
+  letter-spacing: 0.02em;
+}
+
+.section-header p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
+
+/* ---------- 锻锤入场动画 ---------- */
+.forge-reveal {
+  opacity: 0;
+  transform: translateY(-24px) scaleY(1.02);
+}
+
+.forge-reveal.revealed {
+  animation: hammerDrop 0.5s cubic-bezier(0.2, 0.9, 0.25, 1) forwards;
+}
+
+@keyframes hammerDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-24px) scaleY(1.02);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(3px) scaleY(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+/* ---------- 权重板条箱卡片 ---------- */
+.vault-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 22px;
+}
+
+.crate-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--steel-raised) 0%, var(--steel-surface) 60%);
+  border: 1px solid var(--border-steel);
+  border-radius: var(--radius-crate);
+  padding: 26px;
+  box-shadow: 0 14px 30px -18px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: transform var(--transition-forge), border-color var(--transition-forge), box-shadow var(--transition-forge);
+}
+
+/* 金属斜向高光，悬停扫过 */
+.crate-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.13) 50%, transparent 60%);
+  transform: translateX(-130%) skewX(-8deg);
+  pointer-events: none;
+}
+
+.crate-card:hover::before {
+  transform: translateX(130%) skewX(-8deg);
+  transition: transform 0.85s ease;
+}
+
+/* 四角铆钉 */
+.crate-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 10px 10px, var(--steel-blue-grey) 2.5px, rgba(255,255,255,0.14) 3px, transparent 4px),
+    radial-gradient(circle at calc(100% - 10px) 10px, var(--steel-blue-grey) 2.5px, rgba(255,255,255,0.14) 3px, transparent 4px),
+    radial-gradient(circle at 10px calc(100% - 10px), var(--steel-blue-grey) 2.5px, rgba(255,255,255,0.14) 3px, transparent 4px),
+    radial-gradient(circle at calc(100% - 10px) calc(100% - 10px), var(--steel-blue-grey) 2.5px, rgba(255,255,255,0.14) 3px, transparent 4px);
+}
+
+.crate-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-ember);
+  box-shadow: 0 22px 40px -16px rgba(0, 0, 0, 0.9), 0 0 26px rgba(255, 107, 26, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.crate-flagship {
+  border-color: rgba(255, 107, 26, 0.35);
+  background: linear-gradient(160deg, #20242C 0%, var(--steel-surface) 65%);
+}
+
+.crate-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.crate-name {
+  font-family: 'Chakra Petch', 'JetBrains Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin-bottom: 10px;
+  color: var(--text-forge);
+}
+
+.crate-desc {
+  font-size: 0.86rem;
+  line-height: 1.65;
+  color: var(--text-dim);
+  margin-bottom: 18px;
+  min-height: 56px;
+}
+
+/* ---------- 钢印标签 ---------- */
+.stencil-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  padding: 4px 9px;
+  border-radius: var(--radius-tag);
+  text-transform: uppercase;
+}
+
+.tag-flagship {
+  color: var(--lava-light);
+  border: 1px solid rgba(255, 179, 71, 0.5);
+  background: rgba(255, 61, 0, 0.12);
+}
+
+.tag-dense,
+.tag-code,
+.tag-reason,
+.tag-vision,
+.tag-mini {
+  color: var(--text-dim);
+  border: 1px solid rgba(62, 68, 80, 0.9);
+  background: rgba(62, 68, 80, 0.22);
+}
+
+.tag-license {
+  color: var(--caution-yellow);
+  border: 1px dashed rgba(255, 197, 61, 0.5);
+  background: rgba(255, 197, 61, 0.06);
+}
+
+/* ---------- 卡片数据行 ---------- */
+.crate-meta {
+  border-top: 1px dashed var(--border-steel-strong);
+  padding-top: 14px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.meta-key {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.18em;
+  color: var(--text-faint);
+}
+
+.meta-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-forge);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 熔炉热度条 ---------- */
+.gauge {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.gauge-track {
+  width: 100%;
+  height: 10px;
+  background: #0e0f12;
+  border: 1px solid var(--border-steel);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.gauge-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--lava-gradient);
+  background-size: 200% 100%;
+  border-radius: 2px;
+  position: relative;
+  box-shadow: 0 0 10px rgba(255, 107, 26, 0.6);
+  transition: width 1.2s cubic-bezier(0.2, 0.9, 0.25, 1);
+  animation: heatShiver 0.35s linear infinite, lavaFlow 3s linear infinite;
+}
+
+@keyframes heatShiver {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-0.5px); }
+  75% { transform: translateY(0.5px); }
+}
+
+@keyframes lavaFlow {
+  0% { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.gauge-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  color: var(--molten-orange);
+  align-self: flex-end;
+}
+
+/* ---------- 终端 ---------- */
+.forge-terminal {
+  padding: 0;
+}
+
+.terminal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px;
+  background: #0e0f12;
+  border-bottom: 1px solid var(--border-steel);
+}
+
+.dots {
+  display: flex;
+  gap: 7px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot-rust { background: var(--lava-deep); box-shadow: 0 0 8px rgba(255, 61, 0, 0.6); }
+.dot-caution { background: var(--caution-yellow); }
+.dot-steel { background: var(--steel-blue-grey); }
+
+.terminal-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.status-live {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--molten-orange);
+  animation: emberPulse 1.8s ease-in-out infinite;
+}
+
+.terminal-body {
+  padding: 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.84rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cmd-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border-steel);
+  border-radius: 6px;
+  padding: 11px 14px;
+  transition: border-color var(--transition-forge);
+}
+
+.cmd-line:hover {
+  border-color: var(--border-ember);
+}
+
+.cmd-prompt {
+  color: var(--molten-orange);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.cmd-text {
+  flex: 1;
+  color: var(--text-forge);
+  word-break: break-all;
+  line-height: 1.5;
+}
+
+.copy-btn {
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 6px 13px;
+  background: var(--steel-surface);
+  border: 1px solid var(--border-steel-strong);
+  border-radius: var(--radius-tag);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: var(--transition-forge);
+}
+
+.copy-btn:hover {
+  color: var(--caution-yellow);
+  border-color: var(--caution-yellow);
+}
+
+.copy-btn.copied {
+  color: #101012;
+  background: var(--caution-yellow);
+  border-color: var(--caution-yellow);
+  animation: stampBounce 0.35s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+@keyframes stampBounce {
+  0% { transform: scale(1); }
+  40% { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+
+.cmd-log {
+  margin-top: 8px;
+  border-top: 1px dashed var(--border-steel-strong);
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.log-line {
+  font-size: 0.76rem;
+}
+
+.log-ok {
+  color: var(--text-dim);
+}
+
+.log-hot {
+  color: var(--lava-light);
+  text-shadow: 0 0 10px rgba(255, 179, 71, 0.4);
+}
+
+/* ---------- 影响力账本 ---------- */
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 22px;
+}
+
+.impact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 32px 28px;
+}
+
+.impact-unit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--text-faint);
+}
+
+.impact-num {
+  font-family: 'Chakra Petch', 'JetBrains Mono', monospace;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--lava-light);
+  text-shadow: 0 0 20px rgba(255, 107, 26, 0.4);
+  font-variant-numeric: tabular-nums;
+}
+
+.impact-desc {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
+/* ---------- 仓库印章 ---------- */
+.stamp {
+  margin-top: 8px;
+  align-self: flex-end;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  padding: 6px 12px;
+  border: 1.5px dashed currentColor;
+  border-radius: var(--radius-tag);
+  transform: rotate(-3deg);
+  transition: transform var(--transition-forge);
+}
+
+.impact-card:hover .stamp {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+.stamp-orange { color: var(--molten-orange); }
+.stamp-yellow { color: var(--caution-yellow); }
+.stamp-steel { color: var(--text-dim); }
+
+/* ---------- 页脚 ---------- */
+.app-footer {
+  text-align: center;
+  padding: 44px 0 16px;
+  border-top: 1px solid var(--border-steel);
+  margin-top: 24px;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.footer-dim {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.26em;
+  color: var(--text-faint);
+  margin-top: 8px;
+}
+
+/* ---------- 响应式：768px ---------- */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hero-title { font-size: 2.4rem; }
+  .hero-section { padding: 48px 0 44px; }
+  .furnace-telemetry {
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px 24px;
+  }
+  .t-divider { display: none; }
+  .telemetry-item { padding: 0; align-items: center; }
+  .vault-grid { grid-template-columns: 1fr; }
+  .hero-cta-group { flex-direction: column; width: 100%; }
+  .btn-molten, .btn-steel { width: 100%; }
+  .terminal-head { flex-wrap: wrap; gap: 8px; }
+  .section-header h2 { font-size: 1.6rem; }
+}
+
+/* ---------- 响应式：390px ---------- */
+@media (max-width: 390px) {
+  .forge-layout { padding: 0 14px 40px; }
+  .hero-title { font-size: 1.9rem; }
+  .hero-desc { font-size: 0.92rem; }
+  .stencil-text { letter-spacing: 0.14em; font-size: 0.58rem; }
+  .stencil-line { width: 28px; }
+  .crate-card { padding: 20px 16px; }
+  .crate-desc { min-height: 0; }
+  .impact-num { font-size: 2rem; }
+  .cmd-line { flex-wrap: wrap; }
+  .copy-btn { margin-left: 22px; }
+  .terminal-body { padding: 16px; }
+  .brand-title { font-size: 1.05rem; }
+}

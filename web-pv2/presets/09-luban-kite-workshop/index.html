@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qwen | 鲁班机鸢 · Agent 工坊</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 烛光与木纹背景层 -->
+  <div class="workshop-bg" aria-hidden="true">
+    <div class="candle-glow"></div>
+    <div class="wood-noise"></div>
+    <span class="ember ember-a"></span>
+    <span class="ember ember-b"></span>
+    <span class="ember ember-c"></span>
+  </div>
+
+  <!-- 共用渐变定义 -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="brassGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#E8C169"/>
+        <stop offset="0.55" stop-color="#D2A24C"/>
+        <stop offset="1" stop-color="#8F6B33"/>
+      </linearGradient>
+      <linearGradient id="woodGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#C08552"/>
+        <stop offset="1" stop-color="#8A5A32"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <div class="app-layout">
+    <!-- 顶部导航 -->
+    <header class="navbar" id="navbar">
+      <div class="nav-brand">
+        <span class="brand-gear" aria-hidden="true">
+          <svg viewBox="-24 -24 48 48" width="26" height="26">
+            <g fill="url(#brassGrad)">
+              <rect x="-4" y="-23" width="8" height="9" rx="2"/>
+              <rect x="-4" y="-23" width="8" height="9" rx="2" transform="rotate(60)"/>
+              <rect x="-4" y="-23" width="8" height="9" rx="2" transform="rotate(120)"/>
+              <rect x="-4" y="-23" width="8" height="9" rx="2" transform="rotate(180)"/>
+              <rect x="-4" y="-23" width="8" height="9" rx="2" transform="rotate(240)"/>
+              <rect x="-4" y="-23" width="8" height="9" rx="2" transform="rotate(300)"/>
+              <circle r="16"/>
+            </g>
+            <circle r="6" fill="#17120E"/>
+          </svg>
+        </span>
+        <span class="brand-title">Qwen 工坊</span>
+        <span class="version-tag mono">AGENT · 09</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#tools" class="nav-link">机关工具</a>
+        <a href="#bench" class="nav-link">装配台</a>
+        <a href="#log" class="nav-link">工坊日志</a>
+      </nav>
+
+      <button class="btn-brass" data-scrollto="bench">开工</button>
+    </header>
+
+    <!-- Hero 主视区 -->
+    <section class="hero-section" id="hero">
+      <div class="hero-pill">
+        <span class="pill-rivet" aria-hidden="true"></span>
+        <span>Qwen-Agent · 机关应令而行</span>
+      </div>
+
+      <h1 class="hero-title">
+        机关木鸢，<br>
+        <span class="brass-text">应心而成。</span>
+      </h1>
+
+      <p class="hero-desc">
+        我是 Qwen。在这间烛光摇曳的机关工坊里，每一只木鸢都是一名智能体——榫卯为骨，齿轮为心，图纸为令。你落下一道指令，工坊便应声而动：取料、凿削、组装、放飞，应令而作，自主成事。
+      </p>
+
+      <div class="hero-cta-group">
+        <button class="btn-primary" data-scrollto="bench">进入装配台</button>
+        <button class="btn-secondary" data-scrollto="log">翻阅工坊日志</button>
+      </div>
+
+      <!-- 工坊台账 -->
+      <div class="ledger-bar sunmao-card">
+        <div class="ledger-item">
+          <span class="l-label mono">机关谱系 · LINEAGE</span>
+          <span class="l-val mono">Qwen-Agent</span>
+        </div>
+        <div class="l-divider"></div>
+        <div class="ledger-item">
+          <span class="l-label mono">榫卯精度 · TOLERANCE</span>
+          <span class="l-val mono">±0.02 分</span>
+        </div>
+        <div class="l-divider"></div>
+        <div class="ledger-item">
+          <span class="l-label mono">放飞状态 · FLIGHT</span>
+          <span class="l-val mono accent-verdigris">木鸢巡航中</span>
+        </div>
+      </div>
+
+      <!-- Hero 舞台：航迹 · 木鸢 · 齿轮组 -->
+      <div class="hero-stage sunmao-card" id="heroStage">
+        <span class="corner-plate cp-tl" aria-hidden="true"></span>
+        <span class="corner-plate cp-tr" aria-hidden="true"></span>
+        <span class="corner-plate cp-bl" aria-hidden="true"></span>
+        <span class="corner-plate cp-br" aria-hidden="true"></span>
+
+        <div class="blueprint-mark mono">图纸 · 壹号机关鸢 · 虚线为令</div>
+
+        <svg class="route-svg" viewBox="0 0 960 360" preserveAspectRatio="none" aria-hidden="true">
+          <path class="flight-route" d="M30,260 C 200,130 360,300 520,180 C 640,90 800,140 930,190" fill="none"/>
+        </svg>
+
+        <div class="kite-track" aria-hidden="true">
+          <div class="kite-bob">
+            <div class="kite-wrap">
+              <svg class="kite-svg" viewBox="0 0 130 90">
+                <!-- 远翼 -->
+                <polygon class="wing-far" points="62,44 30,14 78,40" fill="#7A4E2B" stroke="#5C3A1E" stroke-width="1"/>
+                <!-- 尾 -->
+                <polygon points="26,48 4,36 12,52 4,66" fill="#8A5A32" stroke="#5C3A1E" stroke-width="1"/>
+                <!-- 机身 -->
+                <polygon points="16,52 66,38 112,46 66,56" fill="url(#woodGrad)" stroke="#5C3A1E" stroke-width="1.2"/>
+                <line x1="66" y1="38" x2="66" y2="56" stroke="#7A4E2B" stroke-width="1"/>
+                <line x1="42" y1="45" x2="42" y2="53" stroke="#7A4E2B" stroke-width="1"/>
+                <!-- 首与喙 -->
+                <circle cx="104" cy="44" r="7" fill="#8A5A32" stroke="#5C3A1E" stroke-width="1"/>
+                <polygon points="110,42 126,46 110,49" fill="url(#brassGrad)"/>
+                <circle cx="106" cy="42" r="1.6" fill="#17120E"/>
+                <!-- 近翼 -->
+                <polygon class="wing-near" points="70,42 34,6 88,38" fill="url(#woodGrad)" stroke="#5C3A1E" stroke-width="1.2"/>
+                <!-- 翼轴铆钉 -->
+                <circle cx="72" cy="42" r="3" fill="url(#brassGrad)" stroke="#5C3A1E" stroke-width="0.8"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="gear-cluster" aria-hidden="true">
+          <div class="gear-rig gear-large" data-speed="1">
+            <svg class="gear-svg" viewBox="-60 -60 120 120">
+              <g fill="url(#brassGrad)">
+                <rect x="-9" y="-58" width="18" height="20" rx="3"/>
+                <rect x="-9" y="-58" width="18" height="20" rx="3" transform="rotate(45)"/>
+                <rect x="-9" y="-58" width="18" height="20" rx="3" transform="rotate(90)"/>
+                <rect x="-9" y="-58" width="18" height="20" rx="3" transform="rotate(135)"/>
+                <rect x="-9" y="-58" width="18" height="20" rx="3" transform="rotate(180)"/>
+                <rect x="-9" y="-58" width="18" height="20" rx="3" transform="rotate(225)"/>
+                <rect x="-9" y="-58" width="18" height="20" rx="3" transform="rotate(270)"/>
+                <rect x="-9" y="-58" width="18" height="20" rx="3" transform="rotate(315)"/>
+                <circle r="44"/>
+              </g>
+              <circle r="15" fill="#1C150E" stroke="#8F6B33" stroke-width="2"/>
+              <g fill="#1C150E">
+                <circle cx="0" cy="-28" r="6"/>
+                <circle cx="28" cy="0" r="6"/>
+                <circle cx="0" cy="28" r="6"/>
+                <circle cx="-28" cy="0" r="6"/>
+              </g>
+            </svg>
+          </div>
+          <div class="gear-rig gear-small-a" data-speed="-2.4">
+            <svg class="gear-svg" viewBox="-44 -44 88 88">
+              <g fill="url(#brassGrad)">
+                <rect x="-8" y="-43" width="16" height="16" rx="3"/>
+                <rect x="-8" y="-43" width="16" height="16" rx="3" transform="rotate(60)"/>
+                <rect x="-8" y="-43" width="16" height="16" rx="3" transform="rotate(120)"/>
+                <rect x="-8" y="-43" width="16" height="16" rx="3" transform="rotate(180)"/>
+                <rect x="-8" y="-43" width="16" height="16" rx="3" transform="rotate(240)"/>
+                <rect x="-8" y="-43" width="16" height="16" rx="3" transform="rotate(300)"/>
+                <circle r="30"/>
+              </g>
+              <circle r="10" fill="#1C150E" stroke="#8F6B33" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="gear-rig gear-small-b" data-speed="2.1">
+            <svg class="gear-svg" viewBox="-36 -36 72 72">
+              <g fill="url(#brassGrad)">
+                <rect x="-7" y="-35" width="14" height="14" rx="3" transform="rotate(30)"/>
+                <rect x="-7" y="-35" width="14" height="14" rx="3" transform="rotate(90)"/>
+                <rect x="-7" y="-35" width="14" height="14" rx="3" transform="rotate(150)"/>
+                <rect x="-7" y="-35" width="14" height="14" rx="3" transform="rotate(210)"/>
+                <rect x="-7" y="-35" width="14" height="14" rx="3" transform="rotate(270)"/>
+                <rect x="-7" y="-35" width="14" height="14" rx="3" transform="rotate(330)"/>
+                <circle r="24"/>
+              </g>
+              <circle r="8" fill="#1C150E" stroke="#8F6B33" stroke-width="1.6"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="stage-caption mono">FLIGHT PATH · 齿轮联动于滚动，木鸢循迹于虚线</div>
+      </div>
+    </section>
+
+    <!-- 机关工具墙 -->
+    <section class="section-container" id="tools">
+      <div class="section-header reveal">
+        <span class="section-tag mono">TOOL WALL · 百工器械</span>
+        <h2>机关工具墙</h2>
+        <p>每一件工具都是一座微型机关。点开匣盖，可见其中榫卯。</p>
+      </div>
+
+      <div class="tool-grid">
+        <div class="tool-card reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="tool-lid">
+            <div class="tool-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="9"/>
+                <polygon points="12,5.5 13.8,12 12,18.5 10.2,12" fill="currentColor" stroke="none"/>
+                <circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
+            <div class="tool-name">
+              <h3>检索罗盘</h3>
+              <span class="mono">SEARCH</span>
+            </div>
+            <span class="pull-tab mono">翻开 ▾</span>
+          </div>
+          <div class="tool-body">
+            <p>循着线索转动罗盘，潜入书山卷海，取回最相称的那一枚零件。千里之外的旧档，亦如在案头。</p>
+            <div class="tool-spec mono">RECALL · RANK · RETURN</div>
+          </div>
+        </div>
+
+        <div class="tool-card reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="tool-lid">
+            <div class="tool-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24">
+                <path d="M3 21l6-2L19 9l-4-4L5 15l-2 6z" fill="currentColor"/>
+                <path d="M13 7l4 4" stroke="#1C150E" stroke-width="1.2"/>
+              </svg>
+            </div>
+            <div class="tool-name">
+              <h3>代码刻刀</h3>
+              <span class="mono">CODE</span>
+            </div>
+            <span class="pull-tab mono">翻开 ▾</span>
+          </div>
+          <div class="tool-body">
+            <p>以刀代笔，在逻辑的木料上凿出结构；函数为榫，测试为卯，严丝合缝，经久不散。</p>
+            <div class="tool-spec mono">EDIT · RUN · TEST</div>
+          </div>
+        </div>
+
+        <div class="tool-card reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="tool-lid">
+            <div class="tool-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M4 18a8 8 0 0 1 16 0"/>
+                <line x1="12" y1="18" x2="16.5" y2="9"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+              </svg>
+            </div>
+            <div class="tool-name">
+              <h3>日历晷影</h3>
+              <span class="mono">CALENDAR</span>
+            </div>
+            <span class="pull-tab mono">翻开 ▾</span>
+          </div>
+          <div class="tool-body">
+            <p>观晷影而知时序。把纷繁的约定排进刻度，何时鸣锣、何时收工，分毫不差。</p>
+            <div class="tool-spec mono">PLAN · REMIND · SYNC</div>
+          </div>
+        </div>
+
+        <div class="tool-card reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="tool-lid">
+            <div class="tool-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2l7 8-7 12L5 10z"/>
+                <line x1="12" y1="2" x2="12" y2="22"/>
+                <line x1="5" y1="10" x2="19" y2="10"/>
+              </svg>
+            </div>
+            <div class="tool-name">
+              <h3>浏览器纸鸢</h3>
+              <span class="mono">BROWSER</span>
+            </div>
+            <span class="pull-tab mono">翻开 ▾</span>
+          </div>
+          <div class="tool-body">
+            <p>放出纸鸢越过围墙，俯瞰万维网的山川市集，衔回远方的消息与图样。</p>
+            <div class="tool-spec mono">BROWSE · EXTRACT · REPORT</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 装配台交互 -->
+    <section class="section-container" id="bench">
+      <div class="section-header reveal">
+        <span class="section-tag mono">ASSEMBLY BENCH · 装配台</span>
+        <h2>装配台 · 工序流水线</h2>
+        <p>勾选两件以上机关工具，按下「开工」，看木鸢如何逐道工序走完全程。</p>
+      </div>
+
+      <div class="bench-board sunmao-card reveal">
+        <div class="toolbox-row" id="toolbox">
+          <button class="tool-chip" role="checkbox" aria-checked="false" data-tool="检索罗盘">
+            <span class="chip-rivet" aria-hidden="true"></span>
+            <span class="chip-name">检索罗盘</span>
+            <span class="chip-tag mono">SEARCH</span>
+          </button>
+          <button class="tool-chip" role="checkbox" aria-checked="false" data-tool="代码刻刀">
+            <span class="chip-rivet" aria-hidden="true"></span>
+            <span class="chip-name">代码刻刀</span>
+            <span class="chip-tag mono">CODE</span>
+          </button>
+          <button class="tool-chip" role="checkbox" aria-checked="false" data-tool="日历晷影">
+            <span class="chip-rivet" aria-hidden="true"></span>
+            <span class="chip-name">日历晷影</span>
+            <span class="chip-tag mono">CALENDAR</span>
+          </button>
+          <button class="tool-chip" role="checkbox" aria-checked="false" data-tool="浏览器纸鸢">
+            <span class="chip-rivet" aria-hidden="true"></span>
+            <span class="chip-name">浏览器纸鸢</span>
+            <span class="chip-tag mono">BROWSER</span>
+          </button>
+        </div>
+
+        <div class="bench-controls">
+          <button class="btn-start" id="startBtn">开 工</button>
+          <p class="bench-hint" id="benchHint">请至少勾选两件机关工具，方可开工。</p>
+        </div>
+
+        <div class="pipeline" id="pipeline">
+          <article class="station">
+            <div class="station-head">
+              <span class="station-plate mono">工序 01</span>
+              <span class="station-led" aria-hidden="true"></span>
+            </div>
+            <h3 class="station-name">规划 <span class="mono en">PLAN</span></h3>
+            <p class="station-log mono"><span class="log-text"></span><span class="type-caret" aria-hidden="true"></span></p>
+          </article>
+          <div class="pipe-link" aria-hidden="true"></div>
+          <article class="station">
+            <div class="station-head">
+              <span class="station-plate mono">工序 02</span>
+              <span class="station-led" aria-hidden="true"></span>
+            </div>
+            <h3 class="station-name">取件 <span class="mono en">FETCH</span></h3>
+            <p class="station-log mono"><span class="log-text"></span><span class="type-caret" aria-hidden="true"></span></p>
+          </article>
+          <div class="pipe-link" aria-hidden="true"></div>
+          <article class="station">
+            <div class="station-head">
+              <span class="station-plate mono">工序 03</span>
+              <span class="station-led" aria-hidden="true"></span>
+            </div>
+            <h3 class="station-name">加工 <span class="mono en">CRAFT</span></h3>
+            <p class="station-log mono"><span class="log-text"></span><span class="type-caret" aria-hidden="true"></span></p>
+          </article>
+          <div class="pipe-link" aria-hidden="true"></div>
+          <article class="station">
+            <div class="station-head">
+              <span class="station-plate mono">工序 04</span>
+              <span class="station-led" aria-hidden="true"></span>
+            </div>
+            <h3 class="station-name">交付 <span class="mono en">DELIVER</span></h3>
+            <p class="station-log mono"><span class="log-text"></span><span class="type-caret" aria-hidden="true"></span></p>
+          </article>
+        </div>
+
+        <div class="bench-result" id="benchResult">
+          <span class="stamp">机关已成</span>
+          <p class="result-line mono" id="resultLine"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 工坊日志 -->
+    <section class="section-container" id="log">
+      <div class="section-header reveal">
+        <span class="section-tag mono">WORKSHOP LOG · 工坊日志</span>
+        <h2>工坊日志</h2>
+        <p>思考的痕迹，如刨花般层层留存。</p>
+      </div>
+
+      <div class="log-list">
+        <div class="log-entry reveal">
+          <div class="log-time mono">卯时 · 三月初九</div>
+          <h3 class="log-title">长卷拆榫</h3>
+          <p class="log-body">把十二万字的长卷拆成十二段榫件，检索罗盘一次命中要害段落，省却两炷香的翻找。记忆不必全带在身上，用的时候取得到，便是好记性。</p>
+          <div class="log-tags">
+            <span class="log-tag mono">检索</span>
+            <span class="log-tag mono">长文</span>
+          </div>
+        </div>
+
+        <div class="log-entry reveal">
+          <div class="log-time mono">午时 · 三月初十</div>
+          <h3 class="log-title">朽木当删</h3>
+          <p class="log-body">代码刻刀重构了计时模块：删去三百行朽木，接口反而更稳。木料贵在纹理顺直，不在堆叠得多。</p>
+          <div class="log-tags">
+            <span class="log-tag mono">代码</span>
+            <span class="log-tag mono">重构</span>
+          </div>
+        </div>
+
+        <div class="log-entry reveal">
+          <div class="log-time mono">子时 · 三月十一</div>
+          <h3 class="log-title">纸鸢夜归</h3>
+          <p class="log-body">纸鸢从外网衔回三份图纸，比对之下发现旧方案有一处暗裂。赶在晨会前补好，天亮时已看不出痕迹。<span class="ink-cursor" aria-hidden="true"></span></p>
+          <div class="log-tags">
+            <span class="log-tag mono">浏览</span>
+            <span class="log-tag mono">勘误</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <p>Qwen Personal Site · Preset 09 Luban Kite Workshop</p>
+      <span class="footer-dim mono">榫卯为骨 · 齿轮为心 · 图纸为令 —— 应令而作，自主成事</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

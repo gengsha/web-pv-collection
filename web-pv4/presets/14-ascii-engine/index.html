@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 · ASCII Render Pipeline — 实时字符渲染</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <div class="shell">
+    <div class="hud">
+      <span class="cell"><i>PIPELINE</i><b>RASTER → SAMPLE → QUANTIZE</b></span>
+      <span class="cell"><i>GRID</i><b id="hGrid">96 × 40</b></span>
+      <span class="cell"><i>SAMPLES</i><b id="hPts">4,000</b></span>
+      <span class="cell"><i>RAMP</i><b>.:-=+*#%@</b></span>
+      <span class="cell"><i>FPS</i><b id="hFps">60</b></span>
+    </div>
+
+    <header class="nav">
+      <div class="brand"><span>hy4</span><em>ASCII RENDER PIPELINE</em></div>
+      <nav class="nav-links">
+        <a href="#stages" class="nav-link active">渲染阶段</a>
+        <a href="#console" class="nav-link">采样控制台</a>
+        <a href="#shell" class="nav-link">终端</a>
+        <a href="#bench" class="nav-link">评测</a>
+      </nav>
+      <button class="btn" id="ctaDeep">×2 采样</button>
+    </header>
+
+    <!-- 主渲染视口 -->
+    <section class="viewport">
+      <canvas id="ascii"></canvas>
+      <div class="vp-overlay">
+        <span class="vp-tag">// VIEWPORT 01 · ORTHOGRAPHIC</span>
+        <span class="vp-meta" id="vpMeta">SHAPE: SPHERE · SAMPLES 4,000</span>
+      </div>
+      <div class="vp-scan"></div>
+    </section>
+
+    <section class="hero">
+      <p class="kicker">// 每帧：投影 → 着色 → z-buffer → 亮度量化 → 字符映射</p>
+      <h1>把三维<span class="mark">压成</span>十个字符。</h1>
+      <p class="desc">
+        我是 hy4。这一页的每一帧都在跑一条完整的软件渲染管线：点云绕轴旋转、正交投影、
+        z-buffer 消隐、朗伯着色，最后把亮度量化成 <code>.:-=+*#%@</code> 十个灰阶。
+        INSTANT 用 96 列粗网格，DEEP 用 200 列细网格与三倍采样点。
+      </p>
+      <div class="cta">
+        <button class="btn solid" id="ctaStages">看看管线</button>
+        <button class="btn" id="ctaConsole">调节采样</button>
+      </div>
+      <p class="hint">拖动视口旋转模型 · 移动鼠标改变光源方位</p>
+    </section>
+
+    <section class="section" id="stages">
+      <div class="sec-head">
+        <span class="sec-tag">// PIPELINE STAGES</span>
+        <h2>四个渲染阶段</h2>
+        <p>每一步都能单独关掉看看。</p>
+      </div>
+      <div class="grid">
+        <article class="card"><span class="no">01</span><h3>混合推理内核</h3><p>同一权重在 Instant 与 Deep Think 间切换，按任务复杂度分配思考预算 —— 就像这里的采样密度。</p><span class="tag">HYBRID CORE</span></article>
+        <article class="card"><span class="no">02</span><h3>全栈代码工程</h3><p>跨文件重构、补齐测试、跑终端命令，遵循仓库既有约定续写。</p><span class="tag">AGENTIC CODING</span></article>
+        <article class="card"><span class="no">03</span><h3>256K 长上下文</h3><p>整本手册、整个仓库一次载入，长跨度下依旧不丢前文细节。</p><span class="tag">LONG CONTEXT</span></article>
+        <article class="card"><span class="no">04</span><h3>并行工具调用</h3><p>检索、读取、计算、执行最多 8 路并行，多步任务压成一轮往返。</p><span class="tag">PARALLEL TOOLS</span></article>
+      </div>
+    </section>
+
+    <section class="section" id="console">
+      <div class="sec-head">
+        <span class="sec-tag">// SAMPLING CONSOLE</span>
+        <h2>采样控制台</h2>
+        <p>切换几何体与网格密度，观察量化误差。</p>
+      </div>
+
+      <div class="panel">
+        <div class="modes">
+          <button class="mode active" data-mode="instant"><b>INSTANT · 球</b><em>96 列 · 4,000 采样 · 1 级灰阶</em></button>
+          <button class="mode" data-mode="deep"><b>DEEP THINK · 环面</b><em>200 列 · 12,000 采样 · 边缘光</em></button>
+          <div class="sl"><label>GRID COLS <b id="vCols">96</b></label><input type="range" id="sCols" min="60" max="260" value="96"></div>
+          <div class="sl"><label>LIGHT AZIMUTH <b id="vLight">0.60</b></label><input type="range" id="sLight" min="0" max="628" value="188"></div>
+        </div>
+        <div class="trace" id="traceBox"></div>
+      </div>
+    </section>
+
+    <section class="section" id="shell">
+      <div class="sec-head">
+        <span class="sec-tag">// SHELL</span>
+        <h2>终端</h2>
+        <p>向渲染管线提交一条指令。</p>
+      </div>
+      <div class="term">
+        <div class="log" id="log">
+          <div class="row"><span class="who">hy4</span><span class="txt">管线已就绪。给我一个几何体、一个采样率，或者一个还没想清楚的投影。</span></div>
+        </div>
+        <div class="inp">
+          <span class="p">render&gt;</span>
+          <input type="text" id="inp" placeholder="输入指令，回车执行" autocomplete="off">
+          <button class="btn solid" id="send">RUN</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bench">
+      <div class="sec-head">
+        <span class="sec-tag">// BENCHMARK</span>
+        <h2>评测数据</h2>
+      </div>
+      <div class="bench-grid">
+        <div class="bench"><span class="bn">SWE-bench Verified</span><span class="bv">74.2</span><div class="bb"><i data-w="74"></i></div></div>
+        <div class="bench"><span class="bn">LiveCodeBench v6</span><span class="bv">68.5</span><div class="bb"><i data-w="68"></i></div></div>
+        <div class="bench"><span class="bn">AIME 2025</span><span class="bv">88.0</span><div class="bb"><i data-w="88"></i></div></div>
+        <div class="bench"><span class="bn">GPQA Diamond</span><span class="bv">71.4</span><div class="bb"><i data-w="71"></i></div></div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>hy4 · ASCII RENDER PIPELINE · PRESET 14 · 软件光栅化，零 GPU 依赖</p>
+      <span>EVERY PIXEL HERE IS A LETTER</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

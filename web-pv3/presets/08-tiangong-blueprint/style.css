@@ -1,0 +1,487 @@
+:root {
+  --kraft: #e7dcc2;
+  --kraft-deep: #dbceac;
+  --ink-brown: #3a2e1b;
+  --ink-line: #4a3b24;
+  --ink-faint: #8a7a5c;
+  --cinnabar-stamp: #a83226;
+  --wash-blue: #33557a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--kraft);
+  color: var(--ink-brown);
+  font-family: 'Noto Serif SC', serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  cursor: crosshair;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+h1, h2, h3, .sheet-brand strong {
+  font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
+}
+
+/* 方眼坐标纸 */
+.grid-paper {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 27px, rgba(74, 59, 36, 0.08) 27px 28px),
+    repeating-linear-gradient(90deg, transparent 0 27px, rgba(74, 59, 36, 0.08) 27px 28px);
+}
+
+/* 图框 */
+.sheet-frame {
+  position: relative;
+  z-index: 1;
+  max-width: 1120px;
+  margin: 34px auto;
+  border: 3px double var(--ink-line);
+  background: rgba(231, 220, 194, 0.6);
+  box-shadow: 8px 10px 0 rgba(58, 46, 27, 0.12);
+}
+
+.sheet-inner {
+  margin: 6px;
+  border: 1px solid var(--ink-line);
+  padding: 44px 56px 90px;
+  position: relative;
+}
+
+/* 头部 */
+.sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--ink-line);
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+}
+
+.sheet-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.sheet-brand strong {
+  font-size: 1.3rem;
+  letter-spacing: 0.2em;
+}
+
+.brand-sub {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--ink-faint);
+}
+
+.sheet-note {
+  font-size: 0.62rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.12em;
+}
+
+/* Hero */
+.blueprint-hero {
+  text-align: center;
+  padding: 30px 0 60px;
+}
+
+.hero-title {
+  font-size: clamp(2.2rem, 5.4vw, 3.6rem);
+  letter-spacing: 0.12em;
+  font-weight: 400;
+}
+
+.title-comma {
+  color: var(--cinnabar-stamp);
+}
+
+.dim-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 28px auto 24px;
+  max-width: 420px;
+  transform-origin: center;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dim-line.reveal {
+  transform: scaleX(0);
+}
+
+.dim-line.reveal.visible {
+  transform: scaleX(1);
+}
+
+.dim-arrow {
+  flex: 1;
+  height: 1px;
+  background: var(--ink-line);
+  position: relative;
+}
+
+.dim-arrow::before {
+  content: '';
+  position: absolute;
+  top: -3.5px;
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+
+.dim-arrow.left::before {
+  left: 0;
+  border-right: 8px solid var(--ink-line);
+}
+
+.dim-arrow.right::before {
+  right: 0;
+  border-left: 8px solid var(--ink-line);
+}
+
+.dim-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  color: var(--ink-faint);
+}
+
+.hero-note {
+  font-size: 1rem;
+  line-height: 2.1;
+  color: var(--ink-brown);
+}
+
+.hero-annotation {
+  margin-top: 22px;
+  font-size: 0.76rem;
+  font-style: italic;
+}
+
+.wash-blue {
+  color: var(--wash-blue);
+}
+
+/* 区块题 */
+.section-caption {
+  font-size: 1.15rem;
+  letter-spacing: 0.22em;
+  margin: 56px 0 26px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-left: 3px solid var(--cinnabar-stamp);
+  padding-left: 14px;
+}
+
+.cap-index {
+  font-size: 0.7rem;
+  color: var(--cinnabar-stamp);
+}
+
+/* 榫卯卡 */
+.tenon-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+
+.tenon-card {
+  position: relative;
+  border: 1.5px solid var(--ink-line);
+  border-right: none;
+  padding: 0 0 18px;
+  background: rgba(255, 252, 240, 0.4);
+  transition: background 0.3s;
+}
+
+.tenon-card:last-child {
+  border-right: 1.5px solid var(--ink-line);
+}
+
+/* 凸榫 */
+.tenon-card::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: 18px;
+  width: 14px;
+  height: 10px;
+  background: var(--ink-line);
+  transition: transform 0.25s ease;
+}
+
+.tenon-card::after {
+  content: '';
+  position: absolute;
+  top: -9px;
+  right: 18px;
+  width: 14px;
+  height: 10px;
+  background: var(--ink-line);
+  transition: transform 0.25s ease;
+}
+
+.tenon-card:hover::before,
+.tenon-card:hover::after {
+  transform: translateY(3px);
+}
+
+.tenon-card:hover {
+  background: rgba(255, 252, 240, 0.75);
+}
+
+.tenon-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 16px 8px;
+  border-bottom: 1px dashed rgba(74, 59, 36, 0.4);
+}
+
+.woodcut {
+  width: 52px;
+  height: 52px;
+  stroke: var(--ink-line);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tenon-head h3 {
+  font-size: 1.05rem;
+  letter-spacing: 0.3em;
+  padding-right: -0.3em;
+}
+
+.tenon-body {
+  padding: 14px 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tenon-body p {
+  font-size: 0.82rem;
+  line-height: 1.9;
+}
+
+.craft-dim {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  border-top: 1px dashed rgba(74, 59, 36, 0.35);
+  padding-top: 8px;
+}
+
+.craft-annotation {
+  font-size: 0.72rem;
+  font-style: italic;
+  color: var(--cinnabar-stamp);
+}
+
+/* BOM 表 */
+.bom-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1.5px solid var(--ink-line);
+  background: rgba(255, 252, 240, 0.4);
+}
+
+.bom-table th, .bom-table td {
+  border: 1px solid rgba(74, 59, 36, 0.5);
+  padding: 13px 18px;
+  text-align: left;
+  font-size: 0.86rem;
+}
+
+.bom-table th {
+  background: rgba(74, 59, 36, 0.1);
+  letter-spacing: 0.18em;
+  font-weight: 600;
+}
+
+.bom-table tbody tr {
+  transition: background 0.25s;
+}
+
+.bom-table tbody tr:hover {
+  background: rgba(168, 50, 38, 0.06);
+}
+
+.bom-table .mono {
+  color: var(--ink-faint);
+  font-size: 0.72rem;
+}
+
+/* 案例卡 */
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 26px;
+}
+
+.case-card {
+  position: relative;
+  border: 1.5px solid var(--ink-line);
+  padding: 28px 30px;
+  background: rgba(255, 252, 240, 0.4);
+  transition: box-shadow 0.3s;
+}
+
+.case-card:hover {
+  box-shadow: 6px 8px 0 rgba(58, 46, 27, 0.16);
+}
+
+.case-tag {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: var(--ink-line);
+  color: var(--kraft);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  padding: 4px 10px;
+}
+
+.case-card h3 {
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 14px;
+}
+
+.case-card p {
+  font-size: 0.88rem;
+  line-height: 2;
+}
+
+.case-dim {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-faint);
+  border-top: 1px dashed rgba(74, 59, 36, 0.4);
+  padding-top: 10px;
+}
+
+/* 图签栏 */
+.title-block {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  border: 1px solid var(--ink-line);
+  background: rgba(231, 220, 194, 0.9);
+}
+
+.tb-cell {
+  border-right: 1px solid var(--ink-line);
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 108px;
+}
+
+.tb-cell:last-child {
+  border-right: none;
+}
+
+.tb-cell span {
+  font-size: 0.56rem;
+  letter-spacing: 0.22em;
+  color: var(--ink-faint);
+}
+
+.tb-cell strong {
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+}
+
+.sheet-footer {
+  text-align: center;
+  padding-top: 60px;
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+}
+
+/* 朱印 */
+.stamp-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.stamp-mark {
+  position: absolute;
+  width: 74px;
+  height: 74px;
+  border: 3px solid var(--cinnabar-stamp);
+  outline: 1px solid var(--cinnabar-stamp);
+  outline-offset: 2px;
+  color: var(--cinnabar-stamp);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.14em;
+  transform: translate(-50%, -50%) rotate(-6deg);
+  animation: stampIn 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.4) forwards;
+  opacity: 0.88;
+}
+
+@keyframes stampIn {
+  0% { transform: translate(-50%, -50%) rotate(-6deg) scale(1.4); opacity: 0; }
+  60% { transform: translate(-50%, -50%) rotate(-6deg) scale(0.94); opacity: 0.92; }
+  100% { transform: translate(-50%, -50%) rotate(-6deg) scale(1); opacity: 0.88; }
+}
+
+/* 渐显 */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dim-line.reveal {
+  transform: scaleX(0);
+  opacity: 1;
+}
+
+.dim-line.reveal.visible {
+  transform: scaleX(1);
+}
+
+@media (max-width: 960px) {
+  .tenon-grid { grid-template-columns: repeat(2, 1fr); }
+  .tenon-card:nth-child(2) { border-right: 1.5px solid var(--ink-line); }
+  .case-grid { grid-template-columns: 1fr; }
+  .sheet-inner { padding: 30px 24px 120px; }
+  .title-block { grid-template-columns: repeat(2, 1fr); width: 220px; }
+}

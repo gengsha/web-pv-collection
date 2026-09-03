@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLM 5.3 | 赛博灯市</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 跑马灯带 -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack">
+      <span>🏮 GLM 5.3 灯市 · 今夜开业 🏮 推理摊半价 · 代码摊送券 🏮 挑一盏灯，解一桩难事 🏮 千问百晓 · 来者不拒 🏮 灯市不打烊 · 通宵营业 🏮</span>
+    </div>
+  </div>
+
+  <div class="bazaar-page">
+    <header class="bazaar-header">
+      <div class="bazaar-brand">
+        <span class="brand-torch">🏮</span>
+        <strong>灯市</strong>
+        <span class="brand-sub mono">GLM-5.3 · NIGHT BAZAAR</span>
+      </div>
+      <span class="bazaar-status mono">OPEN · 24H</span>
+    </header>
+
+    <!-- Hero：竖排霓虹大招牌 -->
+    <section class="bazaar-hero">
+      <div class="hero-sign-col">
+        <div class="mega-sign sign-red flickerable" data-flicker>智</div>
+      </div>
+      <div class="hero-copy">
+        <h1 class="neon-title sign-gold flickerable">GLM 5.3 灯市</h1>
+        <p class="hero-sub">有摊皆亮，有问必答。<br>把最难的题带到最亮的街上。</p>
+        <div class="hero-tags mono">
+          <span class="tag-neon tag-cyan">推理 ×8</span>
+          <span class="tag-neon tag-magenta">代码 ×10</span>
+          <span class="tag-neon tag-gold">多模态 ×6</span>
+        </div>
+      </div>
+      <div class="hero-lantern">
+        <div class="lantern-body">
+          <span>通宵</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 五摊票券 -->
+    <section class="stall-section">
+      <h2 class="stall-heading sign-cyan flickerable" data-flicker>今 夜 出 摊</h2>
+      <div class="stall-grid">
+        <div class="stall-ticket ticket-red reveal">
+          <div class="ticket-main">
+            <h3>推理摊</h3>
+            <p>千层套娃难题，一层层替你拆到底。</p>
+          </div>
+          <div class="ticket-stub mono">TOK<br>×2</div>
+        </div>
+        <div class="stall-ticket ticket-cyan reveal">
+          <div class="ticket-main">
+            <h3>代码摊</h3>
+            <p>祖传屎山，重烧成佛。附赠测试。</p>
+          </div>
+          <div class="ticket-stub mono">TOK<br>×3</div>
+        </div>
+        <div class="stall-ticket ticket-gold reveal">
+          <div class="ticket-main">
+            <h3>画皮摊</h3>
+            <p>文生图、图生动，皮相千变由你点。</p>
+          </div>
+          <div class="ticket-stub mono">TOK<br>×2</div>
+        </div>
+        <div class="stall-ticket ticket-magenta reveal">
+          <div class="ticket-main">
+            <h3>声腔摊</h3>
+            <p>一句嗓音样本，还你百种声腔。</p>
+          </div>
+          <div class="ticket-stub mono">TOK<br>×1</div>
+        </div>
+        <div class="stall-ticket ticket-cyan-alt reveal">
+          <div class="ticket-main">
+            <h3>百晓摊</h3>
+            <p>深读全网文献，天亮交卷的情报贩子。</p>
+          </div>
+          <div class="ticket-stub mono">TOK<br>×5</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 灯谜翻牌 -->
+    <section class="riddle-section">
+      <h2 class="stall-heading sign-magenta flickerable" data-flicker>灯 谜 · 猜 中 免 单</h2>
+      <div class="riddle-grid">
+        <div class="riddle-card" tabindex="0">
+          <div class="riddle-inner">
+            <div class="riddle-face riddle-front">
+              <span class="riddle-lamp">🔴</span>
+              <p>谜面：入夜千摊齐亮，<br>独它替你思考。</p>
+              <span class="riddle-hint mono">点击翻牌</span>
+            </div>
+            <div class="riddle-face riddle-back">
+              <span class="riddle-lamp">🏮</span>
+              <p class="riddle-answer">GLM 5.3<br><em>本街最亮的招牌</em></p>
+            </div>
+          </div>
+        </div>
+        <div class="riddle-card" tabindex="0">
+          <div class="riddle-inner">
+            <div class="riddle-face riddle-front">
+              <span class="riddle-lamp">🟡</span>
+              <p>谜面：有口难言，<br>得它代言。</p>
+              <span class="riddle-hint mono">点击翻牌</span>
+            </div>
+            <div class="riddle-face riddle-back">
+              <span class="riddle-lamp">🏮</span>
+              <p class="riddle-answer">智能体<br><em>替你跑腿的那位</em></p>
+            </div>
+          </div>
+        </div>
+        <div class="riddle-card" tabindex="0">
+          <div class="riddle-inner">
+            <div class="riddle-face riddle-front">
+              <span class="riddle-lamp">🟢</span>
+              <p>谜面：灯下不识字，<br>拍它即成诗。</p>
+              <span class="riddle-hint mono">点击翻牌</span>
+            </div>
+            <div class="riddle-face riddle-back">
+              <span class="riddle-lamp">🏮</span>
+              <p class="riddle-answer">多模态<br><em>看一眼就懂</em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Token 价目牌 -->
+    <section class="price-board reveal">
+      <div class="board-frame">
+        <div class="board-head">
+          <span>灯市公道价 · 概不赊账</span>
+          <span class="mono">PER 1K TOKENS</span>
+        </div>
+        <table class="price-table mono">
+          <tr><td>深度思考</td><td class="price-gold">¥ 0.04</td><td>含思维链</td></tr>
+          <tr><td>极速应答</td><td class="price-cyan">¥ 0.01</td><td>不打磕巴</td></tr>
+          <tr><td>通宵陪聊</td><td class="price-red">送</td><td>灯市人情</td></tr>
+        </table>
+        <p class="board-note">灯市一盏灯，难事一桩桩照单全收。</p>
+      </div>
+    </section>
+
+    <footer class="bazaar-footer">
+      <p class="mono">GLM 5.3 · 赛博灯市 · Preset 05 / Web-PV3 · 打烊？不存在的</p>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

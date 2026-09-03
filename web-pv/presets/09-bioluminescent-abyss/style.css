@@ -1,0 +1,215 @@
+:root {
+  --abyss-deep: #020617;
+  --abyss-black: #010409;
+  --abyss-surface: rgba(8, 20, 44, 0.65);
+  
+  --bio-cyan: #38bdf8;
+  --bio-emerald: #34d399;
+  --bio-coral: #fb7185;
+  
+  --text-biolight: #f0f9ff;
+  --text-dim: #7dd3fc;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: radial-gradient(circle at center, var(--abyss-deep) 0%, var(--abyss-black) 100%);
+  color: var(--text-biolight);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+#causticsCanvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.45;
+}
+
+.ripple-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.bio-ripple {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid var(--bio-cyan);
+  box-shadow: 0 0 20px var(--bio-cyan);
+  transform: translate(-50%, -50%) scale(0);
+  animation: rippleExpand 1.2s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes rippleExpand {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(5); opacity: 0; }
+}
+
+.abyss-app {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 顶部 */
+.abyss-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+  padding-bottom: 20px;
+}
+
+.abyss-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+}
+
+.bio-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--bio-cyan);
+  box-shadow: 0 0 12px var(--bio-cyan);
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.4); opacity: 1; }
+}
+
+.depth-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+/* Hero */
+.abyss-hero {
+  text-align: center;
+  max-width: 740px;
+  margin: 60px auto;
+}
+
+.bio-capsule {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--bio-cyan);
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 4px 14px;
+  border-radius: 9999px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.abyss-title {
+  font-size: 3.6rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.bio-gradient-text {
+  background: linear-gradient(135deg, var(--bio-cyan), var(--bio-emerald));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
+}
+
+.abyss-desc {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-dim);
+}
+
+/* 卡片网格 */
+.bio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+  margin-bottom: 60px;
+}
+
+.bio-pod {
+  background: var(--abyss-surface);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 24px;
+  padding: 36px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s;
+}
+
+.bio-pod:hover {
+  transform: translateY(-6px);
+  border-color: var(--bio-cyan);
+}
+
+.pod-glow {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.5;
+}
+
+.cyan-glow { background: var(--bio-cyan); }
+.emerald-glow { background: var(--bio-emerald); }
+.coral-glow { background: var(--bio-coral); }
+
+.bio-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--bio-cyan);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.bio-pod h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.bio-pod p {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--text-dim);
+}
+
+.abyss-footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  opacity: 0.7;
+}

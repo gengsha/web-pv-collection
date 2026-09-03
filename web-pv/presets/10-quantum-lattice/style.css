@@ -1,0 +1,185 @@
+:root {
+  --quantum-bg: #090a0f;
+  --quantum-surface: rgba(15, 18, 28, 0.7);
+  --quantum-blue: #60a5fa;
+  --quantum-purple: #c084fc;
+  --quantum-border: rgba(96, 165, 250, 0.2);
+  --text-white: #f8fafc;
+  --text-dim: #94a3b8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--quantum-bg);
+  color: var(--text-white);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+#lorenzCanvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.quantum-app {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.quantum-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--quantum-border);
+  padding-bottom: 20px;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.matrix-symbol {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--quantum-blue);
+  font-size: 1.2rem;
+}
+
+.metric-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.quantum-hero {
+  text-align: center;
+  max-width: 780px;
+  margin: 50px auto;
+}
+
+.quantum-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--quantum-blue);
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+
+.quantum-title {
+  font-size: 3.6rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  letter-spacing: -0.03em;
+}
+
+.vector-gradient {
+  background: linear-gradient(135deg, var(--quantum-blue), var(--quantum-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.quantum-desc {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-dim);
+  margin-bottom: 36px;
+}
+
+.slider-control-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--quantum-surface);
+  border: 1px solid var(--quantum-border);
+  padding: 10px 24px;
+  border-radius: 9999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+}
+
+.ctrl-lbl {
+  color: var(--text-dim);
+}
+
+.ctrl-val {
+  color: var(--quantum-blue);
+  font-weight: 700;
+  width: 40px;
+}
+
+.quantum-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+  margin-bottom: 50px;
+}
+
+.vector-card {
+  background: var(--quantum-surface);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--quantum-border);
+  padding: 32px 28px;
+  position: relative;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.vector-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--quantum-blue);
+  box-shadow: 0 10px 30px rgba(96, 165, 250, 0.15);
+}
+
+.card-coord {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--quantum-purple);
+  margin-bottom: 12px;
+}
+
+.vector-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.vector-card p {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+}
+
+.card-mono-stat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--quantum-blue);
+  border-top: 1px dashed var(--quantum-border);
+  padding-top: 10px;
+}
+
+.quantum-footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}

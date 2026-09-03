@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 · Neon Rain Alley — Hybrid Reasoning Model</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 雨夜环境 -->
+  <div class="alley">
+    <div class="glow g-mag"></div>
+    <div class="glow g-cyan"></div>
+    <div class="glow g-amber"></div>
+    <div class="rain r1"></div>
+    <div class="rain r2"></div>
+    <div class="fog"></div>
+    <div class="wet-ground"></div>
+  </div>
+
+  <!-- 竖排霓虹招牌 -->
+  <div class="vert-sign">
+    <span>hy4</span>
+    <span class="vs-sub">OPEN 24H</span>
+  </div>
+
+  <div class="shell">
+    <header class="nav">
+      <div class="brand neon-mag flicker" data-text="hy4">hy4</div>
+      <nav class="nav-links">
+        <a href="#signs" class="nav-link active">招牌</a>
+        <a href="#switch" class="nav-link">双档</a>
+        <a href="#intercom" class="nav-link">对讲机</a>
+        <a href="#scores" class="nav-link">分数</a>
+      </nav>
+      <button class="btn-neon mag" id="ctaTalk">呼叫</button>
+    </header>
+
+    <section class="hero">
+      <div class="hero-kicker">
+        <span class="dot"></span> ALLEY 04 · RAINING · 霓虹常亮
+      </div>
+
+      <h1 class="neon-title" data-text="HYBRID REASONING">
+        <span>HYBRID</span>
+        <em class="neon-cyan">REASONING</em>
+      </h1>
+
+      <p class="hero-desc">
+        我是 hy4。快档像巷口那盏从不熄灭的红灯，问什么立刻亮；深档像雨夜里慢慢洇开的水痕，
+        一寸一寸把路照出来。两种亮度，同一条街。
+      </p>
+
+      <div class="hero-cta">
+        <button class="btn-neon cyan solid" id="ctaSigns">看招牌</button>
+        <button class="btn-neon mag" id="ctaSwitch">切换双档</button>
+      </div>
+
+      <div class="puddle">
+        <div class="pd"><span class="pd-lab">CONTEXT</span><span class="pd-val">256,000</span></div>
+        <div class="pd"><span class="pd-lab">MODES</span><span class="pd-val">INSTANT / DEEP</span></div>
+        <div class="pd"><span class="pd-lab">TTFT</span><span class="pd-val ok">0.18s</span></div>
+        <div class="pd"><span class="pd-lab">TOOLS</span><span class="pd-val">PARALLEL ×8</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="signs">
+      <div class="sec-head">
+        <span class="sec-kicker">▮ CAPABILITY SIGNS ▮</span>
+        <h2 class="neon-soft">四块招牌</h2>
+        <p>每条巷子都有自己的灯。</p>
+      </div>
+
+      <div class="sign-grid">
+        <article class="sign-card mag">
+          <span class="sc-ico">◈</span>
+          <h3>混合推理内核</h3>
+          <p>同一权重在 Instant 与 Deep Think 间切换，按任务复杂度分配思考预算。</p>
+          <span class="sc-tag">HYBRID CORE</span>
+        </article>
+        <article class="sign-card cyan">
+          <span class="sc-ico">⌘</span>
+          <h3>全栈代码工程</h3>
+          <p>跨文件重构、补齐测试、跑终端命令，遵循仓库既有约定续写。</p>
+          <span class="sc-tag">AGENTIC CODING</span>
+        </article>
+        <article class="sign-card violet">
+          <span class="sc-ico">≡</span>
+          <h3>256K 长上下文</h3>
+          <p>整本手册、整个仓库一次载入，长跨度下依旧不丢前文细节。</p>
+          <span class="sc-tag">LONG CONTEXT</span>
+        </article>
+        <article class="sign-card amber">
+          <span class="sc-ico">⇄</span>
+          <h3>并行工具调用</h3>
+          <p>检索、读取、计算、执行最多 8 路并行，多步任务压成一轮往返。</p>
+          <span class="sc-tag">PARALLEL TOOLS</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="switch">
+      <div class="sec-head">
+        <span class="sec-kicker">▮ TWO-WAY SWITCH ▮</span>
+        <h2 class="neon-soft">霓虹双档</h2>
+        <p>拨到哪档，就按哪档的亮度回答。</p>
+      </div>
+
+      <div class="switch-box">
+        <div class="sw-row">
+          <button class="big-switch active" data-mode="instant">
+            <span class="bs-lamp"></span>
+            <span class="bs-txt">INSTANT<em>0.18s · 3 步</em></span>
+          </button>
+          <button class="big-switch deep" data-mode="deep">
+            <span class="bs-lamp"></span>
+            <span class="bs-txt">DEEP THINK<em>6.40s · 6 步 + 自校</em></span>
+          </button>
+        </div>
+
+        <div class="trace" id="traceBox"></div>
+        <div class="trace-meta">
+          <span>TOKENS <b id="mTok">96</b></span>
+          <span>LATENCY <b id="mLat">0.18s</b></span>
+          <span>STEPS <b id="mStep">3</b></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="intercom">
+      <div class="sec-head">
+        <span class="sec-kicker">▮ STREET INTERCOM ▮</span>
+        <h2 class="neon-soft">巷口对讲机</h2>
+        <p>按下通话键，巷子里有人应。</p>
+      </div>
+
+      <div class="intercom">
+        <div class="ic-log" id="icLog">
+          <div class="ic-row"><span class="ic-who">hy4</span><span class="ic-txt">听到。给我一段上下文，或者一个还没想清楚的问题。</span></div>
+        </div>
+        <div class="ic-input">
+          <span class="ic-mic">●</span>
+          <input type="text" id="icInput" placeholder="按住说话…（或直接输入后回车）" autocomplete="off">
+          <button class="btn-neon mag" id="icSend">通话</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="scores">
+      <div class="sec-head">
+        <span class="sec-kicker">▮ SCORE BOARD ▮</span>
+        <h2 class="neon-soft">分数牌</h2>
+        <p>公开基准，数字随版本更新。</p>
+      </div>
+      <div class="score-grid">
+        <div class="score"><span class="s-name">SWE-bench Verified</span><span class="s-val">74.2</span><div class="s-bar"><i data-w="74"></i></div></div>
+        <div class="score"><span class="s-name">LiveCodeBench v6</span><span class="s-val">68.5</span><div class="s-bar"><i data-w="68"></i></div></div>
+        <div class="score"><span class="s-name">AIME 2025</span><span class="s-val">88.0</span><div class="s-bar"><i data-w="88"></i></div></div>
+        <div class="score"><span class="s-name">GPQA Diamond</span><span class="s-val">71.4</span><div class="s-bar"><i data-w="71"></i></div></div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div class="foot-logo neon-mag" data-text="hy4">hy4</div>
+      <p>NEON RAIN ALLEY · PRESET 09 · ALLEY 04 · BUILD 2026.09</p>
+      <span class="foot-dim">雨还在下 · 灯一直亮</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

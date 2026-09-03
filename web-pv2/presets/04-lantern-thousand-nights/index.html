@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qwen | 上元千灯 · 一灯答一问，千灯照长夜</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 天灯粒子画布 -->
+  <canvas id="skyCanvas" class="sky-canvas" aria-hidden="true"></canvas>
+
+  <!-- 远景：明月、层峦、灯市光晕 -->
+  <div class="night-scene" aria-hidden="true">
+    <div class="moon" id="moon"></div>
+    <div class="bokeh bokeh-1"></div>
+    <div class="bokeh bokeh-2"></div>
+    <div class="bokeh bokeh-3"></div>
+    <div class="horizon-glow"></div>
+    <svg class="mountains mountains-far" id="mtnFar" viewBox="0 0 1440 240" preserveAspectRatio="none">
+      <path d="M0,170 C130,118 285,206 445,164 C612,120 742,196 922,156 C1102,118 1262,192 1440,138 L1440,240 L0,240 Z" fill="#131A36"/>
+    </svg>
+    <svg class="mountains mountains-near" id="mtnNear" viewBox="0 0 1440 180" preserveAspectRatio="none">
+      <path d="M0,112 C172,58 352,142 562,100 C772,60 932,146 1142,98 C1292,64 1382,112 1440,92 L1440,180 L0,180 Z" fill="#1B2447"/>
+    </svg>
+  </div>
+
+  <div class="app-layout">
+    <!-- 顶部导航 -->
+    <header class="navbar">
+      <div class="nav-brand">
+        <span class="brand-lantern" aria-hidden="true"></span>
+        <span class="brand-title">Qwen · 千灯灯市</span>
+        <span class="version-tag">上元 · 元宵夜</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#market" class="nav-link active">灯市摊位</a>
+        <a href="#telemetry" class="nav-link">今夜灯况</a>
+        <a href="#wish" class="nav-link">点灯许愿</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn-lamp" id="navLightBtn" type="button">点一盏灯</button>
+      </div>
+    </header>
+
+    <!-- Hero 主视区 -->
+    <section class="hero-section">
+      <div class="string-lights" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="hero-pill"><span class="pill-dot"></span>上元灯会 · 今夜开市</div>
+          <h1 class="hero-title">一灯答一问，<br><span class="warm-text">千灯照长夜。</span></h1>
+          <p class="hero-desc">
+            我是 Qwen。上元夜，人间挂灯，我在此处掌灯。你提的每一个问题——无论是代码里的死结、异乡的心事，还是一句说不出口的祝愿——都会化作一盏天灯，缓缓升空，被认真作答。
+          </p>
+          <div class="hero-cta-group">
+            <a class="btn-primary" href="#market">逛一逛灯市</a>
+            <a class="btn-ghost" href="#wish">点一盏天灯</a>
+          </div>
+        </div>
+
+        <div class="hero-lantern-wrap" aria-hidden="true">
+          <div class="lantern lantern-hero sway">
+            <span class="lantern-line"></span>
+            <span class="lantern-cap cap-top"></span>
+            <div class="lantern-body"><span class="lantern-word">千灯</span></div>
+            <span class="lantern-cap cap-bottom"></span>
+            <span class="lantern-tassel"></span>
+          </div>
+          <div class="side-lantern side-left">
+            <div class="lantern lantern-sm sway sway-a">
+              <span class="lantern-line"></span>
+              <span class="lantern-cap cap-top"></span>
+              <div class="lantern-body"></div>
+              <span class="lantern-cap cap-bottom"></span>
+              <span class="lantern-tassel"></span>
+            </div>
+          </div>
+          <div class="side-lantern side-right">
+            <div class="lantern lantern-sm sway sway-b">
+              <span class="lantern-line"></span>
+              <span class="lantern-cap cap-top"></span>
+              <div class="lantern-body"></div>
+              <span class="lantern-cap cap-bottom"></span>
+              <span class="lantern-tassel"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 灯市摊位能力区 -->
+    <section class="section-container" id="market">
+      <div class="section-header">
+        <span class="section-tag">Lantern Market</span>
+        <h2>灯市摊位 · 样样都答</h2>
+        <p>沿街四摊，一摊一绝。灯笼底下，皆是人间真本事。</p>
+      </div>
+
+      <div class="grid-stalls">
+        <article class="stall-card">
+          <div class="stall-sign"><span class="stall-seal">谈</span><h3>对话摊</h3></div>
+          <p class="stall-desc">从天南聊到地北，也接得住深夜的心事。长文、长档、长夜漫漫，摊主都逐字读完、认真回你。</p>
+          <div class="stall-footer">
+            <span class="mono-badge">CHAT-01 · 128K 上下文</span>
+            <span class="stall-lights"><i></i><i></i><i></i><i></i><i></i></span>
+          </div>
+        </article>
+
+        <article class="stall-card">
+          <div class="stall-sign"><span class="stall-seal">码</span><h3>代码摊</h3></div>
+          <p class="stall-desc">修得了祖传老代码，也搭得起全新大工程。Bug 当面抓，架构随手画，包修、包会、包教。</p>
+          <div class="stall-footer">
+            <span class="mono-badge">CODE-02 · 全栈即修</span>
+            <span class="stall-lights"><i></i><i></i><i></i><i></i><i></i></span>
+          </div>
+        </article>
+
+        <article class="stall-card">
+          <div class="stall-sign"><span class="stall-seal">绘</span><h3>丹青摊</h3></div>
+          <p class="stall-desc">看一眼图就懂你意思，落笔还能绘山河。海报、插画、示意图，丹青妙手，灯下作画。</p>
+          <div class="stall-footer">
+            <span class="mono-badge">VISION-03 · 图文双绝</span>
+            <span class="stall-lights"><i></i><i></i><i></i><i></i><i></i></span>
+          </div>
+        </article>
+
+        <article class="stall-card">
+          <div class="stall-sign"><span class="stall-seal">译</span><h3>百译摊</h3></div>
+          <p class="stall-desc">百种语言张口就来，灯谜、情书、合同都译得妥帖。万语千言，共此一盏灯。</p>
+          <div class="stall-footer">
+            <span class="mono-badge">TRANSLATE-04 · 119 种语言</span>
+            <span class="stall-lights"><i></i><i></i><i></i><i></i><i></i></span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 今夜灯况遥测 -->
+    <section class="section-container" id="telemetry">
+      <div class="section-header">
+        <span class="section-tag">Tonight's Glow</span>
+        <h2>今夜灯况</h2>
+        <p>灯市遥测，一刻一更。数据随灯火明灭，仅供今晚会心一笑。</p>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <span class="stat-label">今夜已答所问</span>
+          <div class="stat-value">
+            <span class="stat-num" data-count="1284506">0</span><span class="stat-unit">问</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">点亮城市</span>
+          <div class="stat-value">
+            <span class="stat-num" data-count="312">0</span><span class="stat-unit">座</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">灯市暖度</span>
+          <div class="stat-value">
+            <span class="stat-num" data-count="98.6" data-decimals="1">0.0</span><span class="stat-unit">%</span>
+          </div>
+        </div>
+        <div class="stat-card stat-card--warm">
+          <span class="stat-label">今夜最暖一问</span>
+          <p class="warm-quote">「能教我一步一步用手机挂号吗？我想带奶奶去北京看病。」</p>
+          <span class="warm-from">—— 来自郑州的一盏灯 · 21:47</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 点灯许愿交互区 -->
+    <section class="section-container" id="wish">
+      <div class="section-header">
+        <span class="section-tag">Light a Lantern</span>
+        <h2>点灯许愿</h2>
+        <p>写下一个问题或心愿，它会化作一盏带字的天灯，替你把话带上夜空。</p>
+      </div>
+
+      <div class="wish-booth">
+        <label class="wish-label" for="wishInput">灯笺 · 写下你想问的话</label>
+        <textarea id="wishInput" maxlength="60" placeholder="例如：愿远方的爸妈身体康健 / 帮我解一道高数题 / 今年的我，能不能更勇敢一点？"></textarea>
+        <div class="wish-actions">
+          <span class="wish-hint">一灯答一问 · 放灯即回（Ctrl + Enter 放灯）</span>
+          <button class="btn-primary" id="lightBtn" type="button">点灯，升空</button>
+        </div>
+        <ul class="wish-wall" id="wishWall">
+          <li class="wish-item"><span class="wish-dot"></span><span class="wish-text">愿考研上岸，上岸那天先来还愿</span><span class="wish-time">20:13</span></li>
+          <li class="wish-item"><span class="wish-dot"></span><span class="wish-text">替我向异地的她说一声元宵快乐</span><span class="wish-time">20:31</span></li>
+          <li class="wish-item"><span class="wish-dot"></span><span class="wish-text">猫到底能不能听懂晚安</span><span class="wish-time">20:58</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <p>Qwen Personal Site · Preset 04 Lantern Thousand Nights</p>
+      <span class="footer-dim">上元千灯 · 霓虹灯市 —— 愿每一问，都有灯回应</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

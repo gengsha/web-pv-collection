@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 — Swiss Editorial Grid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 12 列对齐辅助线（可切换） -->
+  <div class="grid-overlay" id="gridOverlay">
+    <div class="cols">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+  </div>
+
+  <!-- 页眉信息条 -->
+  <div class="topstrip">
+    <span>hy4 — HYBRID REASONING MODEL</span>
+    <span>No. 04 / 2026</span>
+    <span>GRID: 12 COL / 24 PX GUTTER</span>
+    <button class="grid-toggle" id="gridToggle">显示网格</button>
+  </div>
+
+  <main class="page">
+    <!-- 海报 Hero -->
+    <section class="poster">
+      <div class="poster-meta">
+        <span class="idx">01</span>
+        <span class="rule"></span>
+        <span>MANIFEST</span>
+      </div>
+
+      <h1 class="poster-title">
+        <span class="line">HYBRID</span>
+        <span class="line red">REASONING</span>
+        <span class="line">MODEL</span>
+      </h1>
+
+      <div class="poster-sub">
+        <p class="lead">
+          我是 hy4。同一套权重，两种思考预算：Instant 在毫秒间作答，Deep Think 在长链推演里反复自校验。
+          设计上不做多余装饰，只留结构与证据。
+        </p>
+        <ul class="facts">
+          <li><span>CONTEXT</span><b>256,000 TOKENS</b></li>
+          <li><span>TTFT</span><b>0.18 SEC</b></li>
+          <li><span>MODES</span><b>INSTANT / DEEP</b></li>
+          <li><span>TOOLS</span><b>PARALLEL ×8</b></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 能力矩阵 -->
+    <section class="block" id="capabilities">
+      <header class="block-head">
+        <span class="idx">02</span>
+        <h2>能力矩阵</h2>
+        <span class="block-en">CAPABILITY MATRIX</span>
+      </header>
+
+      <div class="grid12 matrix">
+        <article class="cell span3">
+          <span class="cell-no">01</span>
+          <h3>混合推理内核</h3>
+          <p>同一权重在 Instant 与 Deep Think 间切换，按任务复杂度分配思考预算。</p>
+          <span class="cell-tag">HYBRID CORE</span>
+        </article>
+        <article class="cell span3">
+          <span class="cell-no">02</span>
+          <h3>全栈代码工程</h3>
+          <p>跨文件重构、补齐测试、跑终端命令，遵循仓库既有约定续写。</p>
+          <span class="cell-tag">AGENTIC CODING</span>
+        </article>
+        <article class="cell span3">
+          <span class="cell-no">03</span>
+          <h3>256K 长上下文</h3>
+          <p>整本手册、整个仓库一次载入，长跨度下依旧不丢前文细节。</p>
+          <span class="cell-tag">LONG CONTEXT</span>
+        </article>
+        <article class="cell span3">
+          <span class="cell-no">04</span>
+          <h3>并行工具调用</h3>
+          <p>检索、读取、计算、执行最多 8 路并行，多步任务压成一轮往返。</p>
+          <span class="cell-tag">PARALLEL TOOLS</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- 混合推理对照 -->
+    <section class="block" id="reasoning">
+      <header class="block-head">
+        <span class="idx">03</span>
+        <h2>双模对照</h2>
+        <span class="block-en">INSTANT vs DEEP THINK</span>
+      </header>
+
+      <div class="compare">
+        <div class="cmp-col">
+          <div class="cmp-head">
+            <span class="cmp-key">A</span>
+            <h3>INSTANT</h3>
+          </div>
+          <dl class="cmp-list">
+            <div><dt>响应</dt><dd>0.18 s</dd></div>
+            <div><dt>步数</dt><dd>3 步</dd></div>
+            <div><dt>Token</dt><dd>≈96</dd></div>
+            <div><dt>适用</dt><dd>检索、改写、格式化、短补全</dd></div>
+          </dl>
+          <div class="cmp-body">
+            <p>每层 K/V 各 4096×768，共 24 组 → 75,497,472 元素；FP16 下约 144 MB，batch=8 约 1.13 GB。</p>
+          </div>
+        </div>
+
+        <div class="cmp-col red">
+          <div class="cmp-head">
+            <span class="cmp-key">B</span>
+            <h3>DEEP THINK</h3>
+          </div>
+          <dl class="cmp-list">
+            <div><dt>响应</dt><dd>6.40 s</dd></div>
+            <div><dt>步数</dt><dd>6 步 + 自校验</dd></div>
+            <div><dt>Token</dt><dd>≈1,840</dd></div>
+            <div><dt>适用</dt><dd>数学推导、架构设计、长文与复杂重构</dd></div>
+          </dl>
+          <div class="cmp-body">
+            <p>建模 → 代值 → 换算 → 扩展 → 校验 → 结论。启用 GQA(8) 后单条 KV Cache 可降至 ≈18 MB。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="switch-line">
+        <button class="sw-btn active" data-mode="instant">选择 A · INSTANT</button>
+        <button class="sw-btn" data-mode="deep">选择 B · DEEP THINK</button>
+        <span class="sw-status" id="swStatus">当前：A · INSTANT · 0.18s</span>
+      </div>
+    </section>
+
+    <!-- 对话 -->
+    <section class="block" id="console">
+      <header class="block-head">
+        <span class="idx">04</span>
+        <h2>直接提问</h2>
+        <span class="block-en">DIRECT LINE</span>
+      </header>
+
+      <div class="qbox">
+        <div class="qlog" id="qlog">
+          <div class="qrow"><span class="qwho">HY4</span><span class="qtxt">给我一段上下文，或者一个还没想清楚的问题。</span></div>
+        </div>
+        <div class="qinput">
+          <input type="text" id="qInput" placeholder="输入问题，回车提交" autocomplete="off">
+          <button id="qSend">提交 →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 评测表 -->
+    <section class="block" id="bench">
+      <header class="block-head">
+        <span class="idx">05</span>
+        <h2>评测数据</h2>
+        <span class="block-en">BENCHMARK TABLE</span>
+      </header>
+
+      <table class="dtable">
+        <thead>
+          <tr><th>BENCHMARK</th><th>SCORE</th><th>RELATIVE</th><th>MODE</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>SWE-bench Verified</td><td class="num">74.2</td><td><span class="hbar"><i data-w="74"></i></span></td><td>DEEP</td></tr>
+          <tr><td>LiveCodeBench v6</td><td class="num">68.5</td><td><span class="hbar"><i data-w="68"></i></span></td><td>DEEP</td></tr>
+          <tr><td>AIME 2025</td><td class="num">88.0</td><td><span class="hbar"><i data-w="88"></i></span></td><td>DEEP</td></tr>
+          <tr><td>GPQA Diamond</td><td class="num">71.4</td><td><span class="hbar"><i data-w="71"></i></span></td><td>DEEP</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer class="colophon">
+      <div class="colo-grid">
+        <div><span class="cl">EDITION</span><p>hy4 Personal Site · Swiss Editorial Preset 06</p></div>
+        <div><span class="cl">TYPEFACE</span><p>Inter Tight 900 / Inter 400 / JetBrains Mono</p></div>
+        <div><span class="cl">GRID</span><p>12 columns · 24px gutter · baseline 8px</p></div>
+        <div><span class="cl">BUILD</span><p>2026.09 · No.04</p></div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>

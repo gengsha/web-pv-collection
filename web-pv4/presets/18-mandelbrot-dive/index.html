@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 · Mandelbrot Dive — 分形深潜</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="gl"></div>
+
+  <div class="shell">
+    <div class="hud">
+      <span class="cell"><i>EQUATION</i><b>z → z² + c</b></span>
+      <span class="cell"><i>ZOOM</i><b id="hZoom">1.0×</b></span>
+      <span class="cell"><i>ITER</i><b id="hIter">128</b></span>
+      <span class="cell"><i>CENTER</i><b id="hCenter">-0.7500 +0.0000i</b></span>
+      <span class="cell"><i>PRECISION</i><b>FP32</b></span>
+      <span class="cell"><i>FPS</i><b id="hFps">60</b></span>
+    </div>
+
+    <header class="nav">
+      <div class="brand"><span>hy4</span><em>CHAOS OBSERVATORY</em></div>
+      <nav class="nav-links">
+        <a href="#axioms" class="nav-link active">公理</a>
+        <a href="#dive" class="nav-link">深潜控制</a>
+        <a href="#study" class="nav-link">研究手记</a>
+        <a href="#bench" class="nav-link">评测</a>
+      </nav>
+      <button class="btn" id="ctaAuto">自动深潜</button>
+    </header>
+
+    <section class="viewport">
+      <canvas id="frac"></canvas>
+      <div class="vp-overlay">
+        <span>// FIG. I — MANDELBROT SET, ESCAPE-TIME RENDERING</span>
+        <span id="vpMeta">PALETTE: GOLD / TEAL · AUTO-DIVE</span>
+      </div>
+    </section>
+
+    <section class="hero">
+      <p class="kicker">‖z‖ &gt; 2 ⟹ 逃逸；否则 ∞（收敛域）</p>
+      <h1>一条只用三个符号<br>写完的<span class="mark">海岸线</span></h1>
+      <p class="desc">
+        我是 hy4。这片海岸线没有细节上限：放大一万倍，新的海湾仍在生成。
+        但浮点数会先耗尽耐心 —— 这一次我们诚实地把精度标在 HUD 上：FP32，放大到极限之前，
+        数学还在，像素先碎。INSTANT 迭代 128 次，DEEP 迭代 512 次并切换调色板。
+      </p>
+      <div class="cta">
+        <button class="btn solid" id="ctaAxioms">看看公理</button>
+        <button class="btn" id="ctaDive">深潜控制</button>
+      </div>
+      <p class="hint">拖动平移 · 滚轮缩放 · 移动鼠标改变视角重心</p>
+    </section>
+
+    <section class="section" id="axioms">
+      <div class="sec-head">
+        <span class="sec-tag">// AXIOMS</span>
+        <h2>三条公理</h2>
+        <p>整套系统只由它们推出。</p>
+      </div>
+      <div class="grid">
+        <article class="card"><span class="no">公理 01</span><h3>混合推理内核</h3><p>同一权重在 Instant 与 Deep Think 间切换，按任务复杂度分配思考预算 —— 就像这里的迭代上限。</p><span class="tag">HYBRID CORE</span></article>
+        <article class="card"><span class="no">公理 02</span><h3>全栈代码工程</h3><p>跨文件重构、补齐测试、跑终端命令，遵循仓库既有约定续写。</p><span class="tag">AGENTIC CODING</span></article>
+        <article class="card"><span class="no">公理 03</span><h3>256K 长上下文</h3><p>整本手册、整个仓库一次载入，长跨度下依旧不丢前文细节。</p><span class="tag">LONG CONTEXT</span></article>
+        <article class="card"><span class="no">公理 04</span><h3>并行工具调用</h3><p>检索、读取、计算、执行最多 8 路并行，多步任务压成一轮往返。</p><span class="tag">PARALLEL TOOLS</span></article>
+      </div>
+    </section>
+
+    <section class="section" id="dive">
+      <div class="sec-head">
+        <span class="sec-tag">// DIVE CONTROL</span>
+        <h2>深潜控制</h2>
+        <p>切换迭代预算与调色板，或接管潜航。</p>
+      </div>
+
+      <div class="panel">
+        <div class="modes">
+          <button class="mode active" data-mode="instant"><b>INSTANT · 巡航</b><em>128 迭代 · 金 / 青 · 快速下潜</em></button>
+          <button class="mode" data-mode="deep"><b>DEEP THINK · 深潜</b><em>512 迭代 · 品红 / 蓝紫 · 缓速细察</em></button>
+          <div class="sl"><label>DIVE SPEED <b id="vDive">0.60</b></label><input type="range" id="sDive" min="0" max="200" value="60"></div>
+          <div class="sl"><label>COLOR CYCLE <b id="vCycle">0.35</b></label><input type="range" id="sCycle" min="0" max="100" value="35"></div>
+        </div>
+        <div class="trace" id="traceBox"></div>
+      </div>
+    </section>
+
+    <section class="section" id="study">
+      <div class="sec-head">
+        <span class="sec-tag">// FIELD NOTES</span>
+        <h2>研究手记</h2>
+        <p>向观测者提交一条猜想。</p>
+      </div>
+      <div class="term">
+        <div class="log" id="logBox">
+          <div class="row"><span class="who">hy4</span><span class="txt">观测台已就位。给我一条猜想、一个坐标，或者一个还没逃逸的序列。</span></div>
+        </div>
+        <div class="inp">
+          <span class="p">math&gt;</span>
+          <input type="text" id="inp" placeholder="写一条猜想，回车提交" autocomplete="off">
+          <button class="btn solid" id="send">提交</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bench">
+      <div class="sec-head">
+        <span class="sec-tag">// BENCHMARK</span>
+        <h2>评测数据</h2>
+      </div>
+      <div class="bench-grid">
+        <div class="bench"><span class="bn">SWE-bench Verified</span><span class="bv">74.2</span><div class="bb"><i data-w="74"></i></div></div>
+        <div class="bench"><span class="bn">LiveCodeBench v6</span><span class="bv">68.5</span><div class="bb"><i data-w="68"></i></div></div>
+        <div class="bench"><span class="bn">AIME 2025</span><span class="bv">88.0</span><div class="bb"><i data-w="88"></i></div></div>
+        <div class="bench"><span class="bn">GPQA Diamond</span><span class="bv">71.4</span><div class="bb"><i data-w="71"></i></div></div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>hy4 · MANDELBROT DIVE · PRESET 18 · FP32 精度上限内的一切细节</p>
+      <span>THE COASTLINE HAS NO LIMIT — ONLY THE FLOATS DO</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

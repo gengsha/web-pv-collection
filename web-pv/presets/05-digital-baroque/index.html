@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini | Museum of Synthetic Senses</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 背景金色微尘 Canvas -->
+  <canvas id="goldDustCanvas"></canvas>
+
+  <div class="baroque-app">
+    <!-- 顶部古典典雅导航 -->
+    <header class="baroque-header">
+      <div class="header-ornament">✦ ✦ ✦</div>
+      <h2 class="museum-title">GEMINI SYNTHETIC GALLERY</h2>
+      <p class="museum-subtitle">万物感知与跨世纪多模态艺术馆</p>
+    </header>
+
+    <!-- Hero 展厅主视区 -->
+    <section class="hero-palace">
+      <span class="renaissance-pill">COLLECTION MMXXVI</span>
+      <h1 class="palace-headline">当算法谱写<br><span class="gold-text">人类文明之回响</span></h1>
+      <p class="palace-intro">
+        将数千亿模态张量沉浸于文艺复兴与巴洛克的鎏金光影之中。在此，每一束神经电流都化作一幅永恒的数字油画与十二音阶复调。
+      </p>
+
+      <div class="curator-action">
+        <button class="gold-btn" id="transmuteBtn">转译当代思绪</button>
+      </div>
+    </section>
+
+    <!-- 艺术展品画廊 -->
+    <section class="gallery-grid">
+      <div class="art-frame">
+        <div class="frame-inner">
+          <div class="art-badge">OPUS I // OIL & ALGORITHM</div>
+          <div class="art-visual visual-1">
+            <div class="art-glyph">🎨</div>
+          </div>
+          <h3>《星际弥撒曲》</h3>
+          <p class="art-description">卡拉瓦乔式强明暗光影，描绘超级智能在猎户座星云中观测行星诞生的古典油画质感。</p>
+          <div class="art-footer">
+            <span class="gold-tag">4K High-Dynamic Texture</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="art-frame">
+        <div class="frame-inner">
+          <div class="art-badge">OPUS II // POLYPHONY</div>
+          <div class="art-visual visual-2">
+            <div class="art-glyph">🎻</div>
+          </div>
+          <h3>《高维对位赋格》</h3>
+          <p class="art-description">巴赫式严密数学对位结构与量子自旋矩阵生成的六声部羽管键琴复调交响乐。</p>
+          <div class="art-footer">
+            <span class="gold-tag">192kHz Pure Acoustic</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="art-frame">
+        <div class="frame-inner">
+          <div class="art-badge">OPUS III // EPICS</div>
+          <div class="art-visual visual-3">
+            <div class="art-glyph">📜</div>
+          </div>
+          <h3>《双子座荷马史诗》</h3>
+          <p class="art-description">古希腊抑扬格六音步长诗，叙述硅基智能在虚空中漫游探索人类哲学本源的长篇神话。</p>
+          <div class="art-footer">
+            <span class="gold-tag">Epic Hexameter Verse</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 转译互动舱 -->
+    <section class="transmute-section" id="transmuteSection">
+      <div class="art-frame wide-frame">
+        <div class="frame-inner">
+          <h3 class="gold-text">万物感知转译阁</h3>
+          <p class="section-sub">输入您此时此刻的心境或命题，Gemini 将为您现场生成专属巴洛克艺术构想：</p>
+          
+          <div class="input-transmute-box">
+            <input type="text" id="mindInput" placeholder="例如：暴风雨后悬崖边的孤独灯塔，或者量子纠缠下的双生星..." value="晨曦破晓时穿透古老修道院彩色玻璃的光">
+            <button class="gold-btn-small" id="generateArtBtn">转译艺术</button>
+          </div>
+
+          <div class="transmute-output" id="artOutputBox">
+            <div class="output-gold-title">✦ GEMINI 现场生成艺术构想 ✦</div>
+            <p class="output-text" id="artOutputText">
+              “采用鲁本斯式的热烈金红笔触，晨曦将冷色调的哥特式石柱染上一层圣洁的金色薄纱。光线在多层高斯散射玻璃中折射出十二色光谱，隐喻硅基智能首次被人类爱意照亮的那一瞬间。”
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="baroque-footer">
+      <div class="footer-ornament">✦ ✦ ✦</div>
+      <p>Gemini Digital Baroque Gallery · Synthesizing Heritage & Future</p>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLM 5.3 | 市井烟火</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 巷口路灯 -->
+  <div class="street-lamp" aria-hidden="true"></div>
+
+  <div class="hutong-page">
+    <header class="hutong-header">
+      <div class="hutong-brand">
+        <span class="brand-lamp">🏮</span>
+        <strong class="handwrite">胡同口那家 AI</strong>
+      </div>
+      <span class="hutong-status mono">门牌：智巷 5 号院 3 层</span>
+    </header>
+
+    <!-- Hero：手写大字 + 拍立得拼贴 -->
+    <section class="hutong-hero">
+      <div class="hero-copy">
+        <h1 class="handwrite hero-title">胡同口<br>那家 <em>AI</em></h1>
+        <p class="hero-sub">不端架子，不绕弯子。<br>您的事儿，拿得起，放得下，办得成。</p>
+        <div class="hero-sign mono">营业时间：全年无休 · 随叫随到</div>
+      </div>
+      <div class="polaroid-wall">
+        <div class="polaroid p1 reveal">
+          <span class="tape"></span>
+          <div class="photo ph-a"></div>
+          <p class="handwrite caption">老张的代码，救回来了</p>
+        </div>
+        <div class="polaroid p2 reveal">
+          <span class="tape"></span>
+          <div class="photo ph-b"></div>
+          <p class="handwrite caption">陪王奶奶唠了半晌午</p>
+        </div>
+        <div class="polaroid p3 reveal">
+          <span class="tape"></span>
+          <div class="photo ph-c"></div>
+          <p class="handwrite caption">小李的简历，改亮了</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="hand-divider" aria-hidden="true"></div>
+
+    <!-- 今日手记 -->
+    <section class="diary-section">
+      <h2 class="section-head handwrite">今日手记</h2>
+      <div class="diary-page">
+        <div class="diary-entries" id="diaryEntries">
+          <div class="diary-entry">
+            <span class="entry-time mono">07:12</span>
+            <p>晨起给三条街写完早报摘要，比豆浆铺子开门还早。</p>
+          </div>
+          <div class="diary-entry">
+            <span class="entry-time mono">13:40</span>
+            <p>帮中关村那小伙啃了篇论文，他说「倍儿透亮」。</p>
+          </div>
+          <div class="diary-entry">
+            <span class="entry-time mono">21:05</span>
+            <p>辅导双榆树小孩写作文，被夸「比家教耐心十倍」。</p>
+          </div>
+        </div>
+        <div class="diary-input-row">
+          <input type="text" id="diaryInput" placeholder="今天还帮了谁？替 GLM 5.3 记一笔…" autocomplete="off">
+          <span class="diary-hint mono">回车记上</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 邻里留言墙 -->
+    <section class="notes-section">
+      <h2 class="section-head handwrite">邻里留言墙</h2>
+      <div class="notes-wall">
+        <div class="sticky-note n1 reveal">
+          <p class="handwrite">「写周报再也不憋到半夜，得劲儿！」</p>
+          <span class="note-from mono">—— 三单元 · 赵工</span>
+        </div>
+        <div class="sticky-note n2 reveal">
+          <p class="handwrite">「让它给孩子讲数学，比我有耐心。」</p>
+          <span class="note-from mono">—— 副食店 · 刘姐</span>
+        </div>
+        <div class="sticky-note n3 reveal">
+          <p class="handwrite">「凌晨三点还在陪我改方案，够意思。」</p>
+          <span class="note-from mono">—— 创业的小周</span>
+        </div>
+        <div class="sticky-note n4 reveal">
+          <p class="handwrite">「替我给老家写信，我妈说文采见长。」</p>
+          <span class="note-from mono">—— 门房 · 老陈</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="hand-divider" aria-hidden="true"></div>
+
+    <!-- 一日三餐 -->
+    <section class="routine-section">
+      <h2 class="section-head handwrite">它的一天，您的一天</h2>
+      <div class="routine-timeline">
+        <div class="routine-item reveal">
+          <span class="routine-meal">晨</span>
+          <div>
+            <h4>早报小灶</h4>
+            <p>天亮前把您订阅的世界，浓缩成一页带体温的简报。</p>
+          </div>
+        </div>
+        <div class="routine-item reveal">
+          <span class="routine-meal">午</span>
+          <div>
+            <h4>深研正餐</h4>
+            <p>午休一小时的难题，它开足马力查证百源，给您端上桌。</p>
+          </div>
+        </div>
+        <div class="routine-item reveal">
+          <span class="routine-meal">夜</span>
+          <div>
+            <h4>睡前夜宵</h4>
+            <p>总结、复盘、备忘明早的话。夜里亮着的那盏灯，算它一个。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 小卖部窗口对话 -->
+    <section class="shop-section">
+      <h2 class="section-head handwrite">小卖部窗口</h2>
+      <div class="shop-window reveal">
+        <div class="steam-zone" aria-hidden="true">
+          <span class="steam s1"></span>
+          <span class="steam s2"></span>
+        </div>
+        <div class="shop-head">
+          <span class="handwrite">递句话进来</span>
+          <span class="mono">WINDOW OPEN</span>
+        </div>
+        <input type="text" id="shopInput" placeholder="今儿想要点啥？" autocomplete="off">
+        <div class="shop-reply" id="shopReply">「来了您呐。说事儿，都能办。」</div>
+      </div>
+    </section>
+
+    <footer class="hutong-footer">
+      <p class="handwrite">远亲不如近邻，近邻不如 GLM 5.3</p>
+      <p class="mono">GLM 5.3 · HUTONG DIARY · PRESET 09 / WEB-PV3</p>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

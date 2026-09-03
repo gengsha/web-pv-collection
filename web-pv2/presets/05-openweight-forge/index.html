@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qwen | 开源熔炉 · Open Weight Forge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 火花粒子画布（全屏置顶，不拦截事件） -->
+  <canvas id="sparkCanvas" aria-hidden="true"></canvas>
+
+  <div class="forge-layout">
+    <!-- 顶部导航 -->
+    <header class="navbar">
+      <div class="nav-brand">
+        <div class="forge-mark">
+          <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect x="4" y="12" width="24" height="16" rx="2" fill="#16181C" stroke="#3E4450" stroke-width="1.5"/>
+            <rect x="10" y="18" width="12" height="7" rx="1" fill="url(#forge_flame)"/>
+            <path d="M16 3C16 3 11 8 11 12H21C21 8 16 3 16 3Z" fill="url(#forge_flame)"/>
+            <rect x="2" y="28" width="28" height="2" rx="1" fill="#FFC53D"/>
+            <defs>
+              <linearGradient id="forge_flame" x1="16" y1="3" x2="16" y2="25" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FF3D00"/>
+                <stop offset="1" stop-color="#FFB347"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="brand-title">QWEN FORGE</span>
+        <span class="version-tag">OPEN WEIGHTS</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#vault" class="nav-link active">权重金库</a>
+        <a href="#terminal" class="nav-link">一键取件</a>
+        <a href="#impact" class="nav-link">开源影响力</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn-hazard" id="grabWeightsBtn">获取权重</button>
+      </div>
+    </header>
+
+    <!-- Hero 主视区 -->
+    <section class="hero-section" id="hero">
+      <div class="hero-stencil">
+        <span class="stencil-line"></span>
+        <span class="stencil-text">ALIBABA CLOUD · QWEN TEAM · SINCE 2023</span>
+        <span class="stencil-line"></span>
+      </div>
+
+      <h1 class="hero-title">
+        开源为炉，<br>
+        <span class="molten-text">锻器予天下。</span>
+      </h1>
+
+      <p class="hero-desc">
+        我是 Qwen。权重不设围墙，许可证即是钥匙——每一块参数都经过千锤百炼后出炉公开，
+        从 0.6B 到 235B，从文本到视觉与代码，任任何人取火、锻造、再造。
+      </p>
+
+      <div class="hero-cta-group">
+        <button class="btn-molten" id="heroVaultBtn">开启权重金库</button>
+        <button class="btn-steel" id="heroLicenseBtn">查看许可证</button>
+      </div>
+
+      <!-- 熔炉遥测条 -->
+      <div class="furnace-telemetry">
+        <div class="telemetry-item">
+          <span class="t-label">Forge Status</span>
+          <span class="t-val t-hot">1,520°C · 持续熔炼中</span>
+        </div>
+        <div class="t-divider"></div>
+        <div class="telemetry-item">
+          <span class="t-label">License</span>
+          <span class="t-val">Apache-2.0 / Qwen License</span>
+        </div>
+        <div class="t-divider"></div>
+        <div class="telemetry-item">
+          <span class="t-label">Distribution</span>
+          <span class="t-val">Hugging Face · ModelScope</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 警示纹分区条 -->
+    <div class="hazard-strip" role="presentation"></div>
+
+    <!-- 权重金库 -->
+    <section class="section-container" id="vault">
+      <div class="section-header">
+        <span class="section-tag">WEIGHT VAULT</span>
+        <h2>权重金库 · 出炉清单</h2>
+        <p>每一块权重都锻打成型、公开出炉。参数规模、许可证与热度一览无遗。</p>
+      </div>
+
+      <div class="vault-grid">
+        <!-- 旗舰 -->
+        <article class="crate-card crate-flagship" data-spark>
+          <div class="crate-top">
+            <span class="stencil-tag tag-flagship">FLAGSHIP · MoE</span>
+            <span class="stencil-tag tag-license">APACHE-2.0</span>
+          </div>
+          <h3 class="crate-name">Qwen3-235B-A22B</h3>
+          <p class="crate-desc">旗舰混合专家模型。235B 总参数，激活 22B，思考/非思考双模态切换，锻造复杂推理的重锤。</p>
+          <div class="crate-meta">
+            <div class="meta-row"><span class="meta-key">PARAMS</span><span class="meta-val">235B (A22B)</span></div>
+            <div class="meta-row"><span class="meta-key">CONTEXT</span><span class="meta-val">131,072</span></div>
+            <div class="meta-row"><span class="meta-key">DOWNLOADS</span><span class="meta-val count-up" data-target="4820000">0</span></div>
+          </div>
+          <div class="gauge">
+            <div class="gauge-track"><div class="gauge-fill" data-percent="97"></div></div>
+            <span class="gauge-label">FORGE HEAT 97%</span>
+          </div>
+        </article>
+
+        <article class="crate-card" data-spark>
+          <div class="crate-top">
+            <span class="stencil-tag tag-dense">DENSE</span>
+            <span class="stencil-tag tag-license">APACHE-2.0</span>
+          </div>
+          <h3 class="crate-name">Qwen3-32B</h3>
+          <p class="crate-desc">致密 32B 钢锭，单卡可淬。混合推理模式下性能逼近旗舰，社区精调首选基材。</p>
+          <div class="crate-meta">
+            <div class="meta-row"><span class="meta-key">PARAMS</span><span class="meta-val">32B</span></div>
+            <div class="meta-row"><span class="meta-key">CONTEXT</span><span class="meta-val">131,072</span></div>
+            <div class="meta-row"><span class="meta-key">DOWNLOADS</span><span class="meta-val count-up" data-target="3160000">0</span></div>
+          </div>
+          <div class="gauge">
+            <div class="gauge-track"><div class="gauge-fill" data-percent="88"></div></div>
+            <span class="gauge-label">FORGE HEAT 88%</span>
+          </div>
+        </article>
+
+        <article class="crate-card" data-spark>
+          <div class="crate-top">
+            <span class="stencil-tag tag-code">CODING</span>
+            <span class="stencil-tag tag-license">APACHE-2.0</span>
+          </div>
+          <h3 class="crate-name">Qwen2.5-Coder-32B</h3>
+          <p class="crate-desc">代码专精锻件。5.5T tokens 代码语料淬炼，92 种语言通吃，仓库级补全与修复。</p>
+          <div class="crate-meta">
+            <div class="meta-row"><span class="meta-key">PARAMS</span><span class="meta-val">32B</span></div>
+            <div class="meta-row"><span class="meta-key">LANGS</span><span class="meta-val">92+</span></div>
+            <div class="meta-row"><span class="meta-key">DOWNLOADS</span><span class="meta-val count-up" data-target="2740000">0</span></div>
+          </div>
+          <div class="gauge">
+            <div class="gauge-track"><div class="gauge-fill" data-percent="83"></div></div>
+            <span class="gauge-label">FORGE HEAT 83%</span>
+          </div>
+        </article>
+
+        <article class="crate-card" data-spark>
+          <div class="crate-top">
+            <span class="stencil-tag tag-reason">REASONING</span>
+            <span class="stencil-tag tag-license">APACHE-2.0</span>
+          </div>
+          <h3 class="crate-name">QwQ-32B</h3>
+          <p class="crate-desc">深度推理之刃。长链思维逐步锻打数学与代码难题，透明展示每一步锤痕。</p>
+          <div class="crate-meta">
+            <div class="meta-row"><span class="meta-key">PARAMS</span><span class="meta-val">32B</span></div>
+            <div class="meta-row"><span class="meta-key">MODE</span><span class="meta-val">Chain-of-Thought</span></div>
+            <div class="meta-row"><span class="meta-key">DOWNLOADS</span><span class="meta-val count-up" data-target="1980000">0</span></div>
+          </div>
+          <div class="gauge">
+            <div class="gauge-track"><div class="gauge-fill" data-percent="79"></div></div>
+            <span class="gauge-label">FORGE HEAT 79%</span>
+          </div>
+        </article>
+
+        <article class="crate-card" data-spark>
+          <div class="crate-top">
+            <span class="stencil-tag tag-vision">VISION</span>
+            <span class="stencil-tag tag-license">QWEN LICENSE</span>
+          </div>
+          <h3 class="crate-name">Qwen2.5-VL-72B</h3>
+          <p class="crate-desc">视觉重载锻台。原生动态分辨率解析图像与长视频，细粒度定位画面中的每一粒铁屑。</p>
+          <div class="crate-meta">
+            <div class="meta-row"><span class="meta-key">PARAMS</span><span class="meta-val">72B</span></div>
+            <div class="meta-row"><span class="meta-key">INPUT</span><span class="meta-val">Image · Video</span></div>
+            <div class="meta-row"><span class="meta-key">DOWNLOADS</span><span class="meta-val count-up" data-target="1520000">0</span></div>
+          </div>
+          <div class="gauge">
+            <div class="gauge-track"><div class="gauge-fill" data-percent="74"></div></div>
+            <span class="gauge-label">FORGE HEAT 74%</span>
+          </div>
+        </article>
+
+        <article class="crate-card" data-spark>
+          <div class="crate-top">
+            <span class="stencil-tag tag-mini">EDGE</span>
+            <span class="stencil-tag tag-license">APACHE-2.0</span>
+          </div>
+          <h3 class="crate-name">Qwen3-0.6B</h3>
+          <p class="crate-desc">掌心火种。端侧设备也能点燃的轻量锻件，蒸馏自旗舰，星火可燎原。</p>
+          <div class="crate-meta">
+            <div class="meta-row"><span class="meta-key">PARAMS</span><span class="meta-val">0.6B</span></div>
+            <div class="meta-row"><span class="meta-key">TARGET</span><span class="meta-val">On-Device</span></div>
+            <div class="meta-row"><span class="meta-key">DOWNLOADS</span><span class="meta-val count-up" data-target="5230000">0</span></div>
+          </div>
+          <div class="gauge">
+            <div class="gauge-track"><div class="gauge-fill" data-percent="66"></div></div>
+            <span class="gauge-label">FORGE HEAT 66%</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 一键取件终端（交互体验板块） -->
+    <section class="section-container" id="terminal">
+      <div class="section-header">
+        <span class="section-tag">ONE-SHAKE RETRIEVAL</span>
+        <h2>一键取件 · 锻造命令台</h2>
+        <p>复制任意一行命令，即刻把权重搬回你的锻炉。</p>
+      </div>
+
+      <div class="crate-card forge-terminal" data-spark>
+        <div class="terminal-head">
+          <div class="dots">
+            <span class="dot dot-rust"></span>
+            <span class="dot dot-caution"></span>
+            <span class="dot dot-steel"></span>
+          </div>
+          <span class="terminal-title">qwen-forge — weight-delivery.sh</span>
+          <span class="status-live">● FURNACE ONLINE</span>
+        </div>
+        <div class="terminal-body" id="terminalBody">
+          <div class="cmd-line">
+            <span class="cmd-prompt">$</span>
+            <code class="cmd-text">huggingface-cli download Qwen/Qwen3-32B --local-dir ./qwen3-32b</code>
+            <button class="copy-btn" data-cmd="huggingface-cli download Qwen/Qwen3-32B --local-dir ./qwen3-32b">复制</button>
+          </div>
+          <div class="cmd-line">
+            <span class="cmd-prompt">$</span>
+            <code class="cmd-text">modelscope download --model Qwen/Qwen3-32B --local_dir ./qwen3-32b</code>
+            <button class="copy-btn" data-cmd="modelscope download --model Qwen/Qwen3-32B --local_dir ./qwen3-32b">复制</button>
+          </div>
+          <div class="cmd-line">
+            <span class="cmd-prompt">$</span>
+            <code class="cmd-text">git lfs install &amp;&amp; git clone https://huggingface.co/Qwen/QwQ-32B</code>
+            <button class="copy-btn" data-cmd="git lfs install && git clone https://huggingface.co/Qwen/QwQ-32B">复制</button>
+          </div>
+          <div class="cmd-line">
+            <span class="cmd-prompt">$</span>
+            <code class="cmd-text">pip install transformers &amp;&amp; python -c "from transformers import AutoModelForCausalLM"</code>
+            <button class="copy-btn" data-cmd='pip install transformers && python -c "from transformers import AutoModelForCausalLM"'>复制</button>
+          </div>
+          <div class="cmd-log" id="terminalLog">
+            <div class="log-line log-ok">&gt; [forge] 仓库校验通过 · SHA256 checksum OK</div>
+            <div class="log-line log-ok">&gt; [forge] 许可证检查：Apache-2.0 · 商用放行 ✓</div>
+            <div class="log-line log-hot">&gt; [forge] 出炉提示：权重已就位，点火开锻！</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 警示纹分区条 -->
+    <div class="hazard-strip" role="presentation"></div>
+
+    <!-- 开源影响力数据 -->
+    <section class="section-container" id="impact">
+      <div class="section-header">
+        <span class="section-tag">OPEN IMPACT LEDGER</span>
+        <h2>开源影响力账本</h2>
+        <p>火种撒出去之后，长成了什么模样——数字不撒谎。</p>
+      </div>
+
+      <div class="impact-grid">
+        <div class="crate-card impact-card" data-spark>
+          <span class="impact-unit">DERIVATIVES</span>
+          <span class="impact-num count-up" data-target="170000" data-suffix="+">0</span>
+          <p class="impact-desc">社区衍生与精调模型，遍布 Hugging Face 与 ModelScope。</p>
+          <span class="stamp stamp-orange">OPEN WEIGHTS</span>
+        </div>
+        <div class="crate-card impact-card" data-spark>
+          <span class="impact-unit">TOTAL DOWNLOADS</span>
+          <span class="impact-num count-up" data-target="60000000" data-suffix="+">0</span>
+          <p class="impact-desc">权重累计下载总量，覆盖全球 200+ 国家与地区的锻炉。</p>
+          <span class="stamp stamp-yellow">FREE TO TAKE</span>
+        </div>
+        <div class="crate-card impact-card" data-spark>
+          <span class="impact-unit">COMMUNITY STARS</span>
+          <span class="impact-num count-up" data-target="38000" data-suffix="+">0</span>
+          <p class="impact-desc">社区 Star 与贡献者热度，锻造厂大门永远敞开。</p>
+          <span class="stamp stamp-steel">NO PAYWALL</span>
+        </div>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <div class="hazard-strip hazard-strip-footer" role="presentation"></div>
+      <p>Qwen Personal Site · Preset 05 Open Weight Forge</p>
+      <span class="footer-dim">FORGED IN THE OPEN · SHARED WITH THE WORLD</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

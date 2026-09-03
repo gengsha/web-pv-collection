@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 · GPU Particle Field — 十万粒子流场</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="pCanvas"></canvas>
+  <div class="vignette"></div>
+
+  <div class="shell">
+    <div class="hud">
+      <span class="hud-cell"><i>PARTICLES</i><b id="hCount">24,000</b></span>
+      <span class="hud-cell"><i>FPS</i><b id="hFps">60</b></span>
+      <span class="hud-cell"><i>FIELD</i><b id="hField">CURL NOISE</b></span>
+      <span class="hud-cell"><i>DRAW</i><b>gl.POINTS</b></span>
+      <span class="hud-cell"><i>BLEND</i><b>ADDITIVE</b></span>
+    </div>
+
+    <header class="nav">
+      <div class="brand"><span>hy4</span><em>PARTICLE FIELD</em></div>
+      <nav class="nav-links">
+        <a href="#matrix" class="nav-link active">能力矩阵</a>
+        <a href="#field" class="nav-link">流场控制</a>
+        <a href="#terminal" class="nav-link">终端</a>
+        <a href="#bench" class="nav-link">评测</a>
+      </nav>
+      <button class="btn" id="ctaDeep">×10 规模</button>
+    </header>
+
+    <section class="hero">
+      <p class="kicker">// 60,000 VERLETS PER FRAME · ADDITIVE BLENDING</p>
+      <h1>十万颗点，<br><span class="grad">一条流场的形状。</span></h1>
+      <p class="desc">
+        我是 hy4。这一页每一帧都要解算数万条轨迹：所有点共享同一个 curl 噪声场，
+        却被各自的初始条件推向完全不同的去处。INSTANT 只养 2 万颗，DEEP 让 6 万颗同时跑完整个生命周期。
+      </p>
+      <div class="cta">
+        <button class="btn solid" id="ctaMatrix">查看能力矩阵</button>
+        <button class="btn" id="ctaField">调节流场</button>
+      </div>
+      <p class="hint">移动鼠标制造涡旋 · 按住左键吸引 · 右键排斥</p>
+    </section>
+
+    <section class="section" id="matrix">
+      <div class="sec-head">
+        <span class="sec-tag">// CAPABILITY MATRIX</span>
+        <h2>能力矩阵</h2>
+        <p>四个内核，像四股互相缠绕的流。</p>
+      </div>
+      <div class="grid">
+        <article class="card"><span class="no">01</span><h3>混合推理内核</h3><p>同一权重在 Instant 与 Deep Think 间切换，按任务复杂度分配思考预算。</p><span class="tag">HYBRID CORE</span></article>
+        <article class="card"><span class="no">02</span><h3>全栈代码工程</h3><p>跨文件重构、补齐测试、跑终端命令，遵循仓库既有约定续写。</p><span class="tag">AGENTIC CODING</span></article>
+        <article class="card"><span class="no">03</span><h3>256K 长上下文</h3><p>整本手册、整个仓库一次载入，长跨度下依旧不丢前文细节。</p><span class="tag">LONG CONTEXT</span></article>
+        <article class="card"><span class="no">04</span><h3>并行工具调用</h3><p>检索、读取、计算、执行最多 8 路并行，多步任务压成一轮往返。</p><span class="tag">PARALLEL TOOLS</span></article>
+      </div>
+    </section>
+
+    <section class="section" id="field">
+      <div class="sec-head">
+        <span class="sec-tag">// FIELD CONTROL</span>
+        <h2>流场控制</h2>
+        <p>切换规模，或手动拧动三个场参数。</p>
+      </div>
+
+      <div class="panel">
+        <div class="modes">
+          <button class="mode active" data-mode="instant"><b>INSTANT</b><em>20,000 点 · 短生命</em></button>
+          <button class="mode" data-mode="deep"><b>DEEP THINK</b><em>60,000 点 · 长生命</em></button>
+        </div>
+
+        <div class="sliders">
+          <div class="sl"><label>TURBULENCE <b id="vTurb">1.00</b></label><input type="range" id="sTurb" min="0" max="200" value="100"></div>
+          <div class="sl"><label>DAMPING <b id="vDamp">0.985</b></label><input type="range" id="sDamp" min="940" max="999" value="985"></div>
+          <div class="sl"><label>POINT SIZE <b id="vSize">1.6</b></label><input type="range" id="sSize" min="10" max="40" value="16"></div>
+        </div>
+
+        <div class="trace" id="traceBox"></div>
+      </div>
+    </section>
+
+    <section class="section" id="terminal">
+      <div class="sec-head">
+        <span class="sec-tag">// SHELL</span>
+        <h2>终端</h2>
+        <p>向解算器提交一条指令。</p>
+      </div>
+      <div class="term">
+        <div class="log" id="log">
+          <div class="row"><span class="who">hy4</span><span class="txt">解算器在线。给我一个规模、一个约束，或者一个还没收敛的问题。</span></div>
+        </div>
+        <div class="inp">
+          <span class="p">field&gt;</span>
+          <input type="text" id="inp" placeholder="输入指令，回车执行" autocomplete="off">
+          <button class="btn solid" id="send">RUN</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bench">
+      <div class="sec-head">
+        <span class="sec-tag">// BENCHMARK</span>
+        <h2>评测数据</h2>
+      </div>
+      <div class="bench-grid">
+        <div class="bench"><span class="bn">SWE-bench Verified</span><span class="bv">74.2</span><div class="bb"><i data-w="74"></i></div></div>
+        <div class="bench"><span class="bn">LiveCodeBench v6</span><span class="bv">68.5</span><div class="bb"><i data-w="68"></i></div></div>
+        <div class="bench"><span class="bn">AIME 2025</span><span class="bv">88.0</span><div class="bb"><i data-w="88"></i></div></div>
+        <div class="bench"><span class="bn">GPQA Diamond</span><span class="bv">71.4</span><div class="bb"><i data-w="71"></i></div></div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>hy4 · GPU PARTICLE FIELD · PRESET 12 · 60K POINTS / FRAME</p>
+      <span>EVERY DOT REMEMBERS WHERE IT STARTED</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

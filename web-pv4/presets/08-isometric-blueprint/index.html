@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 · DWG-04 — Isometric Blueprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="blueprint-grid"></div>
+  <div class="scan-beam"></div>
+
+  <div class="sheet-frame">
+    <!-- 图纸边框与标题栏 -->
+    <div class="frame-line"></div>
+
+    <header class="dwg-head">
+      <div class="dwg-left">
+        <span class="dwg-no">DWG-04</span>
+        <span class="dwg-name">HYBRID REASONING ASSEMBLY</span>
+      </div>
+      <nav class="dwg-nav">
+        <a href="#assemblies" class="dn active">构件</a>
+        <a href="#flow" class="dn">信号流</a>
+        <a href="#specs" class="dn">规格</a>
+        <a href="#console" class="dn">终端</a>
+      </nav>
+      <div class="dwg-right">
+        <span>REV. B</span>
+        <span>SCALE 1:24</span>
+        <span>UNIT mm</span>
+      </div>
+    </header>
+
+    <!-- Hero：总装图 -->
+    <section class="hero">
+      <div class="hero-text">
+        <p class="kicker">GENERAL ASSEMBLY · 总 装 图</p>
+        <h1 class="dwg-title">HYBRID<br>REASONING<br>ASSEMBLY</h1>
+        <p class="hero-desc">
+          一套权重，两条推理通路。INSTANT 走最短路径直连输出；DEEP THINK 进入迭代回路，
+          在回授线上完成自校验后出图。全部构件共用同一条上下文母线。
+        </p>
+        <div class="hero-cta">
+          <button class="btn-dwg solid" id="ctaAsm">查看构件</button>
+          <button class="btn-dwg" id="ctaFlow">查看信号流</button>
+        </div>
+      </div>
+
+      <div class="hero-drawing">
+        <svg viewBox="0 0 440 480" class="iso-main" aria-label="等轴测总装图">
+          <!-- 基准平台 -->
+          <polygon class="ln" points="220,300 400,404 220,508 40,404"/>
+          <polygon class="ln faint" points="220,320 370,407 220,494 70,407"/>
+
+          <!-- 构件 A -->
+          <g class="part" data-part="A">
+            <polygon class="ln" points="220,250 280,284 220,318 160,284"/>
+            <polygon class="ln" points="160,284 220,318 220,368 160,334"/>
+            <polygon class="ln" points="280,284 220,318 220,368 280,334"/>
+            <line class="ln dash" x1="220" y1="250" x2="220" y2="200"/>
+            <circle class="node" cx="220" cy="196" r="5"/>
+            <text class="lbl" x="228" y="192">A · CORE</text>
+          </g>
+
+          <!-- 构件 B -->
+          <g class="part" data-part="B">
+            <polygon class="ln" points="280,284 340,318 280,352 220,318"/>
+            <polygon class="ln" points="220,318 280,352 280,402 220,368"/>
+            <polygon class="ln" points="340,318 280,352 280,402 340,368"/>
+            <line class="ln dash" x1="310" y1="335" x2="360" y2="335"/>
+            <circle class="node" cx="366" cy="335" r="5"/>
+            <text class="lbl" x="376" y="339">B · CODE</text>
+          </g>
+
+          <!-- 构件 C -->
+          <g class="part" data-part="C">
+            <polygon class="ln" points="160,284 220,318 160,352 100,318"/>
+            <polygon class="ln" points="100,318 160,352 160,402 100,368"/>
+            <polygon class="ln" points="220,318 160,352 160,402 220,368"/>
+            <line class="ln dash" x1="130" y1="335" x2="80" y2="335"/>
+            <circle class="node" cx="74" cy="335" r="5"/>
+            <text class="lbl" x="18" y="339">C · CTX</text>
+          </g>
+
+          <!-- 尺寸标注 -->
+          <g class="dim">
+            <line class="ln dimline" x1="40" y1="440" x2="400" y2="440"/>
+            <line class="ln" x1="40" y1="432" x2="40" y2="448"/>
+            <line class="ln" x1="400" y1="432" x2="400" y2="448"/>
+            <text class="lbl" x="220" y="430" text-anchor="middle">SEQ 4096</text>
+          </g>
+          <g class="dim">
+            <line class="ln dimline" x1="418" y1="318" x2="418" y2="402"/>
+            <line class="ln" x1="410" y1="318" x2="426" y2="318"/>
+            <line class="ln" x1="410" y1="402" x2="426" y2="402"/>
+            <text class="lbl" x="430" y="364">12 LAYERS</text>
+          </g>
+        </svg>
+
+        <div class="drawing-tag">
+          <span>FIG. 01</span>
+          <span>ISO 30°</span>
+          <span>PROJ. THIRD ANGLE</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 构件明细 -->
+    <section class="section" id="assemblies">
+      <div class="sec-head">
+        <span class="sec-no">SHEET 02</span>
+        <h2>构 件 明 细</h2>
+        <p>四个可替换模块，接口统一。</p>
+      </div>
+
+      <div class="part-grid">
+        <article class="part-card">
+          <svg viewBox="0 0 160 140" class="iso-mini" aria-hidden="true">
+            <polygon class="ln" points="80,30 120,52 80,74 40,52"/>
+            <polygon class="ln" points="40,52 80,74 80,112 40,90"/>
+            <polygon class="ln" points="120,52 80,74 80,112 120,90"/>
+          </svg>
+          <span class="pc-no">ITEM 01</span>
+          <h3>混合推理内核</h3>
+          <p>同一权重在 Instant 与 Deep Think 间切换，按任务复杂度分配思考预算。</p>
+          <span class="pc-tag">HYBRID CORE</span>
+        </article>
+        <article class="part-card">
+          <svg viewBox="0 0 160 140" class="iso-mini" aria-hidden="true">
+            <polygon class="ln" points="80,20 116,40 80,60 44,40"/>
+            <polygon class="ln" points="44,40 80,60 80,86 44,66"/>
+            <polygon class="ln" points="116,40 80,60 80,86 116,66"/>
+            <polygon class="ln faint" points="80,66 116,86 80,106 44,86"/>
+            <polygon class="ln faint" points="44,86 80,106 80,120 44,100"/>
+            <polygon class="ln faint" points="116,86 80,106 80,120 116,100"/>
+          </svg>
+          <span class="pc-no">ITEM 02</span>
+          <h3>全栈代码工程</h3>
+          <p>跨文件重构、补齐测试、跑终端命令，遵循仓库既有约定续写。</p>
+          <span class="pc-tag">AGENTIC CODING</span>
+        </article>
+        <article class="part-card">
+          <svg viewBox="0 0 160 140" class="iso-mini" aria-hidden="true">
+            <polygon class="ln" points="30,60 80,88 30,116 -20,88"/>
+            <polygon class="ln" points="80,88 130,60 130,88 80,116"/>
+            <polygon class="ln" points="80,30 130,58 80,86 30,58"/>
+          </svg>
+          <span class="pc-no">ITEM 03</span>
+          <h3>256K 长上下文</h3>
+          <p>整本手册、整个仓库一次载入，长跨度下依旧不丢前文细节。</p>
+          <span class="pc-tag">LONG CONTEXT</span>
+        </article>
+        <article class="part-card">
+          <svg viewBox="0 0 160 140" class="iso-mini" aria-hidden="true">
+            <polygon class="ln" points="40,34 70,52 40,70 10,52"/>
+            <polygon class="ln" points="120,34 150,52 120,70 90,52"/>
+            <polygon class="ln" points="40,80 70,98 40,116 10,98"/>
+            <polygon class="ln" points="120,80 150,98 120,116 90,98"/>
+            <line class="ln dash" x1="70" y1="52" x2="90" y2="52"/>
+            <line class="ln dash" x1="70" y1="98" x2="90" y2="98"/>
+          </svg>
+          <span class="pc-no">ITEM 04</span>
+          <h3>并行工具调用</h3>
+          <p>检索、读取、计算、执行最多 8 路并行，多步任务压成一轮往返。</p>
+          <span class="pc-tag">PARALLEL TOOLS ×8</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- 信号流 -->
+    <section class="section" id="flow">
+      <div class="sec-head">
+        <span class="sec-no">SHEET 03</span>
+        <h2>信 号 流 图</h2>
+        <p>切换通路，观察信号在两种模式下的走线差异。</p>
+      </div>
+
+      <div class="flow-box">
+        <svg viewBox="0 0 900 260" class="flow-svg" aria-label="信号流图">
+          <!-- INSTANT 通路 -->
+          <g class="path instant">
+            <rect class="blk" x="30" y="100" width="120" height="60"/>
+            <text class="lbl" x="90" y="136" text-anchor="middle">INPUT</text>
+            <line class="ln flow" x1="150" y1="130" x2="270" y2="130"/>
+            <circle class="node" cx="270" cy="130" r="6"/>
+            <line class="ln flow" x1="276" y1="130" x2="400" y2="130"/>
+            <rect class="blk" x="400" y="100" width="140" height="60"/>
+            <text class="lbl" x="470" y="136" text-anchor="middle">CORE</text>
+            <line class="ln flow" x1="540" y1="130" x2="680" y2="130"/>
+            <rect class="blk accent" x="680" y="100" width="140" height="60"/>
+            <text class="lbl" x="750" y="136" text-anchor="middle">OUTPUT</text>
+            <text class="lbl dim" x="345" y="118" text-anchor="middle">1 HOP · 0.18s</text>
+          </g>
+
+          <!-- DEEP 通路 -->
+          <g class="path deep">
+            <rect class="blk" x="400" y="20" width="140" height="48"/>
+            <text class="lbl" x="470" y="49" text-anchor="middle">ITERATE</text>
+            <path class="ln flow2" d="M470 100 L470 68"/>
+            <path class="ln flow2" d="M540 44 L700 44 L700 100"/>
+            <path class="ln flow2" d="M400 44 L330 44 L330 130 L400 130"/>
+            <rect class="blk warn" x="150" y="200" width="150" height="48"/>
+            <text class="lbl" x="225" y="229" text-anchor="middle">SELF-CHECK</text>
+            <path class="ln flow2" d="M470 160 L470 200 L300 200"/>
+            <path class="ln flow2" d="M225 200 L225 160 L400 160"/>
+            <text class="lbl dim" x="600" y="230" text-anchor="middle">6 HOPS + FEEDBACK · 6.40s</text>
+          </g>
+        </svg>
+
+        <div class="flow-switch">
+          <button class="fl-btn active" data-mode="instant">通路 A · INSTANT</button>
+          <button class="fl-btn" data-mode="deep">通路 B · DEEP THINK</button>
+          <span class="fl-stat" id="flStat">A · 1 HOP · 96 TOK · 0.18s</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 规格 -->
+    <section class="section" id="specs">
+      <div class="sec-head">
+        <span class="sec-no">SHEET 04</span>
+        <h2>技 术 规 格</h2>
+        <p>公开基准实测值。</p>
+      </div>
+
+      <table class="spec-table">
+        <thead>
+          <tr><th>ITEM</th><th>BENCHMARK</th><th>VALUE</th><th>TOL</th><th>GRAPH</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>01</td><td>SWE-bench Verified</td><td class="v">74.2</td><td>±0.8</td><td><span class="gbar"><i data-w="74"></i></span></td></tr>
+          <tr><td>02</td><td>LiveCodeBench v6</td><td class="v">68.5</td><td>±1.1</td><td><span class="gbar"><i data-w="68"></i></span></td></tr>
+          <tr><td>03</td><td>AIME 2025</td><td class="v">88.0</td><td>±0.6</td><td><span class="gbar"><i data-w="88"></i></span></td></tr>
+          <tr><td>04</td><td>GPQA Diamond</td><td class="v">71.4</td><td>±0.9</td><td><span class="gbar"><i data-w="71"></i></span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 终端 -->
+    <section class="section" id="console">
+      <div class="sec-head">
+        <span class="sec-no">SHEET 05</span>
+        <h2>图 纸 终 端</h2>
+        <p>向制图员 hy4 提交变更请求。</p>
+      </div>
+
+      <div class="term">
+        <div class="term-log" id="termLog">
+          <div class="trow"><span class="t-id">[000]</span><span class="t-who">HY4</span><span class="t-txt">图纸已加载。提交你的变更请求或待核算参数。</span></div>
+        </div>
+        <div class="term-input">
+          <span class="t-prompt">CMD&gt;</span>
+          <input type="text" id="termInput" placeholder="输入指令，回车执行" autocomplete="off">
+          <button class="btn-dwg solid" id="termSend">EXEC</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 标题栏 -->
+    <footer class="title-block">
+      <div class="tb-cell"><span>DRAWN BY</span><b>hy4</b></div>
+      <div class="tb-cell"><span>DWG NO.</span><b>DWG-04-HY4</b></div>
+      <div class="tb-cell"><span>SCALE</span><b>1:24</b></div>
+      <div class="tb-cell"><span>REV</span><b>B</b></div>
+      <div class="tb-cell"><span>DATE</span><b>2026.09.02</b></div>
+      <div class="tb-cell"><span>SHEET</span><b>05 OF 05</b></div>
+      <div class="tb-cell wide"><span>TITLE</span><b>HYBRID REASONING ASSEMBLY — PERSONAL SITE</b></div>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

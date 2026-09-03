@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLM 5.3 | 聚变环芯</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 粒子场 -->
+  <canvas id="plasmaCanvas" aria-hidden="true"></canvas>
+
+  <div class="reactor-page">
+    <header class="reactor-header">
+      <div class="reactor-brand">
+        <span class="brand-tag mono">FUSION-53</span>
+        <strong>聚变环芯</strong>
+      </div>
+      <nav class="reactor-nav mono">
+        <span>IGNITION</span>
+        <span>MAGNET</span>
+        <span>Q-VALUE</span>
+        <span>CONSOLE</span>
+      </nav>
+    </header>
+
+    <!-- Hero：反应堆 -->
+    <section class="reactor-hero">
+      <div class="tokamak" aria-hidden="true">
+        <div class="t-ring ring-1"></div>
+        <div class="t-ring ring-2"></div>
+        <div class="t-ring ring-3"></div>
+        <div class="plasma-core"></div>
+      </div>
+      <div class="hero-copy">
+        <p class="hero-kicker mono">GLM-5.3 · ENERGY LEVEL LEAP</p>
+        <h1 class="hero-title">点火<span class="title-dot">.</span></h1>
+        <p class="hero-sub">思维是等离子体，注意是磁场。<br>GLM 5.3 让推理在约束中燃烧更久。</p>
+        <div class="telemetry-strip mono">
+          <div class="tele-cell"><span class="tele-label">约束时间</span><span class="tele-val" id="teleTime">38.2s</span></div>
+          <div class="tele-cell"><span class="tele-label">能级</span><span class="tele-val">LV.5.3</span></div>
+          <div class="tele-cell"><span class="tele-label">状态</span><span class="tele-val tele-ok">STABLE</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 磁场参数 -->
+    <section class="magnet-section" id="magnet">
+      <h2 class="section-label mono">MAGNET FIELD · 四路磁场参数</h2>
+      <div class="gauge-grid">
+        <div class="gauge-card reveal">
+          <div class="gauge-head">
+            <span class="gauge-name">深度推理</span>
+            <span class="gauge-num mono" data-val="92.7">0.0</span>
+          </div>
+          <div class="energy-bar" data-fill="92.7">
+            <div class="seg s1"></div><div class="seg s2"></div><div class="seg s3"></div><div class="seg s4"></div><div class="seg s5"></div>
+            <div class="seg s6"></div><div class="seg s7"></div><div class="seg s8"></div><div class="seg s9"></div><div class="seg s10"></div>
+          </div>
+        </div>
+        <div class="gauge-card reveal">
+          <div class="gauge-head">
+            <span class="gauge-name">代码工程</span>
+            <span class="gauge-num mono" data-val="90.1">0.0</span>
+          </div>
+          <div class="energy-bar" data-fill="90.1">
+            <div class="seg s1"></div><div class="seg s2"></div><div class="seg s3"></div><div class="seg s4"></div><div class="seg s5"></div>
+            <div class="seg s6"></div><div class="seg s7"></div><div class="seg s8"></div><div class="seg s9"></div><div class="seg s10"></div>
+          </div>
+        </div>
+        <div class="gauge-card reveal">
+          <div class="gauge-head">
+            <span class="gauge-name">智能体</span>
+            <span class="gauge-num mono" data-val="88.9">0.0</span>
+          </div>
+          <div class="energy-bar" data-fill="88.9">
+            <div class="seg s1"></div><div class="seg s2"></div><div class="seg s3"></div><div class="seg s4"></div><div class="seg s5"></div>
+            <div class="seg s6"></div><div class="seg s7"></div><div class="seg s8"></div><div class="seg s9"></div><div class="seg s10"></div>
+          </div>
+        </div>
+        <div class="gauge-card reveal">
+          <div class="gauge-head">
+            <span class="gauge-name">多模态</span>
+            <span class="gauge-num mono" data-val="91.3">0.0</span>
+          </div>
+          <div class="energy-bar" data-fill="91.3">
+            <div class="seg s1"></div><div class="seg s2"></div><div class="seg s3"></div><div class="seg s4"></div><div class="seg s5"></div>
+            <div class="seg s6"></div><div class="seg s7"></div><div class="seg s8"></div><div class="seg s9"></div><div class="seg s10"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Q 值对比 -->
+    <section class="q-section reveal">
+      <h2 class="section-label mono">Q-VALUE · 代际增益</h2>
+      <div class="q-panel">
+        <div class="q-row">
+          <span class="q-name mono">GLM-4</span>
+          <div class="q-track"><div class="q-fill fill-a" style="--w:38%"></div></div>
+          <span class="q-num mono">Q 1.4</span>
+        </div>
+        <div class="q-row">
+          <span class="q-name mono">GLM-5</span>
+          <div class="q-track"><div class="q-fill fill-b" style="--w:64%"></div></div>
+          <span class="q-num mono">Q 2.7</span>
+        </div>
+        <div class="q-row current">
+          <span class="q-name mono">GLM-5.3</span>
+          <div class="q-track"><div class="q-fill fill-c" style="--w:92%"></div></div>
+          <span class="q-num mono">Q 5.3</span>
+        </div>
+        <p class="q-note">Q = 输出能量 / 输入能量。本装置于 5.3 代首次实现「能量净增益」。</p>
+      </div>
+    </section>
+
+    <!-- 控制台 -->
+    <section class="console-section reveal">
+      <div class="console-frame">
+        <div class="console-head mono">
+          <span>PLASMA CONSOLE</span>
+          <span class="console-led"></span>
+        </div>
+        <div class="chat-log" id="chatLog">
+          <div class="c-msg ai"><span class="c-avatar mono">&gt;_</span><p>聚变堆就绪。输入指令以注入燃料。</p></div>
+        </div>
+        <div class="console-input-row">
+          <span class="prompt-mark mono">&gt;</span>
+          <input type="text" id="consoleInput" placeholder="inject a question…" autocomplete="off">
+          <button id="injectBtn" class="mono">INJECT</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="reactor-footer mono">
+      <p>GLM 5.3 · FUSION CORE · PRESET 07 / WEB-PV3</p>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

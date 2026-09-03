@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 · Claymorphism Soft Pop — Hybrid Reasoning Model</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@500;600;700&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="clay-bg">
+    <span class="cblob b1"></span>
+    <span class="cblob b2"></span>
+    <span class="cblob b3"></span>
+  </div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <div class="shell">
+    <header class="nav">
+      <div class="brand">
+        <span class="logo-blob">hy4</span>
+        <span class="brand-sub">soft &amp; deep</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#pills" class="nav-link active">软糖卡</a>
+        <a href="#lever" class="nav-link">拨杆</a>
+        <a href="#bubbles" class="nav-link">气泡</a>
+        <a href="#scores" class="nav-link">分数</a>
+      </nav>
+      <button class="btn-clay primary" id="ctaTalk">戳一戳</button>
+    </header>
+
+    <section class="hero">
+      <div class="mascot">
+        <div class="mascot-body">
+          <span class="eye left"></span>
+          <span class="eye right"></span>
+          <span class="mouth"></span>
+          <span class="cheek l"></span>
+          <span class="cheek r"></span>
+        </div>
+        <div class="mascot-shadow"></div>
+      </div>
+
+      <h1 class="hero-title">软软地想，<br><span class="accent">稳稳地答。</span></h1>
+
+      <p class="hero-desc">
+        我是 hy4，一颗混合推理的软陶团子。SOFT 档轻轻一按就弹回来，DEEP 档会先在肚子里慢慢揉一会儿。
+        不管哪一档，落点都是软的。
+      </p>
+
+      <div class="hero-cta">
+        <button class="btn-clay primary big" id="ctaPills">看看软糖卡</button>
+        <button class="btn-clay mint big" id="ctaLever">拨一下拨杆</button>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat pink"><span class="s-lab">CONTEXT</span><span class="s-val">256K</span></div>
+        <div class="stat mint"><span class="s-lab">MODES</span><span class="s-val">SOFT / DEEP</span></div>
+        <div class="stat blue"><span class="s-lab">TTFT</span><span class="s-val">0.18s</span></div>
+        <div class="stat yellow"><span class="s-lab">TOOLS</span><span class="s-val">×8</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="pills">
+      <div class="sec-head">
+        <span class="sec-kicker">✿ SOFT CAPSULES</span>
+        <h2>四颗软糖</h2>
+        <p>捏一下，它们会弹回来。</p>
+      </div>
+
+      <div class="pill-grid">
+        <article class="clay-card pink" data-pressable>
+          <span class="cc-ico">◈</span>
+          <h3>混合推理内核</h3>
+          <p>同一权重在 SOFT 与 DEEP 间切换，按任务复杂度分配思考预算。</p>
+          <span class="cc-tag">HYBRID CORE</span>
+        </article>
+        <article class="clay-card mint" data-pressable>
+          <span class="cc-ico">⌘</span>
+          <h3>全栈代码工程</h3>
+          <p>跨文件重构、补齐测试、跑终端命令，遵循仓库既有约定续写。</p>
+          <span class="cc-tag">AGENTIC CODING</span>
+        </article>
+        <article class="clay-card blue" data-pressable>
+          <span class="cc-ico">≡</span>
+          <h3>256K 长上下文</h3>
+          <p>整本手册、整个仓库一次载入，长跨度下依旧不丢前文细节。</p>
+          <span class="cc-tag">LONG CONTEXT</span>
+        </article>
+        <article class="clay-card yellow" data-pressable>
+          <span class="cc-ico">⇄</span>
+          <h3>并行工具调用</h3>
+          <p>检索、读取、计算、执行最多 8 路并行，多步任务压成一轮往返。</p>
+          <span class="cc-tag">PARALLEL TOOLS</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="lever">
+      <div class="sec-head">
+        <span class="sec-kicker">✿ SQUISHY LEVER</span>
+        <h2>软陶拨杆</h2>
+        <p>拨到哪边，就按哪边的软硬度回答。</p>
+      </div>
+
+      <div class="lever-panel">
+        <div class="lever">
+          <span class="lev-label left">SOFT</span>
+          <div class="lev-track" id="levTrack">
+            <span class="lev-knob" id="levKnob"></span>
+          </div>
+          <span class="lev-label right">DEEP</span>
+        </div>
+
+        <div class="lev-info">
+          <span class="lev-badge" id="levBadge">SOFT · 0.18s</span>
+          <h3 id="levTitle">轻轻一按，立刻弹回</h3>
+          <p id="levDesc">短路径、低消耗，适合事实查询、格式转换与明确指令。像按下一颗软糖。</p>
+          <ul class="lev-list" id="levList"></ul>
+          <div class="lev-meta">
+            <span>TOKENS <b id="levTok">96</b></span>
+            <span>TIME <b id="levTime">0.18s</b></span>
+            <span>STEPS <b id="levStep">3</b></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bubbles">
+      <div class="sec-head">
+        <span class="sec-kicker">✿ BUBBLE TALK</span>
+        <h2>气泡对话</h2>
+        <p>所有气泡都是圆的，包括回答。</p>
+      </div>
+
+      <div class="bubble-box">
+        <div class="bubble-log" id="bubbleLog">
+          <div class="bub bot"><span class="bub-who">hy4</span><span class="bub-txt">在呢。有什么想让我揉一揉的？</span></div>
+        </div>
+        <div class="bubble-input">
+          <input type="text" id="bubbleInput" placeholder="说点什么，回车发送…" autocomplete="off">
+          <button class="btn-clay primary" id="bubbleSend">发送</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="scores">
+      <div class="sec-head">
+        <span class="sec-kicker">✿ SCORES</span>
+        <h2>分数软糖</h2>
+        <p>公开基准，数字随版本更新。</p>
+      </div>
+      <div class="score-grid">
+        <div class="score pink"><span class="sc-name">SWE-bench Verified</span><span class="sc-val">74.2</span><div class="sc-bar"><i data-w="74"></i></div></div>
+        <div class="score mint"><span class="sc-name">LiveCodeBench v6</span><span class="sc-val">68.5</span><div class="sc-bar"><i data-w="68"></i></div></div>
+        <div class="score blue"><span class="sc-name">AIME 2025</span><span class="sc-val">88.0</span><div class="sc-bar"><i data-w="88"></i></div></div>
+        <div class="score yellow"><span class="sc-name">GPQA Diamond</span><span class="sc-val">71.4</span><div class="sc-bar"><i data-w="71"></i></div></div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <span class="foot-blob">hy4</span>
+      <p>CLAYMORPHISM SOFT POP · PRESET 10 · 手感 Q 弹 · BUILD 2026.09</p>
+      <span class="foot-dim">捏一下试试 ↑</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

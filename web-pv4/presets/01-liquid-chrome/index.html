@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 · Liquid Chrome — Hybrid Reasoning Model</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 液态金属背景层 -->
+  <div class="liquid-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="grain"></div>
+  </div>
+
+  <div class="shell">
+    <!-- 顶部导航 -->
+    <header class="nav">
+      <div class="brand">
+        <span class="brand-mark chrome-text">hy4</span>
+        <span class="brand-tag">HYBRID · REV.4</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#capabilities" class="nav-link active">能力矩阵</a>
+        <a href="#reasoning" class="nav-link">混合推理</a>
+        <a href="#terminal" class="nav-link">对话终端</a>
+        <a href="#bench" class="nav-link">评测</a>
+      </nav>
+      <button class="btn-liquid" data-shine><span>开始对话</span></button>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-pill">
+        <span class="dot"></span>
+        <span>Hybrid Reasoning Architecture · 混合推理架构</span>
+      </div>
+
+      <h1 class="hero-title">
+        思考可快可深，<br>
+        <span class="chrome-text">行动始终如一。</span>
+      </h1>
+
+      <p class="hero-desc">
+        我是 hy4，为真实工作流而生的混合推理模型。快模式在毫秒间给出答案，深模式在长链推演中保持严谨。
+        从多文件代码重构到万字长文，从并行工具调用到视觉理解，全部在同一套架构内完成。
+      </p>
+
+      <div class="hero-cta">
+        <button class="btn-liquid primary" data-shine id="ctaExplore"><span>探索能力矩阵</span></button>
+        <button class="btn-liquid ghost" data-shine id="ctaBench"><span>查看评测数据</span></button>
+      </div>
+
+      <div class="telemetry" data-spotlight>
+        <div class="tm-item">
+          <span class="tm-label">CONTEXT WINDOW</span>
+          <span class="tm-val">256,000 <em>tokens</em></span>
+        </div>
+        <span class="tm-div"></span>
+        <div class="tm-item">
+          <span class="tm-label">THINKING MODE</span>
+          <span class="tm-val">Instant <em>/</em> Deep</span>
+        </div>
+        <span class="tm-div"></span>
+        <div class="tm-item">
+          <span class="tm-label">TTFT</span>
+          <span class="tm-val ok">0.18 <em>sec</em></span>
+        </div>
+        <span class="tm-div"></span>
+        <div class="tm-item">
+          <span class="tm-label">TOOL CALLS</span>
+          <span class="tm-val">Parallel <em>×8</em></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 能力矩阵 -->
+    <section class="section" id="capabilities">
+      <div class="sec-head">
+        <span class="sec-tag">// CAPABILITY MATRIX</span>
+        <h2>能力矩阵</h2>
+        <p>四种核心构件，在同一个推理内核上协同工作。</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="chrome-card" data-spotlight data-tilt>
+          <div class="card-ico">◈</div>
+          <h3>混合推理内核</h3>
+          <p>同一权重在 Instant 与 Deep Think 之间无缝切换，按任务复杂度自动分配思考预算，不牺牲准确率换取速度。</p>
+          <span class="mono-tag">HYBRID CORE</span>
+        </article>
+        <article class="chrome-card" data-spotlight data-tilt>
+          <div class="card-ico">⌘</div>
+          <h3>全栈代码工程</h3>
+          <p>跨文件重构、测试补齐、终端命令与依赖管理一体完成，能读懂既有代码库约定并按其风格续写。</p>
+          <span class="mono-tag">AGENTIC CODING</span>
+        </article>
+        <article class="chrome-card" data-spotlight data-tilt>
+          <div class="card-ico">≡</div>
+          <h3>256K 长上下文</h3>
+          <p>整本手册、整个仓库一次载入，在超长跨度中保持实体一致性与引用准确，不丢前文细节。</p>
+          <span class="mono-tag">LONG CONTEXT</span>
+        </article>
+        <article class="chrome-card" data-spotlight data-tilt>
+          <div class="card-ico">⇄</div>
+          <h3>并行工具调用</h3>
+          <p>搜索、读取、计算、执行可并行发起，最多 8 路同时推进，把多步任务压缩成一轮往返。</p>
+          <span class="mono-tag">PARALLEL TOOLS</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- 混合推理演示 -->
+    <section class="section" id="reasoning">
+      <div class="sec-head">
+        <span class="sec-tag">// HYBRID REASONING</span>
+        <h2>混合推理演示</h2>
+        <p>同一个问题，两种思考预算。切换查看 hy4 的推理路径差异。</p>
+      </div>
+
+      <div class="reasoning-panel chrome-card" data-spotlight>
+        <div class="mode-switch" id="modeSwitch">
+          <button class="mode-btn active" data-mode="instant">INSTANT</button>
+          <button class="mode-btn" data-mode="deep">DEEP THINK</button>
+          <span class="switch-thumb" id="switchThumb"></span>
+        </div>
+
+        <div class="prompt-row">
+          <span class="mono-tag">QUERY</span>
+          <p>一个 12 层的 Transformer，隐藏维度 768，序列长度 4096，估算推理时 KV Cache 的显存占用。</p>
+        </div>
+
+        <div class="trace" id="traceBox">
+          <div class="trace-line"><span class="t-time">0.02s</span><span class="t-txt">每层 K/V 各 4096×768，共 2×12 组矩阵 → 75,497,472 元素</span></div>
+          <div class="trace-line"><span class="t-time">0.09s</span><span class="t-txt">FP16 单元素 2 字节 → 约 144 MB；批量 8 时约 1.13 GB</span></div>
+          <div class="trace-line final"><span class="t-time">0.18s</span><span class="t-txt">答案：单条约 144 MB，批量 8 约 1.13 GB（未计入激活值与框架开销）</span></div>
+        </div>
+
+        <div class="trace-meta">
+          <span>TOKENS <b id="metaTokens">96</b></span>
+          <span>LATENCY <b id="metaLatency">0.18s</b></span>
+          <span>STEPS <b id="metaSteps">3</b></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 对话终端 -->
+    <section class="section" id="terminal">
+      <div class="sec-head">
+        <span class="sec-tag">// CONSOLE</span>
+        <h2>对话终端</h2>
+        <p>直接向 hy4 提问，观察它在两种模式下的响应风格。</p>
+      </div>
+
+      <div class="console chrome-card" data-spotlight>
+        <div class="console-log" id="consoleLog">
+          <div class="line bot"><span class="who">hy4</span><span class="txt">我在。可以让我重构一个模块、读完一份 200 页的文档，或者把一段想法写成完整提案。</span></div>
+        </div>
+        <div class="console-input">
+          <span class="caret">›</span>
+          <input type="text" id="consoleInput" placeholder="输入任务，回车发送…" autocomplete="off">
+          <button id="consoleSend" class="send">发送</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 评测 -->
+    <section class="section" id="bench">
+      <div class="sec-head">
+        <span class="sec-tag">// BENCHMARK</span>
+        <h2>评测数据</h2>
+        <p>公开基准上的表现，数字会随版本迭代更新。</p>
+      </div>
+      <div class="bench-grid">
+        <div class="bench chrome-card" data-spotlight>
+          <span class="bench-name">SWE-bench Verified</span>
+          <span class="bench-val">74.<em>2</em></span>
+          <div class="bar"><i style="--w:74%"></i></div>
+        </div>
+        <div class="bench chrome-card" data-spotlight>
+          <span class="bench-name">LiveCodeBench v6</span>
+          <span class="bench-val">68.<em>5</em></span>
+          <div class="bar"><i style="--w:68%"></i></div>
+        </div>
+        <div class="bench chrome-card" data-spotlight>
+          <span class="bench-name">AIME 2025</span>
+          <span class="bench-val">88.<em>0</em></span>
+          <div class="bar"><i style="--w:88%"></i></div>
+        </div>
+        <div class="bench chrome-card" data-spotlight>
+          <span class="bench-name">GPQA Diamond</span>
+          <span class="bench-val">71.<em>4</em></span>
+          <div class="bar"><i style="--w:71%"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div class="foot-brand chrome-text">hy4</div>
+      <p>Hybrid Reasoning Personal Site · Preset 01 — Liquid Chrome &amp; Fluid Reflection</p>
+      <span class="foot-dim">ALL SIGNALS NOMINAL · BUILD 2026.09</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

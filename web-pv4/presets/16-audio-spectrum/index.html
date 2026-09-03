@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 · Web Audio Spectrum — 实时频谱引擎</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+
+  <div class="shell">
+    <div class="hud">
+      <span class="cell"><i>ENGINE</i><b>WEB AUDIO API</b></span>
+      <span class="cell"><i>FFT</i><b id="hFft">2048</b></span>
+      <span class="cell"><i>BARS</i><b id="hBars">64</b></span>
+      <span class="cell"><i>SMOOTH</i><b id="hSmooth">0.80</b></span>
+      <span class="cell"><i>SRC</i><b id="hSrc">SYNTH</b></span>
+      <span class="cell"><i>FPS</i><b id="hFps">60</b></span>
+    </div>
+
+    <header class="nav">
+      <div class="brand"><span>hy4</span><em>SPECTRUM ENGINE 04</em></div>
+      <nav class="nav-links">
+        <a href="#racks" class="nav-link active">能力机架</a>
+        <a href="#dsp" class="nav-link">DSP 参数</a>
+        <a href="#console" class="nav-link">终端</a>
+        <a href="#bench" class="nav-link">评测</a>
+      </nav>
+      <button class="btn" id="ctaMic">接入麦克风</button>
+    </header>
+
+    <section class="viewport">
+      <canvas id="viz"></canvas>
+      <div class="play-overlay" id="playOverlay">
+        <button class="play-btn" id="playBtn">
+          <span class="tri"></span>
+          <span class="pt">启动音频引擎</span>
+        </button>
+        <p>浏览器要求先有一次点击。点一下，我来放一段自己写的循环。</p>
+      </div>
+      <div class="vp-overlay">
+        <span>// CHANNEL 01 · STEREO OUT</span>
+        <span id="vpMeta">RADIAL + LINEAR + WAVEFORM</span>
+      </div>
+    </section>
+
+    <section class="hero">
+      <p class="kicker">// OscillatorNode → BiquadFilter → AnalyserNode → getByteFrequencyData()</p>
+      <h1>声音我看得见，<br><span class="mark">形状你听得见。</span></h1>
+      <p class="desc">
+        我是 hy4。这一段音乐没有任何音频文件 —— 底鼓、贝斯、琶音与踩镲都是实时合成的振荡器，
+        再交给 AnalyserNode 做 2048 点 FFT。INSTANT 只看 32 根柱子，DEEP 会把频谱拆成 128 根，
+        再叠上波形与余晖。
+      </p>
+      <div class="cta">
+        <button class="btn solid" id="ctaRacks">看看机架</button>
+        <button class="btn" id="ctaDsp">调节 DSP</button>
+      </div>
+      <p class="hint">点击画面暂停/继续 · 移动鼠标改变滤波截止</p>
+    </section>
+
+    <section class="section" id="racks">
+      <div class="sec-head">
+        <span class="sec-tag">// CAPABILITY RACKS</span>
+        <h2>四个能力机架</h2>
+        <p>像四条音轨，各自独立又共享总线。</p>
+      </div>
+      <div class="grid">
+        <article class="card"><span class="no">01</span><h3>混合推理内核</h3><p>同一权重在 Instant 与 Deep Think 间切换，按任务复杂度分配思考预算 —— 就像这里的 FFT 分辨率。</p><span class="tag">HYBRID CORE</span></article>
+        <article class="card"><span class="no">02</span><h3>全栈代码工程</h3><p>跨文件重构、补齐测试、跑终端命令，遵循仓库既有约定续写。</p><span class="tag">AGENTIC CODING</span></article>
+        <article class="card"><span class="no">03</span><h3>256K 长上下文</h3><p>整本手册、整个仓库一次载入，长跨度下依旧不丢前文细节。</p><span class="tag">LONG CONTEXT</span></article>
+        <article class="card"><span class="no">04</span><h3>并行工具调用</h3><p>检索、读取、计算、执行最多 8 路并行，多步任务压成一轮往返。</p><span class="tag">PARALLEL TOOLS</span></article>
+      </div>
+    </section>
+
+    <section class="section" id="dsp">
+      <div class="sec-head">
+        <span class="sec-tag">// DSP PARAMETERS</span>
+        <h2>DSP 参数</h2>
+        <p>调分辨率、平滑与余晖。</p>
+      </div>
+
+      <div class="panel">
+        <div class="modes">
+          <button class="mode active" data-mode="instant"><b>INSTANT · 快速响应</b><em>32 柱 · 平滑 0.55 · 无余晖</em></button>
+          <button class="mode" data-mode="deep"><b>DEEP THINK · 高分辨</b><em>128 柱 · 平滑 0.90 · 余晖 + 波形</em></button>
+          <div class="sl"><label>SMOOTHING <b id="vSmooth">0.80</b></label><input type="range" id="sSmooth" min="0" max="95" value="80"></div>
+          <div class="sl"><label>GAIN <b id="vGain">0.70</b></label><input type="range" id="sGain" min="0" max="100" value="70"></div>
+        </div>
+        <div class="trace" id="traceBox"></div>
+      </div>
+    </section>
+
+    <section class="section" id="console">
+      <div class="sec-head">
+        <span class="sec-tag">// SHELL</span>
+        <h2>终端</h2>
+        <p>向 DSP 提交一条指令。</p>
+      </div>
+      <div class="term">
+        <div class="log" id="log">
+          <div class="row"><span class="who">hy4</span><span class="txt">总线已接通。给我一个采样率、一段和声，或者一个还没调好的滤波器。</span></div>
+        </div>
+        <div class="inp">
+          <span class="p">dsp&gt;</span>
+          <input type="text" id="inp" placeholder="输入指令，回车执行" autocomplete="off">
+          <button class="btn solid" id="send">RUN</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bench">
+      <div class="sec-head">
+        <span class="sec-tag">// BENCHMARK</span>
+        <h2>评测数据</h2>
+      </div>
+      <div class="bench-grid">
+        <div class="bench"><span class="bn">SWE-bench Verified</span><span class="bv">74.2</span><div class="bb"><i data-w="74"></i></div></div>
+        <div class="bench"><span class="bn">LiveCodeBench v6</span><span class="bv">68.5</span><div class="bb"><i data-w="68"></i></div></div>
+        <div class="bench"><span class="bn">AIME 2025</span><span class="bv">88.0</span><div class="bb"><i data-w="88"></i></div></div>
+        <div class="bench"><span class="bn">GPQA Diamond</span><span class="bv">71.4</span><div class="bb"><i data-w="71"></i></div></div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>hy4 · WEB AUDIO SPECTRUM · PRESET 16 · 零音频文件，全部实时合成</p>
+      <span>NO SAMPLES WERE LOADED</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

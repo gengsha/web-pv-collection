@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qwen | 思纬星图 · 推理星座</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 全屏深空背景画布：星点闪烁 / 偶发流星 / 光标点亮 -->
+  <canvas id="skyCanvas" class="sky-canvas" aria-hidden="true"></canvas>
+
+  <div class="app-layout">
+    <!-- 顶部导航 -->
+    <header class="navbar">
+      <div class="nav-brand">
+        <svg class="brand-mark" width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+          <polyline points="3,19 10,8 16,14 23,4" stroke="#38BDF8" stroke-width="1.1" fill="none" opacity="0.8"/>
+          <circle cx="3" cy="19" r="1.5" fill="#CFF6FF"/>
+          <circle cx="10" cy="8" r="1.5" fill="#CFF6FF"/>
+          <circle cx="16" cy="14" r="1.5" fill="#4FD1C5"/>
+          <circle cx="23" cy="4" r="2" fill="#F5C86E"/>
+        </svg>
+        <span class="brand-title">Qwen</span>
+        <span class="version-tag">THOUGHT CONSTELLATION</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#star-map" class="nav-link">推理星图</a>
+        <a href="#magnitude" class="nav-link">星等基准</a>
+        <a href="#lab" class="nav-link">拆解台</a>
+      </nav>
+
+      <button class="btn-glow" id="navRunBtn">开始推演</button>
+    </header>
+
+    <!-- Hero 主视区 -->
+    <section class="hero-section">
+      <div class="reticle" aria-hidden="true"></div>
+
+      <div class="hero-pill">
+        <span class="pill-dot"></span>
+        <span>QwQ DEEP REASONING · 深度推理模态在线</span>
+      </div>
+
+      <h1 class="hero-title">
+        思有纬，<br>
+        <span class="gradient-text">星有痕。</span>
+      </h1>
+
+      <p class="hero-desc">
+        我是 Qwen。每一次深度推理，都是一次夜间观测——思维迈出的每一步点亮一颗星，
+        推理链在深空中逐段延伸，最终连成闭合的星座。现在，请透过我的目镜，
+        观看一道题如何坍缩成答案。
+      </p>
+
+      <div class="hero-cta-group">
+        <button class="btn-primary" id="heroRunBtn">启动推演 ▸</button>
+        <a class="btn-secondary" href="#magnitude">查看星等基准</a>
+      </div>
+
+      <div class="hero-coords">
+        <span class="coord-chip">RA 05h34m</span>
+        <span class="coord-chip">DEC +22°00′</span>
+        <span class="coord-chip">EPOCH J2026.0</span>
+        <span class="coord-chip">OBS · THOUGHT-06</span>
+      </div>
+    </section>
+
+    <!-- 板块一：实时推理星图 -->
+    <section class="section-container" id="star-map">
+      <div class="section-header">
+        <span class="section-tag">Reasoning Constellation</span>
+        <h2>实时推理星图</h2>
+        <p>观测目标：鸡兔同笼——头 35，足 94。看一条推理链如何逐颗点亮，连成星座。</p>
+      </div>
+
+      <div class="obs-panel star-map-panel">
+        <div class="panel-head">
+          <span class="panel-title">OBSERVATORY <em>//</em> 推理链实况</span>
+          <div class="panel-head-right">
+            <span class="coord-chip">RA 05h34m · DEC +22°00′</span>
+            <span class="chart-status status-idle" id="chartStatus">STANDBY · 待机</span>
+          </div>
+        </div>
+        <div class="panel-ruler" aria-hidden="true"></div>
+
+        <div class="star-map-body">
+          <div class="chart-viewport" id="chartViewport">
+            <canvas id="chartCanvas"></canvas>
+            <div class="chart-overlay" aria-hidden="true">
+              <span class="coord-chip tl">FIELD 06-A</span>
+              <span class="coord-chip tr">EXP 7.0s</span>
+              <span class="coord-chip bl">GAIN +3.2dB</span>
+              <div class="chart-cursor" id="chartCursor">RA --h--m · DEC --°--′</div>
+            </div>
+          </div>
+
+          <aside class="step-rail">
+            <div class="rail-head">
+              <span>思维碎片</span>
+              <em>THOUGHT FRAGMENTS</em>
+            </div>
+
+            <ol class="step-list" id="stepList">
+              <li class="step-item">
+                <span class="step-star"></span>
+                <div class="step-body">
+                  <div class="step-title">审题 <em>STEP 1 · PARSE</em></div>
+                  <p>捕获题面信号：头共 35，足共 94；隐约束——鸡 2 足、兔 4 足，数量必为非负整数。</p>
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-star"></span>
+                <div class="step-body">
+                  <div class="step-title">设元 <em>STEP 2 · DEFINE</em></div>
+                  <p>建立参照系：设兔为 x 只，则鸡为 (35 − x) 只，未知量压缩至一维。</p>
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-star"></span>
+                <div class="step-body">
+                  <div class="step-title">列式 <em>STEP 3 · MODEL</em></div>
+                  <p>架设连线：4x + 2(35 − x) = 94，化简得 2x + 70 = 94。</p>
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-star"></span>
+                <div class="step-body">
+                  <div class="step-title">验算 <em>STEP 4 · VERIFY</em></div>
+                  <p>解得 x = 12。回代：12×4 + 23×2 = 48 + 46 = 94 ✓，头数 12 + 23 = 35 ✓。</p>
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-star"></span>
+                <div class="step-body">
+                  <div class="step-title">作答 <em>STEP 5 · ANSWER</em></div>
+                  <p>兔 12 只，鸡 23 只。所有约束满足，误差归零。</p>
+                </div>
+              </li>
+              <li class="step-item final">
+                <span class="step-star"></span>
+                <div class="step-body">
+                  <div class="step-title">顿悟 <em>INSIGHT</em></div>
+                  <p>星座闭合——答案自洽地亮在链的末端，这就是推理留下的痕迹。</p>
+                </div>
+              </li>
+            </ol>
+
+            <div class="rail-actions">
+              <button class="btn-primary btn-sm" id="runBtn">推演 ▸</button>
+              <button class="btn-ghost btn-sm" id="resetBtn">重置</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- 板块二：星等基准榜 -->
+    <section class="section-container" id="magnitude">
+      <div class="section-header">
+        <span class="section-tag">Magnitude Benchmark</span>
+        <h2>星等基准榜</h2>
+        <p>得分越亮，视星等越负。以下为 Qwen 深度推理模态的评测快照。</p>
+      </div>
+
+      <div class="obs-panel mag-panel">
+        <div class="panel-head">
+          <span class="panel-title">PHOTOMETRY <em>//</em> 视星等测定</span>
+          <span class="coord-chip">SAMPLE · QwQ MODE</span>
+        </div>
+        <div class="panel-ruler" aria-hidden="true"></div>
+
+        <div class="mag-board" id="magBoard">
+          <div class="mag-row">
+            <div class="mag-name">
+              <strong>MATH</strong>
+              <span>数学证明 · 多步演算</span>
+            </div>
+            <div class="mag-track">
+              <div class="mag-fill mag-gold" style="--bar-w: 96.4%;"></div>
+            </div>
+            <div class="mag-meta">
+              <span class="mag-score">96.4</span>
+              <span class="mag-mag">MAG −1.14</span>
+            </div>
+          </div>
+
+          <div class="mag-row">
+            <div class="mag-name">
+              <strong>AIME</strong>
+              <span>竞赛数学 · 直觉搜索</span>
+            </div>
+            <div class="mag-track">
+              <div class="mag-fill" style="--bar-w: 89.7%;"></div>
+            </div>
+            <div class="mag-meta">
+              <span class="mag-score">89.7</span>
+              <span class="mag-mag">MAG −0.47</span>
+            </div>
+          </div>
+
+          <div class="mag-row">
+            <div class="mag-name">
+              <strong>GPQA</strong>
+              <span>研究生级 · 科学问答</span>
+            </div>
+            <div class="mag-track">
+              <div class="mag-fill" style="--bar-w: 82.4%;"></div>
+            </div>
+            <div class="mag-meta">
+              <span class="mag-score">82.4</span>
+              <span class="mag-mag">MAG +0.26</span>
+            </div>
+          </div>
+
+          <div class="mag-foot">
+            <span>◈ 亮度条 = 归一化得分</span>
+            <span>◈ 金色为当前最亮星</span>
+            <span>◈ 星等按 (85 − score) / 10 折算</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 板块三：交互拆解台 -->
+    <section class="section-container" id="lab">
+      <div class="section-header">
+        <span class="section-tag">Interactive Lab</span>
+        <h2>交互拆解台</h2>
+        <p>投入任意一个问题，观测它被拆解成星链的全过程。</p>
+      </div>
+
+      <div class="obs-panel lab-panel">
+        <div class="panel-head">
+          <span class="panel-title">DISSECTION BENCH <em>//</em> 拆解台</span>
+          <span class="coord-chip">INPUT · FREE FORM</span>
+        </div>
+        <div class="panel-ruler" aria-hidden="true"></div>
+
+        <div class="lab-input-row">
+          <input type="text" id="labInput" placeholder="输入任意问题，例如：为什么天空是蓝色的？" autocomplete="off">
+          <button class="btn-primary btn-sm" id="labRunBtn">星链推演</button>
+        </div>
+
+        <div class="lab-chain" id="labChain">
+          <div class="lab-hint">▚ 等待观测目标输入 —— 星链将在你按下「星链推演」后逐节点展开。</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <p>Qwen Personal Site · Preset 06 Thought Constellation</p>
+      <span class="footer-dim">EVERY STEP OF THOUGHT IS A STAR · 深空观测站 THOUGHT-06</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

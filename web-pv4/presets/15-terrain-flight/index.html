@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 · Infinite Terrain — 噪声地形穿行</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="sky"></div>
+
+  <div class="shell">
+    <div class="hud">
+      <span class="cell"><i>ENGINE</i><b>VOXEL SPACE / FBM</b></span>
+      <span class="cell"><i>ROWS</i><b id="hRows">80</b></span>
+      <span class="cell"><i>SAMPLES</i><b id="hSamp">40</b></span>
+      <span class="cell"><i>ALT</i><b id="hAlt">0.0</b></span>
+      <span class="cell"><i>SPEED</i><b id="hSpd">1.4</b></span>
+      <span class="cell"><i>FPS</i><b id="hFps">60</b></span>
+    </div>
+
+    <header class="nav">
+      <div class="brand"><span>hy4</span><em>DIGITAL ELEVATION MODEL</em></div>
+      <nav class="nav-links">
+        <a href="#layers" class="nav-link active">等高图层</a>
+        <a href="#flight" class="nav-link">飞行参数</a>
+        <a href="#radio" class="nav-link">电台</a>
+        <a href="#bench" class="nav-link">评测</a>
+      </nav>
+      <button class="btn" id="ctaDeep">进入精细模式</button>
+    </header>
+
+    <section class="viewport">
+      <canvas id="terrain"></canvas>
+      <div class="vp-grid"></div>
+      <div class="vp-overlay">
+        <span>// DEM TILE 04 · SECTOR 37.42N / -122.08W</span>
+        <span id="vpMeta">OCTAVES 4 · FOG ON</span>
+      </div>
+      <div class="vp-legend">
+        <span>ELEV</span>
+        <div class="leg-bar"></div>
+        <span>0 — 1.0</span>
+      </div>
+    </section>
+
+    <section class="hero">
+      <p class="kicker">// h(x,z) = Σ aᵢ · valueNoise(2ⁱx, 2ⁱz) ，i = 0..3</p>
+      <h1>没有高度图，<br><span class="mark">只有一条噪声公式。</span></h1>
+      <p class="desc">
+        我是 hy4。这一页的地形不是贴图，是每帧实时求值的四倍频 fBm 噪声；
+        近处 80 行体素向后推、远处融进雾里。INSTANT 只采 40 个横向样本就敢飞，
+        DEEP 会把采样翻倍、行数加到 130，让山脊上的每一道褶皱都算清楚。
+      </p>
+      <div class="cta">
+        <button class="btn solid" id="ctaLayers">看看等高图层</button>
+        <button class="btn" id="ctaFlight">调节飞行参数</button>
+      </div>
+      <p class="hint">移动鼠标微调航向 · 滚轮改变飞行速度</p>
+    </section>
+
+    <section class="section" id="layers">
+      <div class="sec-head">
+        <span class="sec-tag">// ELEVATION LAYERS</span>
+        <h2>四层能力地层</h2>
+        <p>像四条等高线，越往里越陡。</p>
+      </div>
+      <div class="grid">
+        <article class="card"><span class="no">01</span><h3>混合推理内核</h3><p>同一权重在 Instant 与 Deep Think 间切换，按任务复杂度分配思考预算 —— 就像这里的采样密度。</p><span class="tag">HYBRID CORE</span></article>
+        <article class="card"><span class="no">02</span><h3>全栈代码工程</h3><p>跨文件重构、补齐测试、跑终端命令，遵循仓库既有约定续写。</p><span class="tag">AGENTIC CODING</span></article>
+        <article class="card"><span class="no">03</span><h3>256K 长上下文</h3><p>整本手册、整个仓库一次载入，长跨度下依旧不丢前文细节。</p><span class="tag">LONG CONTEXT</span></article>
+        <article class="card"><span class="no">04</span><h3>并行工具调用</h3><p>检索、读取、计算、执行最多 8 路并行，多步任务压成一轮往返。</p><span class="tag">PARALLEL TOOLS</span></article>
+      </div>
+    </section>
+
+    <section class="section" id="flight">
+      <div class="sec-head">
+        <span class="sec-tag">// FLIGHT PARAMETERS</span>
+        <h2>飞行参数</h2>
+        <p>调采样、调速度、调视距。</p>
+      </div>
+
+      <div class="panel">
+        <div class="modes">
+          <button class="mode active" data-mode="instant"><b>INSTANT · 巡航</b><em>80 行 · 40 样本 · 速度 1.4</em></button>
+          <button class="mode" data-mode="deep"><b>DEEP THINK · 测绘</b><em>130 行 · 72 样本 · 速度 0.6</em></button>
+          <div class="sl"><label>SPEED <b id="vSpd">1.40</b></label><input type="range" id="sSpd" min="10" max="300" value="140"></div>
+          <div class="sl"><label>AMPLITUDE <b id="vAmp">1.00</b></label><input type="range" id="sAmp" min="20" max="220" value="100"></div>
+        </div>
+        <div class="trace" id="traceBox"></div>
+      </div>
+    </section>
+
+    <section class="section" id="radio">
+      <div class="sec-head">
+        <span class="sec-tag">// FIELD RADIO</span>
+        <h2>野外电台</h2>
+        <p>向测绘员 hy4 发一条电报。</p>
+      </div>
+      <div class="term">
+        <div class="log" id="log">
+          <div class="row"><span class="who">hy4</span><span class="txt">信号稳定。给我一组坐标、一段等高线，或者一个还没测完的地形。</span></div>
+        </div>
+        <div class="inp">
+          <span class="p">radio&gt;</span>
+          <input type="text" id="inp" placeholder="发送电报，回车提交" autocomplete="off">
+          <button class="btn solid" id="send">SEND</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bench">
+      <div class="sec-head">
+        <span class="sec-tag">// BENCHMARK</span>
+        <h2>评测数据</h2>
+      </div>
+      <div class="bench-grid">
+        <div class="bench"><span class="bn">SWE-bench Verified</span><span class="bv">74.2</span><div class="bb"><i data-w="74"></i></div></div>
+        <div class="bench"><span class="bn">LiveCodeBench v6</span><span class="bv">68.5</span><div class="bb"><i data-w="68"></i></div></div>
+        <div class="bench"><span class="bn">AIME 2025</span><span class="bv">88.0</span><div class="bb"><i data-w="88"></i></div></div>
+        <div class="bench"><span class="bn">GPQA Diamond</span><span class="bv">71.4</span><div class="bb"><i data-w="71"></i></div></div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>hy4 · INFINITE TERRAIN · PRESET 15 · 实时 fBm 高程场 · 无高度图</p>
+      <span>THE MAP IS GENERATED, NOT STORED</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

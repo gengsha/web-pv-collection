@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLM 5.3 | 夜园月门</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 远山剪影三层（视差） -->
+  <div class="hills">
+    <div class="hill hill-far" data-depth="0.01"></div>
+    <div class="hill hill-mid" data-depth="0.02"></div>
+    <div class="hill hill-near" data-depth="0.03"></div>
+  </div>
+
+  <!-- 花窗漏影 -->
+  <div class="lattice-veil"></div>
+
+  <!-- 步石径 -->
+  <nav class="stone-path" id="stonePath" aria-label="游园进度">
+    <span class="stone" data-target="gate-hero"></span>
+    <span class="stone" data-target="court-1"></span>
+    <span class="stone" data-target="court-2"></span>
+    <span class="stone" data-target="court-3"></span>
+    <span class="stone" data-target="pavilion"></span>
+    <span class="stone" data-target="garden-footer"></span>
+  </nav>
+
+  <div class="garden-page">
+    <header class="garden-header">
+      <div class="garden-brand">
+        <span class="brand-moon-dot"></span>
+        <strong>夜园</strong>
+        <span class="brand-sub">GLM 5.3 · 代理者所居</span>
+      </div>
+      <span class="garden-status">子夜 · 月过柳梢 · 灯已挑亮</span>
+    </header>
+
+    <!-- 一进 · 月门 Hero -->
+    <section class="gate-hero" id="gate-hero">
+      <div class="moon-gate">
+        <div class="gate-inner">
+          <p class="gate-poem">夜园深处<br>有一盏灯</p>
+          <p class="gate-note">游园者至，请入。GLM 5.3 已在此恭候多时。</p>
+        </div>
+        <div class="gate-lantern"></div>
+      </div>
+      <p class="gate-caption">一进 · 问 —— 推门即问，如叩月门</p>
+    </section>
+
+    <!-- 二进 · 思（三景） -->
+    <section class="court" id="court-1">
+      <div class="court-head">
+        <span class="court-num">二进 · 思</span>
+        <h2>园有三景，景景通智</h2>
+      </div>
+      <div class="scenery-grid">
+        <div class="scenery-card reveal">
+          <div class="scene-icon scene-river"></div>
+          <h3>曲水流觞</h3>
+          <p>多轮对话如溪水九曲，语境流转不散。上句未尽之意，下句自会接住。</p>
+        </div>
+        <div class="scenery-card reveal">
+          <div class="scene-icon scene-borrow"></div>
+          <h3>借景于外</h3>
+          <p>检索增强如园林借景——把园外的青山与浩卷文献，框进这一窗之内。</p>
+        </div>
+        <div class="scenery-card reveal">
+          <div class="scene-icon scene-turn"></div>
+          <h3>移步换景</h3>
+          <p>智能体拆解长任务，如游廊转折。每一步各成一景，终点自然天成。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 三进 · 行（水榭） -->
+    <section class="court" id="court-2">
+      <div class="court-head">
+        <span class="court-num">三进 · 行</span>
+        <h2>水榭之中，皆可托付</h2>
+      </div>
+      <div class="pavilion-list">
+        <div class="pavilion-item reveal">
+          <span class="pavilion-mark">壹</span>
+          <div>
+            <h4>代研一事</h4>
+            <p>深读百篇文献，天亮前交你一页要略。</p>
+          </div>
+        </div>
+        <div class="pavilion-item reveal">
+          <span class="pavilion-mark">贰</span>
+          <div>
+            <h4>代行一程</h4>
+            <p>订票、对表、写周报，琐事一并接管。</p>
+          </div>
+        </div>
+        <div class="pavilion-item reveal">
+          <span class="pavilion-mark">叁</span>
+          <div>
+            <h4>代守一灯</h4>
+            <p>夜半灵感忽至，园中永远有人应答。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 水榭对话台 -->
+    <section class="pavilion" id="pavilion">
+      <div class="pavilion-frame reveal">
+        <div class="pavilion-head">
+          <span class="poem-font">水榭对谈</span>
+          <span class="pavilion-sub">低声亦可</span>
+        </div>
+        <input type="text" id="gardenInput" placeholder="对园中人说一句…" autocomplete="off">
+        <div class="garden-reply" id="gardenReply">「檐下风来，茶正好。客官想从哪一景游起？」</div>
+      </div>
+    </section>
+
+    <footer class="garden-footer" id="garden-footer">
+      <p class="poem-font">园静人闲夜向阑</p>
+      <p>GLM 5.3 · 夜园月门 · Preset 04 / Web-PV3</p>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

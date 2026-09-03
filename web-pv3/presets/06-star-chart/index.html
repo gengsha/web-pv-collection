@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLM 5.3 | 石刻星图</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 星野 -->
+  <canvas id="starCanvas" aria-hidden="true"></canvas>
+  <!-- 经线 -->
+  <div class="meridian-grid" aria-hidden="true"></div>
+
+  <div class="chart-page">
+    <!-- 卷轴顶边 -->
+    <div class="scroll-edge scroll-top" aria-hidden="true"></div>
+
+    <header class="chart-header">
+      <div class="chart-brand">
+        <strong>观星台</strong>
+        <span class="brand-sub mono">GLM-5.3 · OBSERVATORY N°53</span>
+      </div>
+      <span class="chart-time mono" id="skyClock">夜 · 星象平稳</span>
+    </header>
+
+    <!-- Hero：浑仪 -->
+    <section class="chart-hero">
+      <div class="armillary" aria-hidden="true">
+        <div class="ring ring-outer"></div>
+        <div class="ring ring-middle"></div>
+        <div class="ring ring-inner"></div>
+        <div class="core-star">
+          <span>GLM<br>5.3</span>
+        </div>
+      </div>
+      <h1 class="stele-title">观星千年<br>今夜最亮</h1>
+      <p class="hero-note">自 GLM-130B 昇起，至 5.3 中天。<br>这一颗，是智谱与众观测者共铸的新星。</p>
+    </section>
+
+    <!-- 星官谱系 -->
+    <section class="constellation" id="constellation">
+      <h2 class="section-stele">星 官 谱 系</h2>
+      <svg class="constellation-svg" viewBox="0 0 640 300" role="img" aria-label="GLM 版本星官连线">
+        <polyline class="const-line" points="70,230 210,190 350,205 480,120 590,60" pathLength="100"/>
+        <g class="star-node" style="--delay:0s">
+          <circle cx="70" cy="230" r="5"/>
+          <text x="70" y="258" text-anchor="middle" class="node-label">GLM-130B</text>
+          <text x="70" y="272" text-anchor="middle" class="node-year">2022</text>
+        </g>
+        <g class="star-node" style="--delay:0.4s">
+          <circle cx="210" cy="190" r="6"/>
+          <text x="210" y="218" text-anchor="middle" class="node-label">ChatGLM</text>
+          <text x="210" y="232" text-anchor="middle" class="node-year">2023</text>
+        </g>
+        <g class="star-node" style="--delay:0.8s">
+          <circle cx="350" cy="205" r="6"/>
+          <text x="350" y="233" text-anchor="middle" class="node-label">GLM-4</text>
+          <text x="350" y="247" text-anchor="middle" class="node-year">2024</text>
+        </g>
+        <g class="star-node" style="--delay:1.2s">
+          <circle cx="480" cy="120" r="7"/>
+          <text x="480" y="148" text-anchor="middle" class="node-label">GLM-5</text>
+          <text x="480" y="162" text-anchor="middle" class="node-year">2025</text>
+        </g>
+        <g class="star-node main-star" style="--delay:1.6s">
+          <circle cx="590" cy="60" r="10"/>
+          <circle class="halo" cx="590" cy="60" r="20"/>
+          <text x="590" y="26" text-anchor="middle" class="node-label">GLM-5.3</text>
+          <text x="590" y="40" text-anchor="middle" class="node-year">今夜</text>
+        </g>
+      </svg>
+      <p class="const-caption">谱系注：五星星光递增，亮度与能级成正比。刻于丙午年。</p>
+    </section>
+
+    <!-- 观测记录 -->
+    <section class="observation">
+      <h2 class="section-stele">观 测 记 录</h2>
+      <div class="obs-entries">
+        <article class="obs-entry reveal">
+          <div class="obs-meta">
+            <span class="obs-no mono">记 · 叁佰壹拾柒</span>
+            <span class="obs-date mono">子夜 · 晴 · 无云</span>
+          </div>
+          <p>命其深读三百篇文献，考「可控核聚变商业化路线」。黎明前交卷，引文皆可溯。</p>
+          <p class="obs-vermilion">朱批：纲目清晰，如掌观纹。</p>
+        </article>
+        <article class="obs-entry reveal">
+          <div class="obs-meta">
+            <span class="obs-no mono">记 · 叁佰壹拾捌</span>
+            <span class="obs-date mono">丑时 · 微风 · 月朗</span>
+          </div>
+          <p>命其以十种编程语言重写同一调度器，皆通过压测，无一溃败。</p>
+          <p class="obs-vermilion">朱批：十指连心，皆通脉络。</p>
+        </article>
+        <article class="obs-entry reveal">
+          <div class="obs-meta">
+            <span class="obs-no mono">记 · 叁佰壹玖</span>
+            <span class="obs-date mono">寅时 · 霜降</span>
+          </div>
+          <p>命其长思一夜，拆解某省电网负荷难题，得三策，其一已被采用。</p>
+          <p class="obs-vermilion">朱批：星光照进现实，可。</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 授时历表 -->
+    <section class="almanac">
+      <h2 class="section-stele">授 时 历 表</h2>
+      <table class="almanac-table mono">
+        <tr class="table-head"><td>历法科目</td><td>测得精度</td><td>较前星增益</td></tr>
+        <tr><td>深度推理 · 综合科</td><td class="gold-val">92.7</td><td>+8.4</td></tr>
+        <tr><td>代码工程 ·营造科</td><td class="gold-val">90.1</td><td>+9.2</td></tr>
+        <tr><td>智能体 · 执行科</td><td class="gold-val">88.9</td><td>+11.6</td></tr>
+        <tr><td>多模态 · 视听科</td><td class="gold-val">91.3</td><td>+7.8</td></tr>
+      </table>
+      <p class="almanac-note">表注：数据为星台观测所录，四舍五入至刻。丙午年颁行。</p>
+    </section>
+
+    <!-- 拜星台 -->
+    <section class="star-shrine reveal">
+      <div class="shrine-frame">
+        <div class="shrine-head">
+          <span>拜星台 · 有问必录</span>
+          <span class="shrine-sub mono">观测请求已入册</span>
+        </div>
+        <input type="text" id="shrineInput" placeholder="向星台呈一道观测请求…" autocomplete="off">
+        <div class="shrine-reply" id="shrineReply">「星官已列班。客官所问，将记入下一条观测卷宗。」</div>
+      </div>
+    </section>
+
+    <!-- 卷轴底边 -->
+    <div class="scroll-edge scroll-bottom" aria-hidden="true"></div>
+
+    <footer class="chart-footer">
+      <p>GLM 5.3 · 石刻星图 · Preset 06 / Web-PV3 · 仰观宇宙之大</p>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

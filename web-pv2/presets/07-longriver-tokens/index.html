@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qwen | 亿万词长河 · 百万词元超长上下文</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 文字长河画布与河面遮纱 -->
+  <canvas id="riverCanvas" class="river-canvas"></canvas>
+  <div class="river-veil"></div>
+
+  <div class="app-layout">
+    <!-- 顶部导航 -->
+    <header class="navbar">
+      <div class="nav-brand">
+        <span class="brand-mark">河</span>
+        <span class="brand-title">Qwen</span>
+        <span class="version-tag">1M Context</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#eras" class="nav-link">时代长卷</a>
+        <a href="#needle" class="nav-link">大海捞针</a>
+        <a href="#stats" class="nav-link">河况数据</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#needle" class="btn-ghost">一口饮尽</a>
+      </div>
+    </header>
+
+    <!-- Hero 主视区 -->
+    <section class="hero-section reveal">
+      <div class="hero-pill">
+        <span class="pill-dot"></span>
+        <span>百万词元 · 一河奔流 · 上下文即江河</span>
+      </div>
+
+      <h1 class="hero-title">
+        亿万字为河，<br>
+        <span class="glow-text">一眼见底。</span>
+      </h1>
+
+      <p class="hero-desc">
+        我是 Qwen。从《易经》的卦爻、楚辞的兰芷，到量子物理论文的最后一行注脚——
+        百万词元汇成一条长河，在一块屏幕里川流不息。文字如水，我取一瓢，一饮而尽。
+      </p>
+
+      <div class="mega-number-wrap">
+        <span class="mega-number" id="megaNumber" data-count="1000000">0</span>
+        <span class="mega-unit">Tokens · 汇流成河</span>
+      </div>
+
+      <div class="hero-cta-group">
+        <a href="#eras" class="btn-gold">展开时代长卷</a>
+        <a href="#needle" class="btn-ghost">去河里捞一根针</a>
+      </div>
+
+      <!-- 源流遥测条 -->
+      <div class="telemetry-bar">
+        <div class="telemetry-item">
+          <span class="t-label">Source · 源头</span>
+          <span class="t-val">《易经》 · 约前 1000 年</span>
+        </div>
+        <div class="t-divider"></div>
+        <div class="telemetry-item">
+          <span class="t-label">Delta · 河口</span>
+          <span class="t-val">量子论文 · 此刻</span>
+        </div>
+        <div class="t-divider"></div>
+        <div class="telemetry-item">
+          <span class="t-label">First Glance · 一眼</span>
+          <span class="t-val accent-cyan">0.8s TTFT</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="gold-divider"></div>
+
+    <!-- 板块一：时代长卷（横向滚动） -->
+    <section class="section-container reveal" id="eras">
+      <div class="section-header">
+        <span class="section-tag">Scroll of Eras</span>
+        <h2>时代长卷</h2>
+        <p>从先秦到深空，一河读尽。按住拖拽，或滚动滚轮，让长卷横向淌过。</p>
+      </div>
+
+      <div class="era-track" id="eraTrack">
+        <article class="era-card">
+          <div class="era-top"><span class="era-index">01</span><span class="era-years">约前 1000 年</span></div>
+          <h3 class="era-name">先秦</h3>
+          <div class="era-books">《易经》 · 《楚辞》</div>
+          <p class="era-quote">“天行健，君子以自强不息。”</p>
+        </article>
+
+        <article class="era-card">
+          <div class="era-top"><span class="era-index">02</span><span class="era-years">前 200 – 900</span></div>
+          <h3 class="era-name">汉唐</h3>
+          <div class="era-books">《史记》 · 《全唐诗》</div>
+          <p class="era-quote">“黄河之水天上来，奔流到海不复回。”</p>
+        </article>
+
+        <article class="era-card">
+          <div class="era-top"><span class="era-index">03</span><span class="era-years">960 – 1368</span></div>
+          <h3 class="era-name">宋元</h3>
+          <div class="era-books">《资治通鉴》 · 《西厢记》</div>
+          <p class="era-quote">“大江东去，浪淘尽，千古风流人物。”</p>
+        </article>
+
+        <article class="era-card">
+          <div class="era-top"><span class="era-index">04</span><span class="era-years">1368 – 1911</span></div>
+          <h3 class="era-name">明清</h3>
+          <div class="era-books">《永乐大典》 · 《红楼梦》</div>
+          <p class="era-quote">“满纸荒唐言，一把辛酸泪。”</p>
+        </article>
+
+        <article class="era-card">
+          <div class="era-top"><span class="era-index">05</span><span class="era-years">1760 – 1900</span></div>
+          <h3 class="era-name">工业时代</h3>
+          <div class="era-books">《物种起源》 · 《资本论》</div>
+          <p class="era-quote">蒸汽与进化，加速世界的脉搏。</p>
+        </article>
+
+        <article class="era-card">
+          <div class="era-top"><span class="era-index">06</span><span class="era-years">1946 – 2020</span></div>
+          <h3 class="era-name">信息时代</h3>
+          <div class="era-books">《计算机程序设计艺术》 · 《信息简史》</div>
+          <p class="era-quote">0 与 1 织出新的诗篇。</p>
+        </article>
+
+        <article class="era-card">
+          <div class="era-top"><span class="era-index">07</span><span class="era-years">2020 → ∞</span></div>
+          <h3 class="era-name">深空时代</h3>
+          <div class="era-books">《时间简史》 · 《量子力学原理》</div>
+          <p class="era-quote">星河之外，仍可读尽。</p>
+        </article>
+      </div>
+
+      <div class="era-hint">
+        <span class="era-hint-line"></span>
+        <span class="era-hint-text">拖拽 / 滚轮 · 横向流淌</span>
+        <span class="era-hint-line"></span>
+      </div>
+    </section>
+
+    <div class="gold-divider"></div>
+
+    <!-- 板块二：大海捞针（交互体验） -->
+    <section class="section-container reveal" id="needle">
+      <div class="section-header">
+        <span class="section-tag">Needle in the River</span>
+        <h2>大海捞针</h2>
+        <p>在百万词元的奔流里，精准捞出你要的那一个字。</p>
+      </div>
+
+      <div class="needle-console glass-card">
+        <div class="console-head">
+          <div class="dots">
+            <span class="dot gold"></span>
+            <span class="dot cyan"></span>
+            <span class="dot cream"></span>
+          </div>
+          <span class="console-title">needle-in-river.log</span>
+          <span class="status-live">● 河水流淌中</span>
+        </div>
+
+        <div class="console-body">
+          <div class="needle-form">
+            <input type="text" id="needleInput" placeholder="投入一个词，看它在哪一朵浪花里。例：烛之武" maxlength="14" autocomplete="off">
+            <button class="btn-gold" id="needleBtn" type="button">投石问河</button>
+          </div>
+
+          <div class="needle-chips">
+            <button class="chip" type="button" data-word="烛之武">烛之武</button>
+            <button class="chip" type="button" data-word="量子">量子</button>
+            <button class="chip" type="button" data-word="春江">春江</button>
+            <button class="chip" type="button" data-word="attention">attention</button>
+          </div>
+
+          <div class="needle-log" id="needleLog">
+            <div class="log-line dim">// 全河 1,000,000 词元已载入。输入任意词，回车投河。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="gold-divider"></div>
+
+    <!-- 板块三：河况数据 -->
+    <section class="section-container reveal" id="stats">
+      <div class="section-header">
+        <span class="section-tag">River Status</span>
+        <h2>河况数据</h2>
+        <p>实时水文，一目了然。</p>
+      </div>
+
+      <div class="grid-cards">
+        <div class="glass-card stat-card">
+          <span class="stat-label">River Volume · 整河词元</span>
+          <div class="stat-value">1,000,000</div>
+          <span class="stat-unit">tokens</span>
+          <p>自源头至河口，一次汲尽，不溢一滴。</p>
+        </div>
+
+        <div class="glass-card stat-card">
+          <span class="stat-label">Readable · 一次可读</span>
+          <div class="stat-value">≈ 1,500</div>
+          <span class="stat-unit">页</span>
+          <p>约七部长篇小说，一屏读完，首尾不忘。</p>
+        </div>
+
+        <div class="glass-card stat-card">
+          <span class="stat-label">Equivalent · 等效时长</span>
+          <div class="stat-value">≈ 120</div>
+          <span class="stat-unit">小时连续朗读</span>
+          <p>人类需五日五夜，我只需一眼 0.8 秒。</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <p>Qwen Personal Site · Preset 07 Long River of Tokens</p>
+      <span class="footer-dim">Design System Inspired by a Long River of a Hundred Million Words</span>
+    </footer>
+  </div>
+
+  <!-- 大海捞针命中浮标 -->
+  <div class="find-toast" id="findToast" role="status" aria-live="polite">
+    <span class="find-toast-char" id="findToastChar">字</span>
+    <div class="find-toast-body">
+      <strong>命中 · NEEDLE FOUND</strong>
+      <span id="findToastText">在 874,203 词元处找到</span>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

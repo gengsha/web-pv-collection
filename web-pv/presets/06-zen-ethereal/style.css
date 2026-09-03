@@ -1,0 +1,180 @@
+:root {
+  --zen-bg: #f8f9fa;
+  --zen-card-bg: rgba(255, 255, 255, 0.7);
+  --zen-ink-black: #111827;
+  --zen-ink-dim: #4b5563;
+  --zen-ink-light: #9ca3af;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--zen-bg);
+  color: var(--zen-ink-black);
+  font-family: 'Noto Serif SC', serif;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 呼吸光环 */
+.zen-halo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, rgba(248, 249, 250, 0) 70%);
+  transform: translate(-50%, -50%) scale(1);
+  animation: zenBreathe 8s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes zenBreathe {
+  0% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.5; }
+  100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.9; }
+}
+
+.zen-layout {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 24px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.zen-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+.zen-logo {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.zen-status {
+  font-size: 0.8rem;
+  color: var(--zen-ink-dim);
+  letter-spacing: 0.05em;
+}
+
+.zen-hero {
+  text-align: center;
+  margin-bottom: 90px;
+}
+
+.zen-title {
+  font-size: 3.4rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  margin-bottom: 24px;
+}
+
+.zen-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--zen-ink-dim);
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.meditation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 32px;
+  margin-bottom: 80px;
+}
+
+.ink-card {
+  background: var(--zen-card-bg);
+  backdrop-filter: blur(16px);
+  padding: 36px 28px;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.03);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ink-card:hover {
+  transform: translateY(-4px);
+}
+
+.ink-num {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--zen-ink-light);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.ink-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: 0.04em;
+}
+
+.ink-card p {
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--zen-ink-dim);
+}
+
+.mind-dialogue {
+  max-width: 600px;
+  margin: 0 auto 60px;
+  width: 100%;
+}
+
+.dialogue-box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#zenInput {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 14px 4px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.05rem;
+  color: var(--zen-ink-black);
+  outline: none;
+  text-align: center;
+  transition: border-color 0.3s;
+}
+
+#zenInput:focus {
+  border-color: var(--zen-ink-black);
+}
+
+.zen-reply {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--zen-ink-dim);
+  font-style: italic;
+  line-height: 1.7;
+  padding: 10px;
+}
+
+.zen-footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--zen-ink-light);
+}

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 · Risograph Press — Hybrid Reasoning Model</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="paper-grain"></div>
+  <div class="ink-bleed"></div>
+
+  <div class="sheet">
+    <!-- 刊头 -->
+    <header class="masthead">
+      <div class="mast-left">
+        <span class="issue">ISSUE N<sup>o</sup>.04</span>
+        <span class="mast-name riso-text" data-text="HY4 QUARTERLY">HY4 QUARTERLY</span>
+      </div>
+      <nav class="mast-nav">
+        <a href="#capabilities" class="mn-link active">能力矩阵</a>
+        <a href="#reasoning" class="mn-link">双栏对开</a>
+        <a href="#letters" class="mn-link">读者来信</a>
+        <a href="#colophon" class="mn-link">版本页</a>
+      </nav>
+      <div class="mast-right">
+        <span class="price">RISO 2-COLOR</span>
+        <span class="date">2026 · 09</span>
+      </div>
+    </header>
+
+    <!-- 封面 Hero -->
+    <section class="cover">
+      <div class="cover-rule"></div>
+      <div class="cover-kicker">
+        <span>THE HYBRID REASONING MODEL</span>
+        <span class="halftone-bar"></span>
+        <span>FEATURE STORY</span>
+      </div>
+
+      <h1 class="cover-title">
+        <span class="riso-text" data-text="快与深，">快与深，</span>
+        <span class="riso-text" data-text="一次成型。">一次成型。</span>
+      </h1>
+
+      <div class="cover-cols">
+        <p class="lead">
+          <span class="dropcap">我</span>是 hy4，一套混合推理模型。同一套权重，既能在毫秒间给出短答案，
+          也能在长链推演里反复自校验。本期特刊我们用四种油墨、两道工序，把它拆给你看。
+        </p>
+        <aside class="cover-side">
+          <div class="side-box">
+            <span class="side-lab">CONTEXT</span>
+            <span class="side-val">256,000</span>
+          </div>
+          <div class="side-box">
+            <span class="side-lab">TTFT</span>
+            <span class="side-val">0.18s</span>
+          </div>
+          <div class="side-box">
+            <span class="side-lab">MODES</span>
+            <span class="side-val">INSTANT / DEEP</span>
+          </div>
+          <div class="side-box">
+            <span class="side-lab">TOOLS</span>
+            <span class="side-val">PARALLEL ×8</span>
+          </div>
+        </aside>
+      </div>
+
+      <div class="cover-cta">
+        <button class="ink-btn red" data-ink>展开能力矩阵</button>
+        <button class="ink-btn blue" data-ink>翻到对开页</button>
+      </div>
+    </section>
+
+    <!-- 能力矩阵 -->
+    <section class="section" id="capabilities">
+      <div class="sec-rule"><span class="sec-no">01</span><h2 class="riso-text" data-text="能力矩阵">能力矩阵</h2><span class="sec-en">CAPABILITY MATRIX</span></div>
+
+      <div class="card-grid">
+        <article class="riso-card" data-reg>
+          <div class="rc-plate halftone-blue"></div>
+          <span class="rc-no">01</span>
+          <h3>混合推理内核</h3>
+          <p>同一权重在 Instant 与 Deep Think 间切换，按任务复杂度分配思考预算。</p>
+          <span class="rc-tag">HYBRID CORE</span>
+        </article>
+        <article class="riso-card" data-reg>
+          <div class="rc-plate halftone-red"></div>
+          <span class="rc-no">02</span>
+          <h3>全栈代码工程</h3>
+          <p>跨文件重构、补齐测试、跑终端命令，严格遵循仓库既有约定续写。</p>
+          <span class="rc-tag">AGENTIC CODING</span>
+        </article>
+        <article class="riso-card" data-reg>
+          <div class="rc-plate halftone-green"></div>
+          <span class="rc-no">03</span>
+          <h3>256K 长上下文</h3>
+          <p>整本手册、整个仓库一次载入，长跨度下依旧不丢前文细节。</p>
+          <span class="rc-tag">LONG CONTEXT</span>
+        </article>
+        <article class="riso-card" data-reg>
+          <div class="rc-plate halftone-blue"></div>
+          <span class="rc-no">04</span>
+          <h3>并行工具调用</h3>
+          <p>检索、读取、计算、执行最多 8 路并行，多步任务压缩成一轮往返。</p>
+          <span class="rc-tag">PARALLEL TOOLS</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- 双栏对开：混合推理 -->
+    <section class="section" id="reasoning">
+      <div class="sec-rule"><span class="sec-no">02</span><h2 class="riso-text" data-text="双栏对开">双栏对开</h2><span class="sec-en">HYBRID REASONING · SPREAD</span></div>
+
+      <div class="spread">
+        <div class="spread-page">
+          <div class="page-head">
+            <span class="page-mode">INSTANT</span>
+            <button class="ink-btn sm red" data-ink data-mode="instant">选这一版</button>
+          </div>
+          <p class="page-note">短答案：直接给结论与关键数字，省略中间步骤。</p>
+          <div class="page-body">
+            <p>每层 K/V 各 4096×768，共 24 组矩阵，合计 75,497,472 元素；FP16 下约 144 MB，批量 8 约 1.13 GB。</p>
+            <p class="stamp">TOKENS 96 · LATENCY 0.18s · STEPS 03</p>
+          </div>
+        </div>
+
+        <div class="spread-gutter">
+          <div class="gutter-line"></div>
+          <div class="gutter-mark">✦ 对折线 ✦</div>
+          <div class="gutter-line"></div>
+        </div>
+
+        <div class="spread-page deep">
+          <div class="page-head">
+            <span class="page-mode">DEEP THINK</span>
+            <button class="ink-btn sm blue" data-ink data-mode="deep">选这一版</button>
+          </div>
+          <p class="page-note">长链推演：逐步建模、换算，并在末尾做一次误差校验。</p>
+          <div class="page-body" id="deepBody">
+            <p>① 建模：KV = 层数 × 2 × 序列长 × 隐藏维 × 精度字节。</p>
+            <p>② 代值：12 × 2 × 4096 × 768 = 75,497,472 元素。</p>
+            <p>③ 换算：×2 字节 = 150,994,944 B ≈ 0.1406 GB ≈ 144 MB。</p>
+            <p>④ 扩展：batch = 8 → 约 1.125 GB。</p>
+            <p>⑤ 校验：GQA 按 kv_heads 缩减，此处为 MHA 上界。</p>
+            <p>⑥ 结论：单条 ≈144 MB；启用 GQA(8) 可降至 ≈18 MB/条。</p>
+            <p class="stamp">TOKENS 1,840 · LATENCY 6.40s · STEPS 06</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 读者来信 -->
+    <section class="section" id="letters">
+      <div class="sec-rule"><span class="sec-no">03</span><h2 class="riso-text" data-text="读者来信">读者来信</h2><span class="sec-en">LETTERS TO THE EDITOR</span></div>
+
+      <div class="letters paper-card">
+        <div class="letters-log" id="lettersLog">
+          <div class="letter bot">
+            <span class="l-from">hy4 · 编辑部</span>
+            <p>来信请附上下文。可以是一段待重构的代码，也可以是一个还没想清楚的问题。</p>
+          </div>
+        </div>
+        <div class="letters-input">
+          <input type="text" id="lettersInput" placeholder="写下你的来信，回车投递…" autocomplete="off">
+          <button class="ink-btn green" data-ink id="lettersSend">投 递</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 版本页 -->
+    <section class="section" id="colophon">
+      <div class="sec-rule"><span class="sec-no">04</span><h2 class="riso-text" data-text="版本页">版本页</h2><span class="sec-en">COLOPHON &amp; BENCHMARK</span></div>
+
+      <div class="colophon">
+        <div class="bench-list">
+          <div class="bl-row"><span class="bl-name">SWE-bench Verified</span><span class="bl-dots"></span><span class="bl-val">74.2</span></div>
+          <div class="bl-row"><span class="bl-name">LiveCodeBench v6</span><span class="bl-dots"></span><span class="bl-val">68.5</span></div>
+          <div class="bl-row"><span class="bl-name">AIME 2025</span><span class="bl-dots"></span><span class="bl-val">88.0</span></div>
+          <div class="bl-row"><span class="bl-name">GPQA Diamond</span><span class="bl-dots"></span><span class="bl-val">71.4</span></div>
+        </div>
+        <div class="colophon-note">
+          <p><strong>印刷信息</strong>：双色 Riso 套印（荧光橘红 #FF5A36 + 亮蓝 #2E5BFF），纸本 80g 米白，半调网点 6px，允许 3px 以内套印偏移。</p>
+          <p><strong>型号</strong>：hy4 · Hybrid Reasoning · Build 2026.09 · 编号 HY4-Q04</p>
+          <div class="seal">
+            <span class="seal-in">RISO<br>PRESS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>HY4 QUARTERLY · 由两套油墨与一次长链推演印制而成</p>
+      <span class="foot-mark">— END OF ISSUE 04 —</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

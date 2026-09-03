@@ -1,0 +1,413 @@
+:root {
+  --river-night: #050e19;
+  --river-deep: #030a12;
+  --current-gold: #f0d387;
+  --stream-cyan: #3fd9e8;
+  --foam: #eaf6fa;
+  --bank: #14263a;
+  --bank-dim: #0d1b2b;
+  --text-hi: #e8f1f8;
+  --text-lo: #7f95a8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(180deg, var(--river-night) 0%, var(--river-deep) 100%);
+  color: var(--text-hi);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+#riverCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 河岸斜切收边 */
+.bank {
+  position: relative;
+  z-index: 1;
+  height: 90px;
+  pointer-events: none;
+}
+
+.bank-top {
+  margin-top: -90px;
+  background: linear-gradient(180deg, var(--bank) 0%, rgba(20, 38, 58, 0) 100%);
+  clip-path: polygon(0 0, 100% 34%, 100% 100%, 0 100%);
+}
+
+.bank-bottom {
+  margin-bottom: -90px;
+  background: linear-gradient(0deg, var(--bank-dim) 0%, rgba(13, 27, 43, 0) 100%);
+  clip-path: polygon(0 100%, 100% 66%, 100% 100%, 0 100%);
+}
+
+.river-page {
+  position: relative;
+  z-index: 1;
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0 32px 60px;
+}
+
+/* 头部 */
+.river-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 0;
+}
+
+.river-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-flow {
+  width: 30px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--stream-cyan));
+  position: relative;
+  animation: flowShift 2.4s linear infinite;
+}
+
+.brand-flow::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: -3.5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--stream-cyan);
+  box-shadow: 0 0 12px rgba(63, 217, 232, 0.8);
+}
+
+@keyframes flowShift {
+  0% { width: 12px; opacity: 0.4; }
+  50% { width: 30px; opacity: 1; }
+  100% { width: 12px; opacity: 0.4; }
+}
+
+.river-brand strong {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+
+.river-status {
+  font-size: 0.66rem;
+  color: var(--text-lo);
+  letter-spacing: 0.1em;
+}
+
+/* Hero */
+.river-hero {
+  position: relative;
+  padding: 70px 0 90px;
+  text-align: center;
+}
+
+.hero-title {
+  font-family: 'Outfit', 'Noto Sans SC', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  line-height: 1.28;
+  background: linear-gradient(180deg, var(--foam) 20%, var(--current-gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title-dot {
+  -webkit-text-fill-color: var(--stream-cyan);
+}
+
+.hero-reflection {
+  font-family: 'Outfit', 'Noto Sans SC', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  line-height: 1.28;
+  color: rgba(240, 211, 135, 0.14);
+  transform: scaleY(-1);
+  margin-top: 10px;
+  mask-image: linear-gradient(0deg, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
+  -webkit-mask-image: linear-gradient(0deg, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-sub {
+  margin-top: 34px;
+  font-size: 1rem;
+  line-height: 2.1;
+  color: var(--text-lo);
+}
+
+.river-metrics {
+  margin-top: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 26px;
+  padding: 18px 34px;
+  border: 1px solid rgba(63, 217, 232, 0.22);
+  border-radius: 14px;
+  background: rgba(5, 14, 25, 0.55);
+  backdrop-filter: blur(10px);
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.metric-val {
+  font-size: 1.5rem;
+  color: var(--current-gold);
+  font-weight: 500;
+}
+
+.metric-key {
+  font-size: 0.62rem;
+  color: var(--text-lo);
+  letter-spacing: 0.12em;
+}
+
+.metric-sep {
+  width: 1px;
+  height: 34px;
+  background: rgba(63, 217, 232, 0.25);
+}
+
+/* 步石区 */
+.stone-section {
+  padding: 40px 0 70px;
+}
+
+.stone-head {
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 56px;
+}
+
+.stone-crossing {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.stone-lane {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 26px 8px;
+  margin-bottom: 40px;
+}
+
+.current-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, rgba(63, 217, 232, 0.5) 0 18px, transparent 18px 30px);
+  animation: currentSlide 1.6s linear infinite;
+  opacity: 0.55;
+}
+
+@keyframes currentSlide {
+  to { background-position: 30px 0; }
+}
+
+.stone-node {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stone-ellipse {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 56px;
+  border-radius: 42%;
+  background: var(--bank);
+  border: 1.5px solid rgba(127, 149, 168, 0.5);
+  color: var(--text-lo);
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  cursor: default;
+}
+
+.stone-node.lit .stone-ellipse {
+  background: linear-gradient(180deg, #1c3350, #122238);
+  border-color: var(--current-gold);
+  color: var(--current-gold);
+  box-shadow: 0 0 24px rgba(240, 211, 135, 0.35), inset 0 0 12px rgba(240, 211, 135, 0.18);
+  transform: translateY(-6px);
+}
+
+.stone-node.lit .stone-ellipse::after {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border-radius: 46%;
+  border: 1px solid rgba(240, 211, 135, 0.35);
+  animation: stonePulse 1.6s ease-out infinite;
+}
+
+@keyframes stonePulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+/* 步石注解 */
+.stone-notes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.stone-note {
+  border: 1px solid rgba(127, 149, 168, 0.22);
+  border-radius: 10px;
+  padding: 18px 20px;
+  background: rgba(8, 18, 30, 0.5);
+  transition: border-color 0.5s, background 0.5s;
+}
+
+.stone-note .mono {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--stream-cyan);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.stone-note p {
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: var(--text-lo);
+}
+
+.stone-note.lit {
+  border-color: rgba(240, 211, 135, 0.4);
+  background: rgba(28, 46, 66, 0.55);
+}
+
+.stone-note.lit p {
+  color: var(--text-hi);
+}
+
+/* 河岸对话台 */
+.riverside-section {
+  padding: 20px 0 90px;
+}
+
+.riverside-frame {
+  max-width: 680px;
+  margin: 0 auto;
+  border: 1px solid rgba(63, 217, 232, 0.25);
+  border-radius: 14px;
+  background: rgba(5, 14, 25, 0.6);
+  backdrop-filter: blur(12px);
+  padding: 30px 36px;
+}
+
+.riverside-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.riverside-head span:first-child {
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--current-gold);
+}
+
+.riverside-head .mono {
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  color: var(--stream-cyan);
+}
+
+#riverInput {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(232, 241, 248, 0.22);
+  padding: 13px 4px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  font-size: 1.02rem;
+  color: var(--text-hi);
+  outline: none;
+  text-align: center;
+  transition: border-color 0.4s;
+}
+
+#riverInput:focus {
+  border-color: var(--stream-cyan);
+}
+
+.river-reply {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-lo);
+  font-style: italic;
+  line-height: 2;
+}
+
+.river-footer {
+  text-align: center;
+  padding-top: 70px;
+  font-size: 0.72rem;
+  color: var(--text-lo);
+  letter-spacing: 0.1em;
+}
+
+/* 渐显 */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+  .river-metrics { gap: 14px; padding: 14px 18px; flex-wrap: wrap; }
+  .stone-notes { grid-template-columns: 1fr; }
+  .stone-ellipse { width: 70px; height: 46px; font-size: 0.8rem; }
+  .bank { display: none; }
+}

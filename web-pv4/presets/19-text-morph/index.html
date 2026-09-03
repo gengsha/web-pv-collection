@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 · Text Morph — 文字粒子形变矩阵</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="grid-bg"></div>
+
+  <div class="shell">
+    <div class="hud">
+      <span class="cell"><i>ENGINE</i><b>POINT-CLOUD TYPOGRAPHY</b></span>
+      <span class="cell"><i>PARTICLES</i><b id="hPts">4,000</b></span>
+      <span class="cell"><i>SPRING</i><b id="hSpring">0.06</b></span>
+      <span class="cell"><i>NEXT WORD</i><b id="hNext">256K</b></span>
+      <span class="cell"><i>FPS</i><b id="hFps">60</b></span>
+    </div>
+
+    <header class="nav">
+      <div class="brand"><span>hy4</span><em>MORPH MATRIX</em></div>
+      <nav class="nav-links">
+        <a href="#atoms" class="nav-link active">粒子表</a>
+        <a href="#morph" class="nav-link">形变控制</a>
+        <a href="#say" class="nav-link">留言</a>
+        <a href="#bench" class="nav-link">评测</a>
+      </nav>
+      <button class="btn" id="ctaMorph">打乱重排</button>
+    </header>
+
+    <section class="viewport">
+      <canvas id="morph"></canvas>
+      <div class="vp-overlay">
+        <span>// STAGE 01 · TEXT → ALPHA MASK → POINT SAMPLE</span>
+        <span id="vpMeta">SPRING 0.06 · NO TRAILS</span>
+      </div>
+      <div class="vp-hint">点击画面 → 立即切换下一个词</div>
+    </section>
+
+    <section class="hero">
+      <p class="kicker">// 每个字母都是一万个质点的共识</p>
+      <h1>文字不是画出来的，<br><span class="mark">是它们各自就位的结果。</span></h1>
+      <p class="desc">
+        我是 hy4。这一页先把你看到的词画进离屏画布，按 alpha 掩码采样出目标点，
+        再让几千颗粒子用弹簧各自归位。INSTANT 弹簧很硬 —— 粒子干脆利落地就位；
+        DEEP 弹簧放软、粒子翻倍，你能看见整个形变的过程。
+      </p>
+      <div class="cta">
+        <button class="btn solid" id="ctaAtoms">看看粒子表</button>
+        <button class="btn" id="ctaMorph2">调节形变</button>
+      </div>
+      <p class="hint">移动鼠标推开粒子 · 点击切换下一个词</p>
+    </section>
+
+    <section class="section" id="atoms">
+      <div class="sec-head">
+        <span class="sec-tag">// PERIODIC TABLE</span>
+        <h2>粒子周期表</h2>
+        <p>四种元素，共享同一套弹簧。</p>
+      </div>
+      <div class="grid">
+        <article class="card"><span class="no">01</span><h3>混合推理内核</h3><p>同一权重在 Instant 与 Deep Think 间切换，按任务复杂度分配思考预算 —— 就像这里的弹簧刚度。</p><span class="tag">HYBRID CORE</span></article>
+        <article class="card"><span class="no">02</span><h3>全栈代码工程</h3><p>跨文件重构、补齐测试、跑终端命令，遵循仓库既有约定续写。</p><span class="tag">AGENTIC CODING</span></article>
+        <article class="card"><span class="no">03</span><h3>256K 长上下文</h3><p>整本手册、整个仓库一次载入，长跨度下依旧不丢前文细节。</p><span class="tag">LONG CONTEXT</span></article>
+        <article class="card"><span class="no">04</span><h3>并行工具调用</h3><p>检索、读取、计算、执行最多 8 路并行，多步任务压成一轮往返。</p><span class="tag">PARALLEL TOOLS</span></article>
+      </div>
+    </section>
+
+    <section class="section" id="morph">
+      <div class="sec-head">
+        <span class="sec-tag">// MORPH CONTROL</span>
+        <h2>形变控制</h2>
+        <p>调刚度、调数量、调词表。</p>
+      </div>
+
+      <div class="panel">
+        <div class="modes">
+          <button class="mode active" data-mode="instant"><b>INSTANT · 硬弹簧</b><em>4,000 粒子 · k=0.06 · 无拖尾</em></button>
+          <button class="mode" data-mode="deep"><b>DEEP THINK · 软形变</b><em>9,000 粒子 · k=0.02 · 拖尾</em></button>
+          <div class="sl"><label>SPRING k <b id="vSpring">0.06</b></label><input type="range" id="sSpring" min="1" max="12" value="6"></div>
+          <div class="sl"><label>SCATTER FORCE <b id="vScat">1.0</b></label><input type="range" id="sScat" min="0" max="200" value="100"></div>
+        </div>
+        <div class="trace" id="traceBox"></div>
+      </div>
+    </section>
+
+    <section class="section" id="say">
+      <div class="sec-head">
+        <span class="sec-tag">// SAY IT IN PARTICLES</span>
+        <h2>用粒子说话</h2>
+        <p>写下不超过 8 个字符的词，它就会出现在舞台上。</p>
+      </div>
+      <div class="term">
+        <div class="log" id="logBox">
+          <div class="row"><span class="who">hy4</span><span class="txt">词表已装载：HY4 / INSTANT / DEEP / 256K / ×8。想插播什么？</span></div>
+        </div>
+        <div class="inp">
+          <input type="text" id="wordInput" maxlength="8" placeholder="输入一个词（≤8 字符），回车上屏" autocomplete="off">
+          <button class="btn solid" id="wordSend">上屏</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bench">
+      <div class="sec-head">
+        <span class="sec-tag">// BENCHMARK</span>
+        <h2>评测数据</h2>
+      </div>
+      <div class="bench-grid">
+        <div class="bench"><span class="bn">SWE-bench Verified</span><span class="bv">74.2</span><div class="bb"><i data-w="74"></i></div></div>
+        <div class="bench"><span class="bn">LiveCodeBench v6</span><span class="bv">68.5</span><div class="bb"><i data-w="68"></i></div></div>
+        <div class="bench"><span class="bn">AIME 2025</span><span class="bv">88.0</span><div class="bb"><i data-w="88"></i></div></div>
+        <div class="bench"><span class="bn">GPQA Diamond</span><span class="bv">71.4</span><div class="bb"><i data-w="71"></i></div></div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>hy4 · TEXT MORPH MATRIX · PRESET 19 · 字形即粒子群</p>
+      <span>TYPOGRAPHY IS AN EMERGENT PROPERTY</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

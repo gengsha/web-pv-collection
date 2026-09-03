@@ -1,0 +1,275 @@
+:root {
+  --acid-bg: #0f1015;
+  --acid-surface: #1a1c24;
+  --acid-lime: #ccff00;
+  --acid-pink: #ff007f;
+  --acid-cyan: #00ffff;
+  --text-white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--acid-bg);
+  color: var(--text-white);
+  font-family: 'Space Grotesk', sans-serif;
+  min-height: 100vh;
+  padding: 30px 20px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.acid-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+/* 顶部导航 */
+.acid-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sticker-brand {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  background: var(--acid-lime);
+  color: #000;
+  padding: 6px 14px;
+  transform: rotate(-2deg);
+  box-shadow: 4px 4px 0 #000;
+}
+
+.sticker-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  box-shadow: 3px 3px 0 #000;
+}
+
+.pink-badge {
+  background: var(--acid-pink);
+  color: #fff;
+  transform: rotate(3deg);
+}
+
+/* Hero */
+.acid-hero {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.hero-sticker-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.sticker-chip {
+  background: #fff;
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  transform: rotate(-1deg);
+  box-shadow: 3px 3px 0 #000;
+}
+
+.cyan-chip {
+  background: var(--acid-cyan);
+  transform: rotate(2deg);
+}
+
+.acid-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+
+.acid-highlight {
+  color: var(--acid-lime);
+  text-shadow: 4px 4px 0 #ff007f;
+}
+
+.acid-sub {
+  font-size: 1.1rem;
+  color: #a1a1aa;
+  max-width: 600px;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+}
+
+.hero-btn-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.acid-btn {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  padding: 14px 28px;
+  cursor: pointer;
+  border: 2px solid #000;
+  box-shadow: 5px 5px 0 #000;
+  transition: all 0.15s;
+}
+
+.primary-lime {
+  background: var(--acid-lime);
+  color: #000;
+}
+
+.outline-pink {
+  background: var(--acid-pink);
+  color: #fff;
+}
+
+.acid-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 #000;
+}
+
+.acid-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* 3D 折纸容器 */
+.origami-section {
+  perspective: 1200px;
+  display: flex;
+  justify-content: center;
+}
+
+.origami-card {
+  width: 100%;
+  max-width: 680px;
+  min-height: 240px;
+  background: var(--acid-surface);
+  border: 3px solid #000;
+  box-shadow: 10px 10px 0 var(--acid-lime);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.origami-card.unfolded {
+  box-shadow: 10px 10px 0 var(--acid-pink);
+}
+
+.origami-face {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.origami-card.folded .face-inside {
+  display: none;
+}
+
+.origami-card.unfolded .face-front {
+  display: none;
+}
+
+.origami-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--acid-pink);
+}
+
+.origami-label.green-lbl {
+  color: var(--acid-lime);
+}
+
+.origami-card h2, .origami-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.origami-card p {
+  color: #d4d4d8;
+  line-height: 1.6;
+}
+
+.card-tag-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.mini-tag {
+  background: #000;
+  color: var(--acid-cyan);
+  font-size: 0.7rem;
+  padding: 4px 8px;
+  font-weight: 700;
+}
+
+.acid-btn-sm {
+  align-self: flex-start;
+  margin-top: 12px;
+  padding: 8px 16px;
+  background: var(--acid-cyan);
+  border: 2px solid #000;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* 灵感生成器 */
+.sticker-generator {
+  background: #18181b;
+  border: 3px solid #000;
+  padding: 30px;
+  box-shadow: 8px 8px 0 var(--acid-cyan);
+  text-align: center;
+}
+
+.gen-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--acid-lime);
+}
+
+.idea-display {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 20px 0;
+  color: #ffffff;
+}
+
+.acid-btn-generate {
+  background: var(--acid-pink);
+  color: #fff;
+  border: 2px solid #000;
+  padding: 12px 24px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.acid-footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #71717a;
+  padding-bottom: 20px;
+}

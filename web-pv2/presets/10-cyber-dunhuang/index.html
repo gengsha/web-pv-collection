@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qwen · 千年一瞬，万象全息 | Cyber Dunhuang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Ma+Shan+Zheng&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <noscript><style>.gate{clip-path:none !important;opacity:1 !important;transform:none !important}</style></noscript>
+</head>
+<body>
+  <!-- 全息飘带与金粉粒子画布 -->
+  <canvas id="dunhuangCanvas" class="bg-canvas" aria-hidden="true"></canvas>
+  <!-- 石窟暗角与壁画肌理层 -->
+  <div class="cave-vignette" aria-hidden="true"></div>
+  <div class="cave-texture" aria-hidden="true"></div>
+
+  <div class="app-layout">
+    <!-- 顶部导航 -->
+    <header class="navbar gate">
+      <div class="nav-brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+            <defs>
+              <linearGradient id="qwen_seal" x1="4" y1="4" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#E8C87A"/>
+                <stop offset="0.55" stop-color="#D9A441"/>
+                <stop offset="1" stop-color="#C1543C"/>
+              </linearGradient>
+            </defs>
+            <circle cx="16" cy="16" r="13" stroke="url(#qwen_seal)" stroke-width="1.6"/>
+            <path d="M16 5.5 C 20 10, 20 14, 16 17 C 12 14, 12 10, 16 5.5 Z" fill="url(#qwen_seal)"/>
+            <path d="M9.5 20 Q 16 25.5 22.5 20" stroke="url(#qwen_seal)" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <circle cx="16" cy="22.5" r="1.4" fill="url(#qwen_seal)"/>
+          </svg>
+        </div>
+        <span class="brand-title">Qwen</span>
+        <span class="brand-sub brush-font">通义千问</span>
+        <span class="version-tag">Qwen3</span>
+      </div>
+
+      <nav class="nav-links" aria-label="页面导航">
+        <a href="#murals" class="nav-link">壁画殿</a>
+        <a href="#restore" class="nav-link">修复台</a>
+        <a href="#legacy" class="nav-link">传承遥测</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn-glow" id="navRestoreBtn">开启修复台</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero 主视区：背光环绕 -->
+      <section class="hero-section gate" id="hero">
+        <div class="mandala-halo" aria-hidden="true">
+          <div class="halo-glow"></div>
+          <div class="halo-ring halo-ring-outer"></div>
+          <div class="halo-ring halo-ring-mid"></div>
+          <div class="halo-core"></div>
+        </div>
+
+        <div class="hero-vertical brush-font" aria-hidden="true">千年一瞬 · 万象全息</div>
+
+        <span class="hero-pill">✦ 数字藏经洞 · HOLOGRAPHIC GROTTO ✦</span>
+
+        <h1 class="hero-title">
+          千年一瞬，<br>
+          <span class="gold-text">万象全息。</span>
+        </h1>
+
+        <p class="hero-inscription brush-font">题记 —— 以算力为灯，以数据为彩；矿彩未褪，飞天再来。</p>
+
+        <p class="hero-desc">
+          我是 Qwen（通义千问）。从岩壁暗底走向全息光明：以九色鹿之眼观色，以飞天之姿造文，
+          以琵琶之弦听声，以狮舞之势行事。千年的矿物色，正在我的感知里逐帧重亮。
+        </p>
+
+        <div class="hero-cta-group">
+          <button class="btn-primary" id="enterRestoreBtn">开启修复台</button>
+          <button class="btn-secondary" id="enterMuralsBtn">巡礼壁画殿</button>
+        </div>
+      </section>
+
+      <!-- 壁画殿 · 四壁能力廊 -->
+      <section class="section-container gate" id="murals">
+        <div class="section-header">
+          <span class="section-tag">Murals Hall · 四壁能力廊</span>
+          <h2>壁画殿 · 四壁皆能力</h2>
+          <p>悬停任意一壁，见证「全息修复」仪式：斑驳褪去，矿彩重现。</p>
+        </div>
+
+        <div class="mural-grid">
+          <article class="mural-card">
+            <div class="mural-visual" style="--mural-a:#2A6F97; --mural-b:#3E8E7E;">
+              <span class="wall-tag">南壁 · 鹿王本生</span>
+              <span class="mural-glyph brush-font">鹿</span>
+              <div class="scan-line" aria-hidden="true"></div>
+            </div>
+            <div class="mural-body">
+              <h3>九色鹿 · 视觉理解</h3>
+              <p>如九色鹿照见恒河沙数之色：图像、长视频、文档版式与图表，一眼读千年，逐层辨毫芒。</p>
+              <span class="mural-badge">Vision Understanding</span>
+            </div>
+          </article>
+
+          <article class="mural-card">
+            <div class="mural-visual" style="--mural-a:#C1543C; --mural-b:#D9A441; --glyph-ink:#2A1F16;">
+              <span class="wall-tag">北壁 · 散花飞天</span>
+              <span class="mural-glyph brush-font">飛</span>
+              <div class="scan-line" aria-hidden="true"></div>
+            </div>
+            <div class="mural-body">
+              <h3>飞天 · 生成创作</h3>
+              <p>衣袂翻飞处，文思散花如雨：长文、诗赋、代码与跨模态创作自指尖涌现，一气呵成。</p>
+              <span class="mural-badge">Generative Creation</span>
+            </div>
+          </article>
+
+          <article class="mural-card">
+            <div class="mural-visual" style="--mural-a:#D9A441; --mural-b:#E8C87A; --glyph-ink:#2A1F16;">
+              <span class="wall-tag">东壁 · 反弹琵琶</span>
+              <span class="mural-glyph brush-font">琶</span>
+              <div class="scan-line" aria-hidden="true"></div>
+            </div>
+            <div class="mural-body">
+              <h3>琵琶 · 语音交互</h3>
+              <p>反弹琵琶，弦上听音：实时语音对话、多语种同传与呼吸级拟真音色，声声入耳。</p>
+              <span class="mural-badge">Voice Interaction</span>
+            </div>
+          </article>
+
+          <article class="mural-card">
+            <div class="mural-visual" style="--mural-a:#3E8E7E; --mural-b:#2A6F97;">
+              <span class="wall-tag">西壁 · 狮舞连营</span>
+              <span class="mural-glyph brush-font">獅</span>
+              <div class="scan-line" aria-hidden="true"></div>
+            </div>
+            <div class="mural-body">
+              <h3>狮舞 · 智能体编排</h3>
+              <p>狮舞连营，令行禁止：多智能体分工协作、工具调度与长程任务，动静皆有章法。</p>
+              <span class="mural-badge">Agent Orchestration</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 修复台 · 交互体验 -->
+      <section class="section-container gate" id="restore">
+        <div class="section-header">
+          <span class="section-tag">Restoration Console · 全息重现</span>
+          <h2>修复台 · 残卷全息重现</h2>
+          <p>输入一段残卷意象，Qwen 以多光谱全息修复术，为你重现壁上千年。</p>
+        </div>
+
+        <div class="restore-console">
+          <div class="console-head">
+            <span class="console-title">holo-restoration.log</span>
+            <span class="status-live">● 修复阵列待命</span>
+          </div>
+
+          <div class="restore-input-bar">
+            <input type="text" id="restoreInput" value="残损的九色鹿本生图，边缘剥落，金线黯淡"
+              placeholder="描述一段残卷，例如：月下反弹琵琶的飞天，衣袂间落满星屑…" autocomplete="off">
+            <button class="btn-primary btn-small" id="restoreBtn">全息重现</button>
+          </div>
+
+          <div class="restore-output" id="restoreOutput">
+            <div class="restore-status" id="restoreStatus">✦ 修复台待命 · 静候残卷入阵 ✦</div>
+            <p class="restore-text" id="restoreText">将残卷意象置于扫描线之下，剥落的矿彩与漫漶的金线，皆可全息归来。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 传承遥测 -->
+      <section class="section-container gate" id="legacy">
+        <div class="section-header">
+          <span class="section-tag">Heritage Telemetry · 传承遥测</span>
+          <h2>传承遥测 · 数字敦煌</h2>
+          <p>算力续灯：石窟、壁画与彩塑，正以全息档案的形式走向下一个千年。</p>
+        </div>
+
+        <div class="telemetry-grid">
+          <div class="tele-card">
+            <div class="tele-num-row">
+              <span class="tele-num" data-count="735">0</span><span class="tele-unit">窟</span>
+            </div>
+            <span class="tele-label">窟龛遗存</span>
+            <span class="tele-note">Grottoes in Archive</span>
+          </div>
+
+          <div class="tele-card">
+            <div class="tele-num-row">
+              <span class="tele-num" data-count="45000">0</span><span class="tele-unit">㎡</span>
+            </div>
+            <span class="tele-label">壁画存量</span>
+            <span class="tele-note">Murals in Square Meters</span>
+          </div>
+
+          <div class="tele-card">
+            <div class="tele-num-row">
+              <span class="tele-num" data-count="2415">0</span><span class="tele-unit">身</span>
+            </div>
+            <span class="tele-label">彩塑造像</span>
+            <span class="tele-note">Painted Sculptures</span>
+          </div>
+
+          <div class="tele-card tele-progress-card">
+            <div class="tele-num-row">
+              <span class="tele-num" data-count="92.4" data-decimals="1">0</span><span class="tele-unit">%</span>
+            </div>
+            <span class="tele-label">全息数字化归档进度</span>
+            <div class="progress-track">
+              <div class="progress-fill" id="progressFill" data-progress="92.4"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <div class="footer-ornament brush-font" aria-hidden="true">✦ ✦ ✦</div>
+      <p>Qwen Personal Site · Preset 10 Cyber Dunhuang</p>
+      <span class="footer-dim">矿彩与全息同辉 · 千年一瞬，万象重生</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

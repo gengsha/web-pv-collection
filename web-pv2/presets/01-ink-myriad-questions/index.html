@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>千问 Qwen | 墨海千问 · 文人水墨长卷</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 背景分层：宣纸噪点 + 淡墨晕染 -->
+  <div class="paper-layers" aria-hidden="true">
+    <div class="paper-noise"></div>
+    <div class="ink-wash wash-1"></div>
+    <div class="ink-wash wash-2"></div>
+    <div class="ink-wash wash-3"></div>
+  </div>
+
+  <!-- 动态墨粒与飞白笔触画布 -->
+  <canvas id="inkCanvas" aria-hidden="true"></canvas>
+
+  <!-- 竖排侧批 -->
+  <div class="side-col side-col-left" aria-hidden="true">博学 · 审问 · 慎思 · 明辨 · 笃行</div>
+  <div class="side-col side-col-right" aria-hidden="true">以墨为思 · 以朱为心</div>
+
+  <div class="scroll-layout">
+    <!-- 顶部导航 -->
+    <header class="navbar">
+      <div class="nav-brand">
+        <span class="seal seal-mini">千</span>
+        <div class="brand-text">
+          <span class="brand-title">通义千问</span>
+          <span class="brand-sub">QWEN · 墨海千问</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#capabilities" class="nav-link">四部之能</a>
+        <a href="#colophon" class="nav-link">卷末题跋</a>
+        <a href="#ask" class="nav-link">问答题字</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn-seal-nav" data-scroll-to="ask">请赐一问</button>
+      </div>
+    </header>
+
+    <!-- Hero 主视区 -->
+    <section class="hero-section">
+      <div class="hero-pill" data-reveal>
+        <span class="pill-dot"></span>
+        <span>阿里巴巴大模型 · 通义千问 · 亮色水墨长卷</span>
+      </div>
+
+      <h1 class="hero-title" data-reveal data-reveal-delay="0.08">
+        问千问，<span class="accent-ink">问道于一</span>
+      </h1>
+
+      <div class="brush-stroke" data-reveal data-reveal-delay="0.16"></div>
+
+      <p class="hero-desc" data-reveal data-reveal-delay="0.22">
+        吾乃千问，通义门下一书生。以一轴长卷为席，以松烟为思，以朱砂为心。
+        经史子集皆可问，代码图像皆可解——博学之，审问之，慎思之，明辨之，笃行之。
+      </p>
+
+      <div class="hero-cta-group" data-reveal data-reveal-delay="0.3">
+        <button class="btn-seal-primary" data-scroll-to="ask">请赐一问</button>
+        <button class="btn-ink-outline" data-scroll-to="capabilities">展卷观四部</button>
+      </div>
+
+      <div class="hero-colophon" data-reveal data-reveal-delay="0.38">
+        <span class="vertical-note">千问之问 · 问于天地</span>
+        <span class="seal seal-lg">千问</span>
+        <span class="vertical-note">通义之义 · 义在答疑</span>
+      </div>
+    </section>
+
+    <div class="ink-divider"></div>
+
+    <!-- 板块一：经史子集四部能力 -->
+    <section class="section-container" id="capabilities">
+      <div class="section-header" data-reveal>
+        <span class="section-tag">经史子集 · FOUR ARTS</span>
+        <h2>四部之能</h2>
+        <p>以一问贯四部：对话如经之正大，代码如史之谨严，视觉如子之通变，多模态如集之宏富。</p>
+      </div>
+
+      <div class="grid-cards">
+        <div class="paper-card" data-char="经" data-reveal>
+          <span class="seal seal-mini card-seal">经</span>
+          <h3>经 · 对话问学</h3>
+          <p>与君对谈，引经据典而不泥于古；往来应答，如行云流水，自有法度。</p>
+          <div class="card-footer">
+            <span class="card-tag">DIALOGUE · 对话理解</span>
+            <span class="card-num">壹</span>
+          </div>
+        </div>
+
+        <div class="paper-card" data-char="史" data-reveal data-reveal-delay="0.08">
+          <span class="seal seal-mini card-seal">史</span>
+          <h3>史 · 代码编年</h3>
+          <p>读码如读史：自架构兴衰，至一行一注，皆可为君考据源流、修补阙漏。</p>
+          <div class="card-footer">
+            <span class="card-tag">CODE · 代码工程</span>
+            <span class="card-num">贰</span>
+          </div>
+        </div>
+
+        <div class="paper-card" data-char="子" data-reveal data-reveal-delay="0.16">
+          <span class="seal seal-mini card-seal">子</span>
+          <h3>子 · 观象悟理</h3>
+          <p>诸子百家，各有所长。观图识象、读表解形，如诸子之察物，格物致知。</p>
+          <div class="card-footer">
+            <span class="card-tag">VISION · 视觉理解</span>
+            <span class="card-num">叁</span>
+          </div>
+        </div>
+
+        <div class="paper-card" data-char="集" data-reveal data-reveal-delay="0.24">
+          <span class="seal seal-mini card-seal">集</span>
+          <h3>集 · 汇文成集</h3>
+          <p>集者，文之汇也。文本、图像、语音、视频，熔于一炉而裁成新篇。</p>
+          <div class="card-footer">
+            <span class="card-tag">MULTIMODAL · 多模态</span>
+            <span class="card-num">肆</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ink-divider"></div>
+
+    <!-- 板块二：卷末题跋数据 -->
+    <section class="section-container" id="colophon">
+      <div class="section-header" data-reveal>
+        <span class="section-tag">卷末题跋 · COLOPHON</span>
+        <h2>卷末题跋 · 以数纪略</h2>
+        <p>长卷之制，悬于壁上；数轴并排，如签如题。</p>
+      </div>
+
+      <div class="colophon-row">
+        <div class="scroll-card" data-reveal title="Context Window · 1,000,000+ Tokens">
+          <span class="data-label">上下文</span>
+          <span class="data-num accent-ink">百万言</span>
+          <span class="seal seal-sm data-seal">长卷</span>
+        </div>
+        <div class="scroll-card" data-reveal data-reveal-delay="0.1" title="Modality · Text / Image / Audio / Video">
+          <span class="data-label">模态</span>
+          <span class="data-num">四端合</span>
+          <span class="seal seal-sm data-seal">通义</span>
+        </div>
+        <div class="scroll-card" data-reveal data-reveal-delay="0.2" title="Languages · 119 Languages &amp; Dialects">
+          <span class="data-label">语言</span>
+          <span class="data-num">百十九</span>
+          <span class="seal seal-sm data-seal">问学</span>
+        </div>
+        <div class="scroll-card" data-reveal data-reveal-delay="0.3" title="Knowledge Cutoff · 2025">
+          <span class="data-label">知识</span>
+          <span class="data-num accent-ink">二〇二五</span>
+          <span class="seal seal-sm data-seal">知新</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="ink-divider"></div>
+
+    <!-- 板块三：问答题字交互区 -->
+    <section class="section-container" id="ask">
+      <div class="section-header" data-reveal>
+        <span class="section-tag">问答题字 · INSCRIPTION</span>
+        <h2>问答题字</h2>
+        <p>君问一句，吾以毛笔逐字题答；前端模拟流式书写，风雅之答随机而取。</p>
+      </div>
+
+      <div class="inscription-pod" data-reveal>
+        <div class="pod-head">
+          <span class="pod-head-title">千问题答砚</span>
+          <span class="status-ink"><span class="status-dot"></span>墨已研好 · 静候君问</span>
+        </div>
+
+        <div class="inscription-body" id="inscriptionBody">
+          <p class="answer-placeholder" id="inscriptionPlaceholder">（卷上无字。请于下方题一句问，墨迹将逐字浮现。）</p>
+        </div>
+
+        <div class="ask-bar">
+          <input type="text" id="askInput" placeholder="写下一句想问的话，按回车或钤「题」印……" autocomplete="off">
+          <button class="seal ask-btn" id="askBtn" type="button">题</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <div class="footer-seals">
+        <span class="seal seal-mini">千问</span>
+        <span class="seal seal-mini">通义</span>
+        <span class="seal seal-mini">墨思</span>
+        <span class="seal seal-mini">笃问</span>
+      </div>
+      <p>Qwen Personal Site · Preset 01 Ink Myriad Questions</p>
+      <span class="footer-dim">以一轴长卷 · 问天地之问 · 墨海千问设计系统</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

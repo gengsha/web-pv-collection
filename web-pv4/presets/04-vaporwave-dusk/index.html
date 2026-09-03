@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hy4 · Vaporwave Dusk — Hybrid Reasoning Model</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 背景层：落日 / 网格 / 棕榈 / 扫描线 -->
+  <div class="sky">
+    <div class="sun">
+      <div class="sun-slits"></div>
+    </div>
+    <div class="stars"></div>
+    <div class="floor"><div class="floor-grid"></div></div>
+    <svg class="palm palm-l" viewBox="0 0 200 320" aria-hidden="true">
+      <path d="M100 320 C 96 240 92 190 88 140" stroke="#12062a" stroke-width="9" fill="none"/>
+      <path d="M88 140 C 50 130 24 112 6 84 C 40 104 70 116 88 122 Z" fill="#12062a"/>
+      <path d="M88 140 C 60 148 34 168 14 196 C 46 176 72 158 88 150 Z" fill="#12062a"/>
+      <path d="M88 140 C 118 126 148 106 170 78 C 138 100 110 114 88 120 Z" fill="#12062a"/>
+      <path d="M88 140 C 120 146 152 162 182 186 C 146 168 116 154 88 148 Z" fill="#12062a"/>
+      <path d="M88 140 C 92 118 100 100 112 84 C 104 106 98 124 92 142 Z" fill="#12062a"/>
+    </svg>
+    <svg class="palm palm-r" viewBox="0 0 200 320" aria-hidden="true">
+      <path d="M100 320 C 104 240 108 190 112 140" stroke="#12062a" stroke-width="9" fill="none"/>
+      <path d="M112 140 C 150 130 176 112 194 84 C 160 104 130 116 112 122 Z" fill="#12062a"/>
+      <path d="M112 140 C 140 148 166 168 186 196 C 154 176 128 158 112 150 Z" fill="#12062a"/>
+      <path d="M112 140 C 82 126 52 106 30 78 C 62 100 90 114 112 120 Z" fill="#12062a"/>
+      <path d="M112 140 C 80 146 48 162 18 186 C 54 168 84 154 112 148 Z" fill="#12062a"/>
+    </svg>
+  </div>
+  <div class="scanlines"></div>
+  <div class="vhs-noise"></div>
+
+  <div class="shell">
+    <header class="nav">
+      <div class="brand neon" data-text="hy4">hy4</div>
+      <nav class="nav-links">
+        <a href="#capabilities" class="nav-link active">MATRIX</a>
+        <a href="#reasoning" class="nav-link">REASONING</a>
+        <a href="#console" class="nav-link">CONSOLE</a>
+        <a href="#bench" class="nav-link">SCORES</a>
+      </nav>
+      <button class="btn-vhs" id="playBtn">▶ INSERT</button>
+    </header>
+
+    <section class="hero">
+      <div class="tape-label">
+        <span>SIDE A</span><span>·</span><span>1986 ⇌ 2026</span><span>·</span><span>SP MODE</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="glitch" data-text="HYBRID">HYBRID</span>
+        <span class="glitch alt" data-text="REASONING">REASONING</span>
+      </h1>
+
+      <p class="hero-sub">ハイブリッド推論 · 混合推理 · HY4 · 96.4 MHz</p>
+
+      <p class="hero-desc">
+        我是 hy4。快模式像一盘倒带到位的磁带，按下播放立刻出声；深模式像慢放的 MV，
+        每一帧推演都看得见。两种速度，同一套声音。
+      </p>
+
+      <div class="hero-cta">
+        <button class="btn-vhs pink" id="ctaMatrix">▸ PLAY MATRIX</button>
+        <button class="btn-vhs cyan" id="ctaReasoning">▸ SIDE B</button>
+      </div>
+
+      <div class="osb">
+        <div class="osb-row"><span>CONTEXT</span><span class="osb-val">256,000</span></div>
+        <div class="osb-row"><span>MODE</span><span class="osb-val">INSTANT / DEEP</span></div>
+        <div class="osb-row"><span>TTFT</span><span class="osb-val ok">0.18s</span></div>
+        <div class="osb-row"><span>TOOLS</span><span class="osb-val">PARALLEL ×8</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="capabilities">
+      <div class="sec-head">
+        <span class="sec-kicker">◆ CAPABILITY MATRIX ◆</span>
+        <h2>能力矩阵</h2>
+        <p>四条音轨，同时录制。</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="vhs-card">
+          <div class="vc-ico">◈</div>
+          <h3>混合推理内核</h3>
+          <p>同一权重在 Instant 与 Deep Think 间切换，按任务复杂度分配思考预算。</p>
+          <span class="vc-tag">HYBRID CORE</span>
+        </article>
+        <article class="vhs-card">
+          <div class="vc-ico">⌘</div>
+          <h3>全栈代码工程</h3>
+          <p>跨文件重构、补齐测试、跑终端命令，遵循仓库既有约定续写。</p>
+          <span class="vc-tag">AGENTIC CODING</span>
+        </article>
+        <article class="vhs-card">
+          <div class="vc-ico">≡</div>
+          <h3>256K 长上下文</h3>
+          <p>整本手册、整个仓库一次载入，长跨度下依旧不丢前文细节。</p>
+          <span class="vc-tag">LONG CONTEXT</span>
+        </article>
+        <article class="vhs-card">
+          <div class="vc-ico">⇄</div>
+          <h3>并行工具调用</h3>
+          <p>检索、读取、计算、执行最多 8 路并行，多步任务压成一轮往返。</p>
+          <span class="vc-tag">PARALLEL TOOLS</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="reasoning">
+      <div class="sec-head">
+        <span class="sec-kicker">◆ DUAL DECK ◆</span>
+        <h2>双卡带混音台</h2>
+        <p>SIDE A 是即时，SIDE B 是深推。点一下换轨。</p>
+      </div>
+
+      <div class="deck">
+        <div class="deck-head">
+          <div class="deck-btns">
+            <button class="track-btn active" data-mode="instant">◀◀ SIDE A</button>
+            <button class="track-btn" data-mode="deep">SIDE B ▶▶</button>
+          </div>
+          <div class="deck-meta" id="deckMeta">TRACK 01 · 96 TOK · 0.18s</div>
+        </div>
+
+        <div class="deck-body">
+          <div class="reel"><span class="reel-in"></span></div>
+          <div class="trace" id="traceBody"></div>
+          <div class="reel"><span class="reel-in"></span></div>
+        </div>
+
+        <div class="deck-foot">
+          <div class="vu"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <span class="time-code" id="timeCode">00:00:00</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="console">
+      <div class="sec-head">
+        <span class="sec-kicker">◆ DIRECT LINE ◆</span>
+        <h2>直播热线</h2>
+        <p>信号已接通，请讲话。</p>
+      </div>
+
+      <div class="console">
+        <div class="console-log" id="consoleLog">
+          <div class="line"><span class="who">HY4</span><span class="txt">信号正常。给我一个仓库、一份文档，或一个还没想清楚的问题。</span></div>
+        </div>
+        <div class="console-input">
+          <span class="blink">▮</span>
+          <input type="text" id="consoleInput" placeholder="on air… 输入后回车" autocomplete="off">
+          <button class="btn-vhs pink sm" id="consoleSend">SEND</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bench">
+      <div class="sec-head">
+        <span class="sec-kicker">◆ SCORE BOARD ◆</span>
+        <h2>评分板</h2>
+        <p>公开基准，数字随版本迭代更新。</p>
+      </div>
+      <div class="bench-grid">
+        <div class="bench"><span class="b-name">SWE-bench Verified</span><span class="b-val">74.2</span><div class="b-bar"><i data-w="74"></i></div></div>
+        <div class="bench"><span class="b-name">LiveCodeBench v6</span><span class="b-val">68.5</span><div class="b-bar"><i data-w="68"></i></div></div>
+        <div class="bench"><span class="b-name">AIME 2025</span><span class="b-val">88.0</span><div class="b-bar"><i data-w="88"></i></div></div>
+        <div class="bench"><span class="b-name">GPQA Diamond</span><span class="b-val">71.4</span><div class="b-bar"><i data-w="71"></i></div></div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div class="foot-logo neon" data-text="hy4">hy4</div>
+      <p>VAPORWAVE DUSK PRESET · SIDE A/B · 96.4 MHz · BUILD 2026.09</p>
+      <span class="foot-dim">░▒▓ END OF TAPE ▓▒░</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

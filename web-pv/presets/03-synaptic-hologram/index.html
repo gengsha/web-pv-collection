@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini | Synaptic Holo-Chroma Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 背景全息扫描线与突触 Canvas -->
+  <div class="holo-grid-bg"></div>
+  <div class="scanline-overlay"></div>
+  <div class="holo-scan-beam"></div>
+  <canvas id="synapseCanvas"></canvas>
+
+  <div class="lab-container">
+    <!-- 全息顶部 HUD -->
+    <header class="holo-hud">
+      <div class="hud-brand">
+        <div class="hud-badge">HUD // ONLINE</div>
+        <h2>GEMINI // SYNAPTIC.LAB</h2>
+      </div>
+
+      <div class="hud-telemetry">
+        <div class="hud-metric">
+          <span class="lbl">SYNAPSE ACTIVE</span>
+          <span class="val cyan" id="activeSynapseCount">99.98%</span>
+        </div>
+        <div class="hud-metric">
+          <span class="lbl">ATTENTION MATRIX</span>
+          <span class="val magenta">HOLO-TENSOR</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 主展示区 -->
+    <main class="holo-main">
+      <div class="hero-holo-box">
+        <span class="holo-tag">COGNITIVE ARCHITECTURE v4.0</span>
+        <h1 class="holo-glitch" data-text="CROSS-MODAL SYNAPSIS">CROSS-MODAL SYNAPSIS</h1>
+        <p class="holo-desc">
+          打破模态壁垒的高维全息认知实验舱。每一个文本 Token、图像像素、声学微波在此交汇融合为单一全息神经态。
+        </p>
+
+        <div class="pulse-trigger-bar">
+          <button class="holo-btn primary" id="firePulseBtn">
+            <span class="btn-text">激发全域突触脉冲</span>
+            <span class="btn-glare"></span>
+          </button>
+          <button class="holo-btn secondary" id="resetMatrixBtn">校准全息光栅</button>
+        </div>
+      </div>
+
+      <!-- 突触认知节点矩阵 -->
+      <section class="holo-nodes-grid">
+        <div class="holo-card" data-node="vision">
+          <div class="card-corner tl"></div><div class="card-corner br"></div>
+          <div class="node-header">
+            <span class="node-id">NODE_01 // OPTIC</span>
+            <span class="node-status live">CONNECTED</span>
+          </div>
+          <h3>视觉神经流形编码</h3>
+          <p>单帧 3D 几何重构与微米级光学反光推演，赋予 AI 空间立体感知。</p>
+          <div class="node-meter">
+            <div class="meter-bar" style="width: 88%; background: var(--holo-cyan);"></div>
+          </div>
+        </div>
+
+        <div class="holo-card" data-node="acoustic">
+          <div class="card-corner tl"></div><div class="card-corner br"></div>
+          <div class="node-header">
+            <span class="node-id">NODE_02 // ACOUSTIC</span>
+            <span class="node-status live">RESONATING</span>
+          </div>
+          <h3>端到端声学时序共振</h3>
+          <p>全频段微秒级音画同步与拟真人声细微呼吸声波渲染。</p>
+          <div class="node-meter">
+            <div class="meter-bar" style="width: 94%; background: var(--holo-magenta);"></div>
+          </div>
+        </div>
+
+        <div class="holo-card" data-node="symbolic">
+          <div class="card-corner tl"></div><div class="card-corner br"></div>
+          <div class="node-header">
+            <span class="node-id">NODE_03 // TENSOR</span>
+            <span class="node-status live">OPTIMIZED</span>
+          </div>
+          <h3>符号化张量逻辑核心</h3>
+          <p>自动证明复杂数学命题，跨越语言边界生成底层汇编与高层架构。</p>
+          <div class="node-meter">
+            <div class="meter-bar" style="width: 99%; background: var(--holo-lime);"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="holo-footer">
+      <span class="mono-text">SYSTEM STATUS: OPTIMAL // ENCRYPTION: QUANTUM_SECURED</span>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

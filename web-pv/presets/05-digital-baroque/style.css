@@ -1,0 +1,295 @@
+:root {
+  --baroque-bg: #14050b;
+  --baroque-card-bg: rgba(30, 10, 18, 0.75);
+  
+  --gold-foil: #eab308;
+  --gold-champagne: #fde047;
+  --gold-dim: #a16207;
+  
+  --text-parchment: #fef3c7;
+  --text-dim-gold: #d4af37;
+  --text-muted: #881337;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--baroque-bg);
+  color: var(--text-parchment);
+  font-family: 'Playfair Display', serif;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+#goldDustCanvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.baroque-app {
+  position: relative;
+  z-index: 1;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+/* 顶部导航 */
+.baroque-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.header-ornament, .footer-ornament {
+  color: var(--gold-foil);
+  font-size: 1rem;
+  letter-spacing: 0.5em;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.museum-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--gold-champagne);
+}
+
+.museum-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-dim-gold);
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* Hero 主厅 */
+.hero-palace {
+  text-align: center;
+  padding: 40px 0 60px;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.renaissance-pill {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--gold-foil);
+  border: 1px solid var(--gold-dim);
+  padding: 4px 16px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.palace-headline {
+  font-family: 'Cinzel', serif;
+  font-size: 3.2rem;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  letter-spacing: 0.04em;
+}
+
+.gold-text {
+  background: linear-gradient(135deg, #fde047 0%, #ca8a04 50%, #fde047 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.palace-intro {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #fde68a;
+  opacity: 0.85;
+  margin-bottom: 36px;
+}
+
+.gold-btn {
+  padding: 14px 36px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #14050b;
+  background: linear-gradient(135deg, #fde047 0%, #eab308 50%, #ca8a04 100%);
+  border: 1px solid #fef08a;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(234, 179, 8, 0.3);
+  transition: all 0.3s;
+}
+
+.gold-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(234, 179, 8, 0.5);
+}
+
+/* 艺术画框网格 */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.art-frame {
+  background: var(--baroque-card-bg);
+  border: 1px solid var(--gold-dim);
+  padding: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s;
+}
+
+.art-frame:hover {
+  border-color: var(--gold-champagne);
+  transform: translateY(-6px);
+}
+
+.frame-inner {
+  border: 1px solid rgba(234, 179, 8, 0.2);
+  padding: 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.art-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  color: var(--gold-foil);
+  letter-spacing: 0.15em;
+  margin-bottom: 14px;
+}
+
+.art-visual {
+  height: 140px;
+  border: 1px solid rgba(234, 179, 8, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.visual-1 { background: radial-gradient(circle, #3b0764 0%, #14050b 100%); }
+.visual-2 { background: radial-gradient(circle, #1e1b4b 0%, #14050b 100%); }
+.visual-3 { background: radial-gradient(circle, #451a03 0%, #14050b 100%); }
+
+.art-glyph {
+  font-size: 2.8rem;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
+}
+
+.art-frame h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.25rem;
+  color: var(--gold-champagne);
+  margin-bottom: 8px;
+}
+
+.art-description {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #fde68a;
+  opacity: 0.8;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.gold-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  color: var(--gold-foil);
+  border-top: 1px solid rgba(234, 179, 8, 0.2);
+  padding-top: 8px;
+  display: block;
+}
+
+/* 转译区域 */
+.transmute-section {
+  margin-bottom: 60px;
+}
+
+.wide-frame {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.section-sub {
+  font-size: 0.9rem;
+  color: #fef08a;
+  opacity: 0.85;
+  margin-bottom: 20px;
+}
+
+.input-transmute-box {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+#mindInput {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--gold-dim);
+  color: var(--text-parchment);
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  padding: 12px 18px;
+  outline: none;
+}
+
+#mindInput:focus {
+  border-color: var(--gold-champagne);
+}
+
+.gold-btn-small {
+  padding: 0 24px;
+  background: var(--gold-foil);
+  color: #14050b;
+  border: none;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.transmute-output {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px dashed var(--gold-dim);
+  padding: 20px;
+}
+
+.output-gold-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  color: var(--gold-champagne);
+  letter-spacing: 0.15em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.output-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #fef9c3;
+  font-style: italic;
+}
+
+.baroque-footer {
+  text-align: center;
+  padding: 30px 0 10px;
+  border-top: 1px solid rgba(234, 179, 8, 0.2);
+  font-size: 0.8rem;
+  color: var(--gold-dim);
+}

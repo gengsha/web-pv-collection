@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLM 5.3 | 曙光旗舰</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 曙光柔光球 -->
+  <div class="dawn-orb orb-a" id="orbA"></div>
+  <div class="dawn-orb orb-b" id="orbB"></div>
+
+  <div class="page">
+    <header class="top-nav">
+      <div class="nav-logo">
+        <div class="logo-mark"></div>
+        <span class="logo-text">GLM <em>5.3</em></span>
+      </div>
+      <nav class="nav-links">
+        <a href="#capabilities">能力矩阵</a>
+        <a href="#benchmarks">评测成绩</a>
+        <a href="#terminal">对话体验</a>
+      </nav>
+      <a class="nav-cta" href="#terminal">立即试用</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <span class="version-pill"><i class="dot"></i>GLM-5.3 · 旗舰版已发布</span>
+        <h1 class="hero-title">让智能，<br>如<span class="grad-text">曙光</span>般抵达</h1>
+        <p class="hero-sub">
+          GLM 5.3 —— 深度推理、自主智能体与全模态理解的集大成者。每一次思考，都为抵达更远的地方。
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary">开始对话</button>
+          <button class="btn-ghost">查看技术报告</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-chip"><b data-count="200">0</b><span>K 上下文窗口</span></div>
+          <div class="stat-chip"><b data-count="128">0</b><span>K tokens/s 推理速度</span></div>
+          <div class="stat-chip"><b data-count="49">0</b><span>项权威评测 SOTA</span></div>
+        </div>
+      </section>
+
+      <section class="capabilities" id="capabilities">
+        <div class="section-head">
+          <span class="section-eyebrow">CAPABILITY MATRIX</span>
+          <h2>一颗模型的<span class="grad-text">四种人格</span></h2>
+        </div>
+        <div class="bento-grid">
+          <article class="bento-card span-7 reveal">
+            <div class="bento-icon icon-reason"></div>
+            <h3>深度推理</h3>
+            <p>思维链可延伸至数万步，在数学证明、因果推断与复杂决策中保持严密的逻辑韧性。</p>
+            <div class="bento-metric"><span>GPQA-Diamond</span><b>87.4%</b></div>
+          </article>
+          <article class="bento-card span-5 reveal">
+            <div class="bento-icon icon-agent"></div>
+            <h3>自主智能体</h3>
+            <p>自主规划任务链，调用工具、检索与执行一气呵成，像一个真正的数字同事。</p>
+            <div class="bento-metric"><span>AgentBench</span><b>92.1%</b></div>
+          </article>
+          <article class="bento-card span-5 reveal">
+            <div class="bento-icon icon-vision"></div>
+            <h3>全模态理解</h3>
+            <p>文本、图像、音频、视频在统一语义空间对齐，看懂图表里的趋势，也听懂语气里的情绪。</p>
+            <div class="bento-metric"><span>MMMU-Pro</span><b>78.8%</b></div>
+          </article>
+          <article class="bento-card span-7 reveal">
+            <div class="bento-icon icon-code"></div>
+            <h3>工程级代码</h3>
+            <p>从单行修复到跨仓库重构，5.3 的代码智能已进入真实生产环境，日均提交百万级补丁。</p>
+            <div class="bento-metric"><span>SWE-bench</span><b>71.3%</b></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="benchmarks" id="benchmarks">
+        <div class="section-head">
+          <span class="section-eyebrow">BENCHMARKS</span>
+          <h2>用数字<span class="grad-text">说话</span></h2>
+        </div>
+        <div class="bench-panel reveal">
+          <div class="bench-row">
+            <span class="bench-name">MMLU-Pro</span>
+            <div class="bench-track"><div class="bench-bar" data-width="86"><span class="bench-fill"></span></div></div>
+            <b class="bench-val mono" data-count="86">0</b>
+          </div>
+          <div class="bench-row">
+            <span class="bench-name">MATH-Arena</span>
+            <div class="bench-track"><div class="bench-bar" data-width="91"><span class="bench-fill"></span></div></div>
+            <b class="bench-val mono" data-count="91">0</b>
+          </div>
+          <div class="bench-row">
+            <span class="bench-name">CodeForce</span>
+            <div class="bench-track"><div class="bench-bar" data-width="78"><span class="bench-fill"></span></div></div>
+            <b class="bench-val mono" data-count="78">0</b>
+          </div>
+          <div class="bench-row">
+            <span class="bench-name"> τ-Bench</span>
+            <div class="bench-track"><div class="bench-bar" data-width="83"><span class="bench-fill"></span></div></div>
+            <b class="bench-val mono" data-count="83">0</b>
+          </div>
+          <p class="bench-note mono">* 评测数据为预设演示样例，替换为真实数据即可。</p>
+        </div>
+      </section>
+
+      <section class="terminal" id="terminal">
+        <div class="terminal-card reveal">
+          <div class="terminal-head">
+            <span class="terminal-dot red"></span>
+            <span class="terminal-dot yellow"></span>
+            <span class="terminal-dot green"></span>
+            <span class="terminal-title mono">glm-5.3 · chat</span>
+          </div>
+          <div class="chat-list" id="chatList">
+            <div class="msg ai">
+              <div class="msg-avatar">✦</div>
+              <div class="msg-bubble">你好，我是 GLM 5.3。今天想让我帮你思考点什么？</div>
+            </div>
+          </div>
+          <div class="chat-input-row">
+            <input type="text" id="chatInput" placeholder="向 GLM 5.3 提一个问题…" autocomplete="off">
+            <button id="sendBtn">发送</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      <p>GLM 5.3 · 曙光旗舰 · Preset 01 / Web-PV3</p>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
