@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
       geminiMsg.className = 'msg gemini';
       const randomAns = cannedAnswers[Math.floor(Math.random() * cannedAnswers.length)];
       geminiMsg.innerHTML = `
-        <div class="msg-avatar">✨</div>
+        <div class="msg-avatar">✦</div>
         <div class="msg-bubble">${randomAns}</div>
       `;
       chatList.appendChild(geminiMsg);

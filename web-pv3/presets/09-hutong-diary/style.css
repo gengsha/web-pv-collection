@@ -69,6 +69,8 @@ body {
 
 .brand-lamp {
   font-size: 1.4rem;
+  font-weight: 700;
+  color: #c8102e;
   filter: drop-shadow(0 4px 10px rgba(232, 102, 44, 0.4));
 }
 

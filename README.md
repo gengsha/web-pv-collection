@@ -6,13 +6,13 @@
 >
 > *50 runnable web art-style presets (HTML/CSS/JS, zero build), each with a style spec and a copy-paste LLM prompt for generating pages in that style.*
 
-**🔗 在线预览**：<https://gengsha.github.io/web-pv-collection/> &nbsp;·&nbsp; **📜 License**：[MIT](./LICENSE)
+**在线预览**：<https://gengsha.github.io/web-pv-collection/> &nbsp;·&nbsp; **License**：[MIT](./LICENSE)
 
-> ⚠️ 分卷名中的 Gemini、Qwen（通义千问）、GLM（智谱）等均为各自公司的商标，本项目仅以其为**创作主题与示例主角**，与相关公司无关联，亦非官方作品。`hy4` 为本项目虚构的示例模型品牌。
+> 分卷名中的 Gemini、Qwen（通义千问）、GLM（智谱）等均为各自公司的商标，本项目仅以其为**创作主题与示例主角**，与相关公司无关联，亦非官方作品。`hy4` 为本项目虚构的示例模型品牌。
 
 ---
 
-## 🖼️ 预览墙
+## 预览墙
 
 > 截图由 GitHub Actions（`.github/workflows/screenshots.yml`）自动生成，点击缩略图打开在线预览。
 
@@ -54,7 +54,7 @@
 
 ---
 
-## 🏛️ 四大专题分卷矩阵 (50 Presets Matrix)
+## 四大专题分卷矩阵 (50 Presets Matrix)
 
 ```
 web-pv-collection/
@@ -66,7 +66,7 @@ web-pv-collection/
 
 ---
 
-### 🌟 Vol. 1: Gemini 专题 (10 预设)
+### Vol. 1: Gemini 专题 (10 预设)
 > **题材**：Google Gemini 旗舰多模态智能体、双生宇宙、深度思维与空间计算。  
 > **入口**：[`web-pv/index.html`](./web-pv/index.html)
 
@@ -85,7 +85,7 @@ web-pv-collection/
 
 ---
 
-### 🎋 Vol. 2: Qwen (通义千问) 专题 (10 预设)
+### Vol. 2: Qwen (通义千问) 专题 (10 预设)
 > **题材**：通义千问品牌演化、东方哲思、开源硬核与多模态工坊。  
 > **入口**：[`web-pv2/index.html`](./web-pv2/index.html)
 
@@ -104,7 +104,7 @@ web-pv-collection/
 
 ---
 
-### 🏛️ Vol. 3: GLM 5.3 (智谱) 专题 (10 预设)
+### Vol. 3: GLM 5.3 (智谱) 专题 (10 预设)
 > **题材**：智谱清言与 GLM 5.3 全能旗舰基座、东方造物与硬核算力。  
 > **入口**：[`web-pv3/index.html`](./web-pv3/index.html)
 
@@ -123,7 +123,7 @@ web-pv-collection/
 
 ---
 
-### 🎨 Vol. 4: hy4 视觉艺术与硬核 WebGL 专题 (20 预设)
+### Vol. 4: hy4 视觉艺术与硬核 WebGL 专题 (20 预设)
 > **题材**：20 种前沿艺术流派与 Shader / WebGL 硬核数学实时渲染。  
 > **入口**：[`web-pv4/index.html`](./web-pv4/index.html)
 
@@ -153,7 +153,7 @@ web-pv-collection/
 
 ---
 
-## 🚀 极速启动与本地体验
+## 极速启动与本地体验
 
 本项目完全基于原生 HTML5 + CSS3 + Vanilla JavaScript 构建，**无需任何 npm install 或复杂构建流水线**！
 
@@ -172,7 +172,7 @@ python -m http.server 8080
 
 ---
 
-## 🤖 如何使用风格说明（`style-spec.md`）引导 AI
+## 如何使用风格说明（`style-spec.md`）引导 AI
 
 1. 浏览选择您心仪的预设目录（例如 `web-pv/presets/01-cosmic-nebula/`）；
 2. 打开该目录下的 `style-spec.md` 文件；
@@ -184,7 +184,7 @@ python -m http.server 8080
 
 ---
 
-## 🌏 国内访问字体
+## 国内访问字体
 
 所有页面使用 Google Fonts。部署给中国大陆用户时，可一键切换到官方 `.cn` 节点：
 
@@ -197,14 +197,14 @@ python scripts/use_cn_font_mirror.py --revert  # 切换回 .com
 
 ---
 
-## ♿ 可访问性
+## 可访问性
 
 * 全部 50 个预设与各分卷门户均遵循系统「减少动态效果」（`prefers-reduced-motion`）设置，自动关闭 CSS 动画与过渡；
 * WebGL 预设在浏览器无法创建 WebGL 上下文时会显示降级提示，而非黑屏。
 
 ---
 
-## 🛠️ 维护与贡献
+## 维护与贡献
 
 ```
 scripts/
@@ -220,6 +220,6 @@ scripts/
 
 ---
 
-## 📄 License
+## License
 
 [MIT License](./LICENSE) © 2026 [gengsha](https://github.com/gengsha)

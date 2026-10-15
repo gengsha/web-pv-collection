@@ -79,6 +79,8 @@ body {
 
 .brand-torch {
   font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffc233;
   filter: drop-shadow(0 0 10px rgba(255, 194, 51, 0.7));
 }
 
@@ -357,6 +359,8 @@ body {
 
 .riddle-lamp {
   font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffc233;
   filter: drop-shadow(0 0 12px rgba(255, 194, 51, 0.6));
 }
 

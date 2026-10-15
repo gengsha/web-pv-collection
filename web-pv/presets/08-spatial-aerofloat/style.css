@@ -171,6 +171,8 @@ body {
 
 .island-icon {
   font-size: 2.2rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 20px;
 }
 
