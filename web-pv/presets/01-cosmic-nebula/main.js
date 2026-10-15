@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const mouseX = e.clientX / window.innerWidth - 0.5;
     const mouseY = e.clientY / window.innerHeight - 0.5;
 
-    if (orbPurple) orbPurple.style.transform = `translate(${mouseX * 60}px, ${mouseY * 60}px)`;
-    if (orbBlue) orbBlue.style.transform = `translate(${mouseX * -80}px, ${mouseY * -80}px)`;
-    if (orbCyan) orbCyan.style.transform = `translate(${mouseX * 40}px, ${mouseY * 40}px)`;
+    if (orbPurple) orbPurple.style.translate = `${mouseX * 60}px ${mouseY * 60}px`;
+    if (orbBlue) orbBlue.style.translate = `${mouseX * -80}px ${mouseY * -80}px`;
+    if (orbCyan) orbCyan.style.translate = `${mouseX * 40}px ${mouseY * 40}px`;
   });
 
   // 对话交互模拟

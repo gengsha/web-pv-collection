@@ -44,8 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.fill();
     });
 
-    requestAnimationFrame(render);
+    if (!reduceMotion.matches) requestAnimationFrame(render);
   }
+  // prefers-reduced-motion：只绘制一帧静态画面，不启动连续动画循环
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  reduceMotion.addEventListener('change', () => { if (!reduceMotion.matches) render(); });
+  window.addEventListener('resize', () => { if (reduceMotion.matches) requestAnimationFrame(render); });
   render();
 
   // 艺术转译交互

@@ -16,13 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // 分屏拖拽交互
   let isDragging = false;
 
-  splitDivider.addEventListener('mousedown', (e) => {
+  splitDivider.addEventListener('pointerdown', (e) => {
     isDragging = true;
+    splitDivider.setPointerCapture(e.pointerId);
     splitDivider.classList.add('dragging');
     document.body.style.cursor = 'col-resize';
   });
 
-  window.addEventListener('mouseup', () => {
+  window.addEventListener('pointerup', () => {
     if (isDragging) {
       isDragging = false;
       splitDivider.classList.remove('dragging');
@@ -30,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  window.addEventListener('mousemove', (e) => {
+  window.addEventListener('pointermove', (e) => {
     if (!isDragging) return;
     const containerWidth = splitContainer.offsetWidth;
     let newWidth = (e.clientX / containerWidth) * 100;
