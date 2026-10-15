@@ -1,9 +1,9 @@
-# 风格构成说明：十万粒子·GPU 流场引擎 (GPU Particle Field)
+# 风格构成说明：六万粒子·流场引擎 (GPU Particle Field)
 
 ## 1. 风格概述 (Style DNA)
 
 * **核心理念**：用最底层的绘制原语（`gl.POINTS`）画出一整片流场。每一个点都是一条独立轨迹，数万条轨迹叠加出的"流丝"才是真正的主视觉 —— 形态不是设计出来的，是解算出来的。
-* **技术锚点**：TypedArray 粒子池 / curl 噪声近似流场 / 叠加混合（additive）拖尾 / 光标涡旋力场 / 每帧 480KB `bufferSubData`。
+* **技术锚点**：CPU 端 JS 积分（非 GPGPU，GPU 只负责绘制）/ TypedArray 粒子池 / curl 噪声近似流场 / 叠加混合（additive）拖尾 / 光标涡旋力场 / 每帧 480KB `bufferSubData`。
 * **视觉情绪**：星云、湍流、密度感、实验物理的浪漫。
 * **适用场景**：数据可视化产品、AI 基础设施、性能型 SaaS、科学计算品牌。
 
@@ -94,6 +94,8 @@ gl.drawArrays(gl.POINTS, 0, N);
 ## 7. 大模型直接复用 Prompt (LLM System Prompt)
 
 ```markdown
+【使用说明】下文以 hy4 作为示例主角。复用时请把其中的品牌名、版本号、文案与「内容板块」替换为 {{品牌/产品名}} 和你的业务需求；色彩、材质、字体、动效等风格规范保持不变。
+
 你是一名图形与前端双栖的工程师。请以【GPU 粒子流场】风格为 hy4 生成个人官网（原生 HTML+CSS+JS，WebGL1）。
 技术要求：
 1. 全屏 canvas 置底（position:fixed），WebGL1 上下文（alpha:false, depth:false, preserveDrawingBuffer:true），DPR 上限 1.5。

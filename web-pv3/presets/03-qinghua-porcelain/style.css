@@ -528,3 +528,13 @@ h1, h2, h3, .brand-text strong, .plate-title {
   .kiln-timeline { grid-template-columns: repeat(2, 1fr); }
   .wave-divider { margin-left: auto; margin-right: auto; max-width: 460px; }
 }
+
+/* 尊重系统「减少动态效果」设置 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

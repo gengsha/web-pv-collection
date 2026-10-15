@@ -3,6 +3,22 @@
 > **Web-PV Collection (Web Aesthetic Presets Vault Collection)** 是一个面向现代大语言模型（LLM）与前沿前端工程的美术风格规范与交互原型总库。
 > 
 > 全库精选收录 **4 大系列、共计 50 款顶级网页设计风格预设**。每个预设均配备了**独立可运行的高保真示例项目（HTML/CSS/JS）**以及规范化的**《风格构成说明》（`style-spec.md`）**，旨在为 Claude、GPT-4o、DeepSeek、Gemini、Qwen、GLM 等大模型提供标准化的系统级 Prompt，使任意 AI 都能精准生成指定艺术风格的现代网页。
+>
+> *50 runnable web art-style presets (HTML/CSS/JS, zero build), each with a style spec and a copy-paste LLM prompt for generating pages in that style.*
+
+**🔗 在线预览**：<https://gengsha.github.io/web-pv-collection/> &nbsp;·&nbsp; **📜 License**：[MIT](./LICENSE)
+
+> ⚠️ 分卷名中的 Gemini、Qwen（通义千问）、GLM（智谱）等均为各自公司的商标，本项目仅以其为**创作主题与示例主角**，与相关公司无关联，亦非官方作品。`hy4` 为本项目虚构的示例模型品牌。
+
+---
+
+## 🖼️ 预览墙
+
+> 截图由 GitHub Actions（`.github/workflows/screenshots.yml`）自动生成，点击缩略图打开在线预览。
+
+<!-- GALLERY:START -->
+_截图生成中：合并到 main 后，`screenshots` 工作流会自动生成并填充这里。_
+<!-- GALLERY:END -->
 
 ---
 
@@ -91,9 +107,9 @@ web-pv-collection/
 * **09-neon-rain-alley** (雨夜赛博霓虹雨丝)
 * **10-clay-soft-pop** (粘土拟物柔和波普)
 
-#### 硬核篇·WebGL & GPGPU 粒子渲染 (11-20)：
+#### 硬核篇·实时渲染 (11-20)：WebGL 着色器（11/12/13/18，其中 13 为 GPGPU 乒乓纹理）+ Canvas 2D 物理与软件光栅（14–17/19/20）
 * **11-raymarch-sdf** (实时光线步进有向距离场)
-* **12-gpu-particles** (十万级 GPU 引力流场粒子)
+* **12-gpu-particles** (2 万～6 万粒子 curl 流场：CPU 积分 + WebGL 点渲染)
 * **13-reaction-diffusion** (图灵反应扩散斑图仿真)
 * **14-ascii-engine** (3D 几何实时 ASCII 字符渲染引擎)
 * **15-terrain-flight** (分形柏林噪声三维地形掠地飞行)
@@ -129,12 +145,49 @@ python -m http.server 8080
 1. 浏览选择您心仪的预设目录（例如 `web-pv/presets/01-cosmic-nebula/`）；
 2. 打开该目录下的 `style-spec.md` 文件；
 3. 复制其中的 **「大模型直接复用 Prompt」** 模块；
-4. 粘贴给任意大语言模型（Claude、GPT-4o、DeepSeek、Gemini、Qwen、GLM），并在其后输入您的具体业务需求，例如：
+4. Prompt 中的品牌、版本号与「内容板块」只是示例主角，请替换为 `{{品牌/产品名}}` 与你的业务内容（色彩、材质、字体、动效规范保持不变）；
+5. 粘贴给任意大语言模型（Claude、GPT-4o、DeepSeek、Gemini、Qwen、GLM），并在其后输入您的具体业务需求，例如：
    > *“请在上述【星轨星云·极光流体】风格基础上，为我制作一个多模态语音转译工具的落地页。”*
-5. 大模型将严格按照预设的色彩令牌、字体比例、光影模型和动效物理输出 100% 契合该风格的前端代码！
+6. 大模型会按照预设的色彩令牌、字体比例、光影模型和动效物理生成高度贴合该风格的前端代码（效果因模型而异，建议对照示例页微调）。
+
+---
+
+## 🌏 国内访问字体
+
+所有页面使用 Google Fonts。部署给中国大陆用户时，可一键切换到官方 `.cn` 节点：
+
+```bash
+python scripts/use_cn_font_mirror.py           # 切换为 fonts.googleapis.cn / fonts.gstatic.cn
+python scripts/use_cn_font_mirror.py --revert  # 切换回 .com
+```
+
+字体加载失败时页面会回退到系统字体（各样式均声明了通用字体族兜底）。
+
+---
+
+## ♿ 可访问性
+
+* 全部 50 个预设与各分卷门户均遵循系统「减少动态效果」（`prefers-reduced-motion`）设置，自动关闭 CSS 动画与过渡；
+* WebGL 预设在浏览器无法创建 WebGL 上下文时会显示降级提示，而非黑屏。
+
+---
+
+## 🛠️ 维护与贡献
+
+```
+scripts/
+├── validate.py          # 结构 / 链接 / JS 语法 / Prompt 一致性体检（CI 自动运行）
+├── sync_prompts.py      # 以 style-spec.md 为唯一来源，同步各分卷 hub.js 的「复制 Prompt」
+├── screenshot.py        # 生成 screenshots/ 与 README 预览墙
+└── use_cn_font_mirror.py
+```
+
+* **改 Prompt 只改 `style-spec.md`**，然后运行 `python scripts/sync_prompts.py`；
+* 新增预设：复制任一预设目录（四件套 `index.html / style.css / main.js / style-spec.md`），在对应 `hub.js` 中登记，再运行 `python scripts/validate.py`；
+* GitHub Pages：仓库 **Settings → Pages → Source 选择 “GitHub Actions”** 后，推送到 main 即自动部署。
 
 ---
 
 ## 📄 License
 
-MIT License © 2026 [gengsha](https://github.com/gengsha)
+[MIT License](./LICENSE) © 2026 [gengsha](https://github.com/gengsha)

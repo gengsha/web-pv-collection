@@ -172,6 +172,9 @@
       color: var(--text-dim);
       font-size: 0.85rem;
     }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
   </style>
 </head>
 <body>
@@ -268,7 +271,7 @@
             <span>20 PRESETS</span>
           </div>
           <h2 class="card-title">hy4 视觉与硬核 WebGL</h2>
-          <p class="card-desc">包含 10 种前沿视觉艺术流派（液态金属、蒸汽波、太阳朋克等）与 10 种硬核 Shader/GPGPU 实时数学渲染。</p>
+          <p class="card-desc">包含 10 种前沿视觉艺术流派（液态金属、蒸汽波、太阳朋克等）与 10 种硬核实时渲染（WebGL 着色器 / GPGPU / Canvas 2D 物理与软件光栅）。</p>
           <div class="card-tags">
             <span class="tag">Liquid Chrome</span>
             <span class="tag">Raymarch SDF</span>

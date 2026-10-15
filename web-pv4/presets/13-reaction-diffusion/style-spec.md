@@ -95,6 +95,8 @@ nb = b + (0.5 * lap.y + abb - (f + k) * b) * dt;     // Db = 0.5
 ## 7. 大模型直接复用 Prompt (LLM System Prompt)
 
 ```markdown
+【使用说明】下文以 hy4 作为示例主角。复用时请把其中的品牌名、版本号、文案与「内容板块」替换为 {{品牌/产品名}} 和你的业务需求；色彩、材质、字体、动效等风格规范保持不变。
+
 你是一名图形与前端双栖的工程师。请以【Gray-Scott 反应扩散】风格为 hy4 生成个人官网（原生 HTML+CSS+JS，WebGL1）。
 技术要求：
 1. 两张 256² 浮点纹理做 ping-pong（OES_texture_float → half_float → UNSIGNED_BYTE 三级降级，checkFramebufferStatus 校验），NEAREST 过滤，CLAMP_TO_EDGE。

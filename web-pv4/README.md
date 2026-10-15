@@ -4,7 +4,7 @@
 
 本期主题：**hy4 的个人网站**（混合推理模型人设 · 20 套互不雷同的视觉语言 · 不含国风元素）
 
-> **01–10** 为美术风格篇（材质、排版、配色驱动）；**11–20** 为技术炫技篇（WebGL 着色器、GPGPU 模拟、物理引擎、实时渲染管线驱动）。两篇共用同一份内容骨架，仅视觉与引擎不同。
+> **01–10** 为美术风格篇（材质、排版、配色驱动）；**11–20** 为技术炫技篇（WebGL 着色器、GPGPU 模拟（13）、Canvas 2D 物理与软件渲染、实时渲染管线驱动）。两篇共用同一份内容骨架，仅视觉与引擎不同。
 
 ---
 
@@ -23,7 +23,7 @@
 | **09** | `neon-rain-alley` | 霓虹雨夜·湿巷反射 | 霓虹辉光、雨丝斜线、水面倒影、招牌闪烁 | [`presets/09-neon-rain-alley/`](./presets/09-neon-rain-alley/) |
 | **10** | `clay-soft-pop` | 软陶拟物·粉彩立体 | Claymorphism、粉彩配色、弹性按压、柔和光晕 | [`presets/10-clay-soft-pop/`](./presets/10-clay-soft-pop/) |
 | **11** | `raymarch-sdf` | 光线步进·SDF 雕塑 | WebGL 光线步进、smin 融合、步进预算 64↔192、零三角形 | [`presets/11-raymarch-sdf/`](./presets/11-raymarch-sdf/) |
-| **12** | `gpu-particles` | 十万粒子·流场引擎 | gl.POINTS、curl 噪声流场、叠加混合拖尾、光标涡旋 | [`presets/12-gpu-particles/`](./presets/12-gpu-particles/) |
+| **12** | `gpu-particles` | 六万粒子·流场引擎 | CPU 积分 + gl.POINTS 渲染、curl 噪声流场、叠加混合拖尾、光标涡旋 | [`presets/12-gpu-particles/`](./presets/12-gpu-particles/) |
 | **13** | `reaction-diffusion` | 反应扩散·Gray-Scott 培养皿 | ping-pong FBO、9 点拉普拉斯、形态发生、拖动接种 | [`presets/13-reaction-diffusion/`](./presets/13-reaction-diffusion/) |
 | **14** | `ascii-engine` | 实时字符化·ASCII 渲染管线 | 软件光栅、z-buffer、朗伯着色、亮度量化字符映射 | [`presets/14-ascii-engine/`](./presets/14-ascii-engine/) |
 | **15** | `terrain-flight` | 无限地形·噪声穿行 | fBm 高程场、Voxel Space 投影、画家算法、等高线 | [`presets/15-terrain-flight/`](./presets/15-terrain-flight/) |

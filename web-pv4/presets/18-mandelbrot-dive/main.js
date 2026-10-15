@@ -5,6 +5,16 @@
 const canvas = document.getElementById('frac');
 const gl = canvas.getContext('webgl', { antialias: false, alpha: false, depth: false });
 
+/* WebGL 不可用时的降级提示（旧设备 / 关闭硬件加速 / 部分无头浏览器） */
+if (!gl) {
+  const tip = document.createElement('div');
+  tip.setAttribute('role', 'alert');
+  tip.style.cssText = 'position:fixed;inset:0;display:grid;place-items:center;padding:24px;text-align:center;background:#05060a;color:#cbd5e1;font:15px/1.7 system-ui,sans-serif;z-index:9999';
+  tip.innerHTML = '当前浏览器无法创建 WebGL 上下文，本预设无法渲染。<br>请开启浏览器的硬件加速，或换用最新版 Chrome / Edge / Firefox / Safari。';
+  document.body.appendChild(tip);
+  throw new Error('WebGL unavailable');
+}
+
 const VS = `attribute vec2 a; void main(){ gl_Position = vec4(a, 0.0, 1.0); }`;
 
 const FS = `
