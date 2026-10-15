@@ -96,6 +96,8 @@ for (let i = rows; i >= 1; i--) { ...; ctx.fill(); prev = pts; }
 ## 7. 大模型直接复用 Prompt (LLM System Prompt)
 
 ```markdown
+【使用说明】下文以 hy4 作为示例主角。复用时请把其中的品牌名、版本号、文案与「内容板块」替换为 {{品牌/产品名}} 和你的业务需求；色彩、材质、字体、动效等风格规范保持不变。
+
 你是一名图形与前端双栖的工程师。请以【Voxel Space 无限地形】风格为 hy4 生成个人官网（原生 HTML+CSS+JS，Canvas2D）。
 技术要求：
 1. 高程场：value noise（smoothstep 插值 + 四点哈希）+ 四倍频 fBm（频率 ×2、振幅 ×0.5 递归 4 次），再做 Math.pow(h, 1.7) 山脊化，实时求值不缓存。

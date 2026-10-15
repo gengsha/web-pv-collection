@@ -100,6 +100,8 @@ ch = RAMP[Math.round(v * (RAMP.length - 1))];
 ## 7. 大模型直接复用 Prompt (LLM System Prompt)
 
 ```markdown
+【使用说明】下文以 hy4 作为示例主角。复用时请把其中的品牌名、版本号、文案与「内容板块」替换为 {{品牌/产品名}} 和你的业务需求；色彩、材质、字体、动效等风格规范保持不变。
+
 你是一名图形与前端双栖的工程师。请以【ASCII 实时字符渲染】风格为 hy4 生成个人官网（原生 HTML+CSS+JS，不用任何库）。
 技术要求：
 1. Canvas2D 软件渲染管线：Float32Array 亮度缓冲 + z-buffer（每帧 fill 复用），点云绕 Y/X 轴旋转矩阵，正交投影到 cols×rows 网格，z-buffer 取最近点消隐。

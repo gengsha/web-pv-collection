@@ -98,6 +98,16 @@ void main(){
 
 const gl = canvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'high-performance' });
 
+/* WebGL 不可用时的降级提示（旧设备 / 关闭硬件加速 / 部分无头浏览器） */
+if (!gl) {
+  const tip = document.createElement('div');
+  tip.setAttribute('role', 'alert');
+  tip.style.cssText = 'position:fixed;inset:0;display:grid;place-items:center;padding:24px;text-align:center;background:#05060a;color:#cbd5e1;font:15px/1.7 system-ui,sans-serif;z-index:9999';
+  tip.innerHTML = '当前浏览器无法创建 WebGL 上下文，本预设无法渲染。<br>请开启浏览器的硬件加速，或换用最新版 Chrome / Edge / Firefox / Safari。';
+  document.body.appendChild(tip);
+  throw new Error('WebGL unavailable');
+}
+
 let prog, U = {}, rotX = 0, rotY = 0, camZ = 3.4;
 let rotSpeed = 0.25, morph = 0, morphTarget = 0, steps = 96, stepsTarget = 96;
 let dpr = 1;

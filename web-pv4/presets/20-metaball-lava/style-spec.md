@@ -90,6 +90,8 @@ data[p++] = 0xff000000 | (LUT[c+2] << 16) | (LUT[c+1] << 8) | LUT[c];
 ## 7. 大模型直接复用 Prompt (LLM System Prompt)
 
 ```markdown
+【使用说明】下文以 hy4 作为示例主角。复用时请把其中的品牌名、版本号、文案与「内容板块」替换为 {{品牌/产品名}} 和你的业务需求；色彩、材质、字体、动效等风格规范保持不变。
+
 你是一名图形与前端双栖的工程师。请以【Metaball 标量场渲染】风格为 hy4 生成个人官网（原生 HTML+CSS+JS，Canvas2D）。
 技术要求：
 1. 低分辨率离屏画布（INSTANT 180×100 / DEEP 300×168）逐像素求标量场 v = Σ rᵢ²/d²，3r 之外截断；putImageData 后 drawImage 双线性放大到全屏。
