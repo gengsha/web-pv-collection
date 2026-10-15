@@ -111,7 +111,7 @@
   @keyframes floatBlue   { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-100px, 120px) scale(0.9); } }
   @keyframes floatCyan   { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(80px, -90px) scale(1.1); } }
   ```
-* **光标视差 (main.js)**：`mousemove` 时取归一化坐标（-0.5~0.5），分别给三颗光球写入 `translate(x*60, y*60)`、`translate(x*-80, y*-80)`、`translate(x*40, y*40)`，蓝球反向移动形成层次；光球自带 `transition: transform 0.6s cubic-bezier(0.16,1,0.3,1)` 作阻尼。实现提示：CSS 动画的 `transform` 会覆盖行内 `transform`，复刻时应把视差写在光球的外层包裹元素上，漂移动画留在内层，两者才能叠加。
+* **光标视差 (main.js)**：`mousemove` 时取归一化坐标（-0.5~0.5），分别给三颗光球写入独立的 CSS `translate` 属性（系数 60 / -80 / 40），蓝球反向移动形成层次；光球带 `transition: translate 0.6s cubic-bezier(0.16,1,0.3,1)` 作阻尼。由于漂移动画用的是 `transform`，视差用独立的 `translate` 属性，两者可以叠加而不互相覆盖。
 * **悬停反馈**：卡片悬停只改边框色与辉光阴影（0.35s）；主按钮上浮 2px；导航链接由 `#94a3b8` 过渡到白色；统一曲线 `cubic-bezier(0.16, 1, 0.3, 1)`。
 * **对话模拟 (main.js)**：点击发送或按 Enter，先把用户输入（经 HTML 转义）追加为用户气泡并清空输入框，`650ms` 后随机抽取一条预设回答追加为 AI 气泡，每次追加后滚动到底部（消息区 `max-height: 280px; overflow-y: auto`）。
 * **无障碍 / 减少动效**：在 `@media (prefers-reduced-motion: reduce)` 下关闭三颗光球的持续漂移动画（`animation: none`），并停用光标视差与 hover 位移，只保留颜色变化。
@@ -142,7 +142,7 @@
 
 交互与动效：
 - 三颗光球 CSS 往返漂移（16s/20s/18s，ease-in-out infinite alternate，带位移与缩放）。
-- 鼠标移动时光球产生视差（系数 60 / -80 / 40，0.6s 阻尼过渡；视差写在外层包裹元素，避免与漂移动画冲突）。
+- 鼠标移动时光球产生视差（系数 60 / -80 / 40，0.6s 阻尼过渡；视差用独立的 translate 属性，与漂移动画的 transform 叠加）。
 - 卡片悬停 0.35s 发光过渡，曲线 cubic-bezier(0.16,1,0.3,1)。
 - 对话舱：回车或点击发送后追加用户气泡，约 650ms 后追加一条预设回复并滚动到底。
 - prefers-reduced-motion 下关闭光球漂移与视差。

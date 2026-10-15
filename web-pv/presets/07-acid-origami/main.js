@@ -4,15 +4,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const foldTriggerBtn = document.getElementById('foldTriggerBtn');
   const collapseBtn = document.getElementById('collapseBtn');
 
+  // 3D 翻折：先沿 X 轴折到 90°（侧面朝向观者，此时换面不可见），再以弹性曲线回弹展开
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let flipping = false;
+  function setFolded(folded) {
+    if (!origamiCard || flipping) return;
+    if (origamiCard.classList.contains('folded') === folded) return;
+    const swap = () => {
+      origamiCard.classList.toggle('folded', folded);
+      origamiCard.classList.toggle('unfolded', !folded);
+    };
+    if (reduceMotion.matches) return swap();
+    flipping = true;
+    origamiCard.classList.add('flipping');
+    setTimeout(() => {
+      swap();
+      origamiCard.classList.remove('flipping');
+      flipping = false;
+    }, 220);
+  }
   function toggleUnfold() {
-    if (!origamiCard) return;
-    if (origamiCard.classList.contains('folded')) {
-      origamiCard.classList.remove('folded');
-      origamiCard.classList.add('unfolded');
-    } else {
-      origamiCard.classList.remove('unfolded');
-      origamiCard.classList.add('folded');
-    }
+    if (origamiCard) setFolded(!origamiCard.classList.contains('folded'));
   }
 
   if (origamiCard) origamiCard.addEventListener('click', toggleUnfold);
@@ -20,8 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (collapseBtn) {
     collapseBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      origamiCard.classList.remove('unfolded');
-      origamiCard.classList.add('folded');
+      setFolded(true);
     });
   }
 

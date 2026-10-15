@@ -27,7 +27,7 @@ const PRESETS = [
 
 交互与动效：
 - 三颗光球 CSS 往返漂移（16s/20s/18s，ease-in-out infinite alternate，带位移与缩放）。
-- 鼠标移动时光球产生视差（系数 60 / -80 / 40，0.6s 阻尼过渡；视差写在外层包裹元素，避免与漂移动画冲突）。
+- 鼠标移动时光球产生视差（系数 60 / -80 / 40，0.6s 阻尼过渡；视差用独立的 translate 属性，与漂移动画的 transform 叠加）。
 - 卡片悬停 0.35s 发光过渡，曲线 cubic-bezier(0.16,1,0.3,1)。
 - 对话舱：回车或点击发送后追加用户气泡，约 650ms 后追加一条预设回复并滚动到底。
 - prefers-reduced-motion 下关闭光球漂移与视差。
@@ -71,7 +71,7 @@ const PRESETS = [
 - 32px 白色圆形光标，mix-blend-mode: difference，跟随鼠标零延迟，在黑白两侧自动反色。
 - 按住中轴拖拽改变左栏宽度，范围钳制 20%–80%，拖拽中轴变蓝、页面光标为 col-resize。
 - 按钮悬停上移 2px、透明度 0.9（0.2s）。不加任何循环动画。
-- prefers-reduced-motion 下取消过渡与位移；补充 pointer 事件支持触屏拖拽。
+- prefers-reduced-motion 下取消过渡与位移；Pointer Events 支持触屏拖拽。
 
 内容板块（示例，可按业务替换）：
 - 左极「理性」：编号页眉 → 大标题 → 副标 → 技术卡片（含代码片段）→ 两项硬指标 → 行动按钮

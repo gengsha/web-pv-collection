@@ -91,7 +91,7 @@
 * **分屏拖拽 (main.js)**：在中轴 `mousedown` 开始拖拽并添加 `.dragging`（轴变蓝）、`body` 光标改为 `col-resize`；`mousemove` 时左栏宽度 = `clientX / 容器宽 × 100%`，并钳制在 **20% ~ 80%**；`mouseup` 结束拖拽并复原光标。右栏为 `flex: 1` 自动填满剩余宽度。
 * **按钮悬停**：`transform: translateY(-2px); opacity: 0.9;`，过渡 `0.2s`；中轴颜色过渡 `0.2s`。
 * **克制原则**：整页没有任何持续循环动画、渐变或粒子，动感完全来自用户的拖拽与光标反色。
-* **无障碍 / 减少动效**：本预设无持续动画；在 `prefers-reduced-motion: reduce` 下仍应取消按钮位移与过渡，并可隐藏自定义光标、恢复系统光标。复刻时建议补充触摸事件（`pointerdown/pointermove`）以支持移动端拖拽。
+* **无障碍 / 减少动效**：本预设无持续动画；在 `prefers-reduced-motion: reduce` 下仍应取消按钮位移与过渡，并可隐藏自定义光标、恢复系统光标。拖拽使用 Pointer Events（`pointerdown/pointermove/pointerup` + `setPointerCapture`，分隔条 `touch-action: none`），鼠标、触屏和触控笔都可以拖；触屏设备上隐藏自定义光标。
 
 ---
 
@@ -123,7 +123,7 @@
 - 32px 白色圆形光标，mix-blend-mode: difference，跟随鼠标零延迟，在黑白两侧自动反色。
 - 按住中轴拖拽改变左栏宽度，范围钳制 20%–80%，拖拽中轴变蓝、页面光标为 col-resize。
 - 按钮悬停上移 2px、透明度 0.9（0.2s）。不加任何循环动画。
-- prefers-reduced-motion 下取消过渡与位移；补充 pointer 事件支持触屏拖拽。
+- prefers-reduced-motion 下取消过渡与位移；Pointer Events 支持触屏拖拽。
 
 内容板块（示例，可按业务替换）：
 - 左极「理性」：编号页眉 → 大标题 → 副标 → 技术卡片（含代码片段）→ 两项硬指标 → 行动按钮

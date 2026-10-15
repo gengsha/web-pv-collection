@@ -68,7 +68,7 @@
   .acid-btn:hover  { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 #000; }
   .acid-btn:active { transform: translate(2px, 2px);   box-shadow: 2px 2px 0 #000; }
   ```
-* **翻面折纸卡 (Origami Card)**：3px 黑框加 10px 彩色硬影，父容器设 `perspective: 1200px`。卡片有正面和背面两个面，通过 `.folded` / `.unfolded` 类配合 `display: none` 切换显示哪一面；展开后硬影由绿变粉。
+* **翻面折纸卡 (Origami Card)**：3px 黑框加 10px 彩色硬影，父容器设 `perspective: 1200px`。卡片有正面和背面两个面，通过 `.folded` / `.unfolded` 类配合 `display: none` 切换显示哪一面；换面时先加 `.flipping`（`rotateX(-90deg)`，0.22s 加速曲线）把卡片折到侧面，换面后再用 0.6s 回弹曲线展开。展开后硬影由绿变粉。
   ```css
   .origami-section { perspective: 1200px; display: flex; justify-content: center; }
   .origami-card { max-width: 680px; min-height: 240px; background: #1a1c24;
@@ -86,9 +86,9 @@
 ## 5. 动效物理与微交互 (Motion & Dynamics)
 
 * **按钮压感**：`transition: all 0.15s`（默认 ease）。悬停时上浮 2px、影子加长；按下时下沉 2px、影子缩短，模拟实体贴纸被按压的手感。
-* **折纸翻面 (main.js)**：点击卡片本身或 Hero 的「展开全维折纸」按钮都会调用 `toggleUnfold()`，在 `folded` 和 `unfolded` 之间切换；背面的「收起折叠」按钮会先 `stopPropagation()` 再强制回到 `folded`。切换时两面瞬间互换，硬影颜色从绿变粉。卡片上声明了回弹曲线 `cubic-bezier(0.175, 0.885, 0.32, 1.275)` 0.6s，但 demo 没有对 transform 赋值，所以**并没有实际的 3D 旋转**。如需真正的翻折，可在 `.unfolded` 上加 `rotateX/rotateY`，沿用这条曲线。
-* **灵感轰炸 (main.js)**：点击「BOMB ANOTHER IDEA 💥」后，文本框先设 `transform: scale(0.95)`，`150ms` 后从 4 条预置跨界创意中随机替换文本，再恢复 `scale(1)`。`.idea-display` 没有声明 transition，所以呈现为一次短促的「缩一下再弹回」。
-* **减弱动效**：本预设没有持续循环动画。在 `prefers-reduced-motion: reduce` 下，应关闭按钮位移与卡片过渡（`transition: none`），只保留颜色和内容的切换。
+* **折纸翻面 (main.js)**：点击卡片本身或 Hero 的「展开全维折纸」按钮都会调用 `toggleUnfold()`，在 `folded` 和 `unfolded` 之间切换；背面的「收起折叠」按钮会先 `stopPropagation()` 再强制回到 `folded`。切换时卡片先沿 X 轴折到 -90°（220ms），在侧面朝向观者、看不见的那一刻互换两面，再以 `cubic-bezier(0.175, 0.885, 0.32, 1.275)` 0.6s 回弹展开，带一点过冲；翻折进行中会忽略重复点击。硬影颜色从绿变粉。
+* **灵感轰炸 (main.js)**：点击「BOMB ANOTHER IDEA 💥」后，文本框先设 `transform: scale(0.95)`，`150ms` 后从 4 条预置跨界创意中随机替换文本，再恢复 `scale(1)`。`.idea-display` 使用 `transition: transform 0.3s` 加同一条回弹曲线，呈现为「缩一下再弹回」。
+* **减弱动效**：本预设没有持续循环动画。在 `prefers-reduced-motion: reduce` 下跳过 3D 翻折，直接换面，并关闭按钮位移与过渡，只保留颜色和内容的切换。
 
 ---
 

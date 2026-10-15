@@ -168,6 +168,11 @@ body {
   transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+.origami-card.flipping {
+  transform: rotateX(-90deg);
+  transition: transform 0.22s cubic-bezier(0.55, 0, 1, 0.45);
+}
+
 .origami-card.unfolded {
   box-shadow: 10px 10px 0 var(--acid-pink);
 }
@@ -250,6 +255,7 @@ body {
 }
 
 .idea-display {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   font-size: 1.25rem;
   font-weight: 700;
   margin: 20px 0;
